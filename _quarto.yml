@@ -39,7 +39,7 @@ filters:
 toc: true
 number-depth: 3
 # bibliographic options
-bibliography: cellcommunication.bib
+bibliography: assets/cellcommunication.bib
 link-citations: true
 highlight-style: github
 # code options
@@ -67,7 +67,7 @@ format:
       light: sandstone
       dark: cosmo
     # add styling sheets
-    css: assets/styles.css
+    css: assets/css/styles.css
     include-in-header:
       text: |
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=fallback" rel="stylesheet">
