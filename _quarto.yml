@@ -1,25 +1,109 @@
 project:
   type: book
+  output-dir: docs
 
 book:
-  title: "CCCSTBench-Book"
+  title: "CCCSTBench-Book benchmarking CCC tools integrating pathway information."
+  reader-mode: true
+
   author: "Bastien CHASSAGNOL"
-  date: "11/02/2025"
+  date: last-modified
+  page-navigation: true
+ # cover-image: cover.jpg
+ # favicon: cover.jpg
+  repo-url: https://github.com/bastienchassagnol/CCCSTBench-Book
+  repo-branch: master
+  repo-actions: [edit, issue]
+  sharing: [twitter, facebook, linkedin]
   chapters:
     - index.qmd
     - intro.qmd
     - summary.qmd
     - references.qmd
+  appendices:
+    - tools.qmd
+  page-footer:
+    left:  |
+      The book on cell-cell communication tools was written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.
+    background: light
+    border: false
+    right:
+      - icon: github
+        href: https://github.com/bastienchassagnol/CCCSTBench-Book.git
 
-bibliography: references.bib
+## global metadata options, whatever the format
+# quarto extensions
+filters:
+  - highlight-text
+# toc options
+toc: true
+number-depth: 3
+# bibliographic options
+bibliography: cellcommunication.bib
+link-citations: true
+highlight-style: github
+# code options
+execute:
+  echo: false
+  eval: true
+  message: false
+  warning: false
+  error: false
+  freeze: auto
+# Table options
+tbl-cap-location: bottom
+keywords:
+  - Benchmark
+  - Cell-cell communication tools
+  - spatial transcriptomics
+  - single-cell
+# document metadata
+lang: en-GB
+subject: "Cell-cell benchmark"
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: sandstone
+      dark: cosmo
+    # add styling sheets
+    css: assets/styles.css
+    include-in-header:
+      text: |
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=fallback" rel="stylesheet">
+    lightbox: true
+    author-meta: "Bastien CHASSAGNOL, and Marie-Pier"
+    toc-location: left
+    toc-expand: 3
+    comments:
+      hypothesis: true
+    # code options
+    code-fold: show
+    code-copy: true
+    code-link: true
+    collapse: true
+  docx:
+    toc-title: Contents
+    # reference-doc: custom-reference-doc.docx To add a docx reference.
   pdf:
     documentclass: scrreprt
+    # Bibliographic outputs
+    colourlinks: true
+    cite-method: biblatex
+    # Generates list of figures and tables
+    lof: true
+    lot: true
+    crossref:
+      lof-title: "List of Figures"
+      lot-title: "List of Tables"
+    #  Add indexing
+    include-in-header:
+      text: |
+        \usepackage{imakeidx}
+        \makeindex[intoc=true, columns=2, columnseprule=true]
+    include-after-body:
+      text: |
+        \printindex
 
 editor: source
 
