@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "CCCSTBench-Book benchmarking CCC tools integrating pathway information."
+  title: "CCCSTBench-Book benchmarking CCC tools integrating pathway information"
   reader-mode: true
 
   author: "Bastien CHASSAGNOL"
@@ -12,20 +12,28 @@ book:
  # cover-image: cover.jpg
  # favicon: cover.jpg
   repo-url: https://github.com/bastienchassagnol/CCCSTBench-Book
+  site-url: https://bastienchassagnol.github.io/CCCSTBench-Book
   repo-branch: master
-  repo-actions: [edit, issue]
+  repo-actions: [edit, issue, source]
   sharing: [twitter, facebook, linkedin]
+  open-graph: true
+  downloads: [pdf, docx]
+  sidebar:
+    style: "docked"
+    collapse-level: 2
+    border: true
+    search: true
   chapters:
     - index.qmd
     - intro.qmd
     - summary.qmd
-    - references.qmd
   appendices:
+    - references.qmd
     - tools.qmd
   page-footer:
     left:  |
-      The book on cell-cell communication tools was written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.
-    background: light
+       Written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.
+    background: "#f8f9fa"
     border: false
     right:
       - icon: github
@@ -35,8 +43,6 @@ book:
 # quarto extensions
 filters:
   - highlight-text
-# toc options
-toc: true
 number-depth: 3
 # bibliographic options
 bibliography: assets/cellcommunication.bib
@@ -64,16 +70,16 @@ subject: "Cell-cell benchmark"
 format:
   html:
     theme:
-      light: sandstone
-      dark: cosmo
-    # add styling sheets
-    css: assets/css/styles.css
+      light: [cosmo, assets/css/style-utiltr.scss]
+      dark:  [darkly, assets/css/style-utiltr.scss]
+    css:
+      - assets/css/style-reactable.css
+      - assets/css/style-utiltr.css
     include-in-header:
       text: |
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=fallback" rel="stylesheet">
     lightbox: true
     author-meta: "Bastien CHASSAGNOL, and Marie-Pier"
-    toc-location: left
     toc-expand: 3
     comments:
       hypothesis: true
@@ -81,12 +87,17 @@ format:
     code-fold: show
     code-copy: true
     code-link: true
+    code-overflow: wrap
     collapse: true
+    smooth-scroll: true
   docx:
     toc-title: Contents
     # reference-doc: custom-reference-doc.docx To add a docx reference.
   pdf:
-    documentclass: scrreprt
+    documentclass: book
+    # package installation
+    pdf-engine: lualatex
+    latex-auto-install: true
     # Bibliographic outputs
     colourlinks: true
     cite-method: biblatex
@@ -97,13 +108,13 @@ format:
       lof-title: "List of Figures"
       lot-title: "List of Tables"
     #  Add indexing
-    include-in-header:
-      text: |
-        \usepackage{imakeidx}
-        \makeindex[intoc=true, columns=2, columnseprule=true]
-    include-after-body:
-      text: |
-        \printindex
+    # include-in-header:
+    #   text: |
+    #     \usepackage{imakeidx}
+    #     \makeindex[intoc=true, columns=2, columnseprule=true]
+    # include-after-body:
+    #   text: |
+    #     \printindex
 
 editor: source
 

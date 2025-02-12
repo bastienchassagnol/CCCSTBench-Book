@@ -1,0 +1,121 @@
+/*-- scss:defaults --*/
+
+$code-bg: white;
+$code-color: #4c8c8c ;
+$utilitr-color: #93bcbc;
+
+/*-- scss:rules --*/
+
+/* from https://github.com/InseeFrLab/utilitR/blob/082a38f6073b5513a5fa89fc4249ddc7bad477fd/css/style-utilitr.css */
+body{
+  font-size: 18px;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  line-height: 1.6;
+}
+
+a {
+  color: #239f9f;
+}
+.sidebar-item-section .sidebar-item-text.sidebar-link.text-start {
+  font-weight: bold;
+  color: #6ba0a0 ;
+}
+
+.caption {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-align-last: center;
+  font-weight: 900;
+}
+/* Mise en forme des images inline */
+img[src*="inline"] {
+   display: inline ;
+   vertical-align: middle;
+   padding: 0;
+}
+p {
+  /* Pas de marge entre les paragraphes du texte */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+
+kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    color: #333;
+    display: inline-block;
+    font-size: .85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+   }
+
+
+.center {
+  text-align: center;
+}
+
+.btn {
+    border-width: 0 0px 0px 0px;
+    font-weight: normal;
+}
+
+.btn-default {
+    color: #2ecc71;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.bigger120 {
+  font-size: 1.20em;
+}
+
+
+#hero-banner {
+    padding-top: 35px;
+    /*background-color: $utilitr-color;
+    color: white;*/
+}
+
+#hero-banner code {
+   color:#e83e8c;
+   background-color: transparent !important;
+}
+
+
+.grid-item-link {
+    color: inherit;
+    text-decoration: none; /* Remove underline */
+    transition: transform 0.2s ease-in-out; /* Add transition for smooth effect */
+}
+
+.grid-item-link:hover {
+    transform: scale(1.05); /* Increase the scale for a zoom effect */
+}
+
+.no-anchor.card-title.listing-title {
+    font-weight: bolder !important;
+    color: $utilitr-color !important;
+    }
+
+.card-text {
+  color: rgb(89, 89, 89) ;
+}

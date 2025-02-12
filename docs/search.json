@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CCCSTBench-Book benchmarking CCC tools integrating pathway information",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nStar this website on Github",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "\n1  Introduction\n",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee (knuth84?) for additional discussion of literate programming.\n\n\n[1] 2",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "\n2  Summary\n",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n\n[1] 2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  }
+]
