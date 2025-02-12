@@ -1,9 +1,470 @@
-# Introduction
+# General overview of CCC pipeline
 
-This is a book created from markdown and executable code.
 
-See @knuth84 for additional discussion of literate programming.
+```{r setup}
+#| include: false
+# load packages
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# table options
+library(flextable)
+library(reactable)
+library(htmltools)
+library(fontawesome)
+
+knitr::opts_chunk$set(
+  comment = "#>",
+  out.width = "100%"
+)
+
+html_bool <- knitr::is_html_output()
+
+# custom visualisation functions
+with_tooltip <- function(value, tooltip) {
+  tags$abbr(
+    style = "text-decoration: underline; text-decoration-style: dotted; cursor: help",
+    title = tooltip, value
+  )
+}
+```
+
+
+## Litterature review
+
+### Review papers
+
+- Reviews on SRT (spatially-resolved-transcriptomic) datasets.
+  - [Advances in spatial transcriptomic data analysis](https://pmc.ncbi.nlm.nih.gov/articles/PMC8494229/#s4), from @dries2021gr.
+  - [Advances in spatial transcriptomics and related data analysis strategies](https://translational-medicine.biomedcentral.com/articles/10.1186/s12967-023-04150-2), from @du2023jotm.
+
+- Reviews on Cell-cell-communication Inference:
+  - [The diversification of methods for studying cell–cell interactions and communication](https://www.nature.com/articles/s41576-023-00685-8), from @armingol2024nrg. 
+  - [Cell–cell communication: new insights and clinical implications](https://www.nature.com/articles/s41392-024-01888-z), from @su2024sttt. 
+  - [Deciphering cell–cell interactions and communication from gene expression](https://www.nature.com/articles/s41576-020-00292-x), from @armingol2021nrg. 
+
+### Benchmark papers
+
+- [Comparison of methods and resources for cell-cell communication inference from single-cell RNA-Seq data](https://www.nature.com/articles/s41467-022-30755-0)
+- [Evaluation of cell-cell interaction methods by integrating single-cell RNA sequencing data with spatial information](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02783-y)
+
+
+---
+
+## Review of CCC tools
+
+### General principles
+
+- Rule-based
+- Data-driven
+- Hybrid, contextualisation of prior knowledge networks through incorporation of omic datasets 
+
+### Core tools (usually on bulk transcriptomic profiles)
+
+### Single-cell
+
+- [Ming tommy tang compendium, section `cell-cell interactions`](https://github.com/crazyhottommy/scRNAseq-analysis-notes)
+- [`FASTCCC`](https://www.biorxiv.org/content/10.1101/2025.01.27.635115v1)
+
+### Spatial tools
+
+- [IGAN](https://github.com/Zhu-JC/IGAN)
+- [TWCOM](https://doi.org/10.1093/bioadv/vbae101)
+- `Niche-DE`: [Niche differential gene expression analysis in spatial transcriptomics data identifies context-dependent cell-cell interactions](https://www.biorxiv.org/content/10.1101/2023.01.03.522646v1.full.pdf)
+  
+### General overview
+
+Comprehensive list of Cell-cell interaction tools is provided in a phylogenetic representation [@fig-phylo-CCC], while Table @tbl-ccc-tools-intra focuses on tools pairing **intracellular signalling** and extra-cellular communication pathways^[The comprehensive list of CCC tools is reported in Appendix @sec-ccc-tools.]. Both figures are drawn from @armingol2024nrg.
+
+![Phylogenetic tree of computational tools for inferring cell–cell interactions, from [@armingol2024nrg](https://www.nature.com/articles/s41576-023-00685-8/figures/2). Tools published as a **preprint** are marked with an asterisk.](images/phylogenetic_tree_CCC.webp){#fig-phylo-CCC width=85%}
+
+@tbl-ccc-tools-intra focuses on tools pairing **intracellular signalling** and extra-cellular.
 
 ```{r}
-1 + 1
+#| label: read-ccc-tools
+CCC_tools <- readxl::read_xlsx("tables/CCC-tools.xlsx",
+  sheet = "CCC-tools",
+  col_types = c(
+    rep("text", 8),
+    "numeric", rep("logical", 9)
+  )
+) |>
+  select(-`Real SC`, `Machine Learning`, `Core Functions`, Year) |>
+  rename(Package = URL) |>
+  mutate(Year = as.integer(Year)) |>
+  dplyr::filter(Category == "Deeper: New ligand types and intracellular signaling" | Intracellular) |>
+  arrange(Category, `Tool classification`, desc(Year), Language) |>
+  relocate(Intracellular, .before = Language)
 ```
+
+
+
+::: {#tbl-ccc-tools-intra} 
+
+:::: {.content-hidden unless-format="html"}
+
+```{r}
+#| eval: !expr knitr::is_html_output()
+#| label: format-CCC-html
+CCC_tools_reactable <- div(
+  class = "CCC-tools",
+  h2(class = "title", "Cell-cell-communication tools"),
+  reactable(CCC_tools,
+            groupBy = "Category",
+            paginateSubRows = TRUE,
+            defaultColDef = colDef(
+              cell = function(value) format(value, nsmall = 1),
+              align = "center",
+              headerClass = "header",
+              minWidth = 150
+            ),
+            highlight = TRUE,
+            filterable = TRUE,
+            searchable = TRUE,
+            # to deal with columns exhbiting lots of text
+            resizable = TRUE,
+            columns = list(
+              Intracellular = colDef(cell = function(value) {
+                class <- paste0("tag status-", ifelse(value, "paid", "canceled"))
+                div(class = class, value)
+              }),
+              Refs = colDef(
+                html = TRUE,
+                cell = JS('function(cell) {return `<a href="${cell.value}" target="_blank">${cell.value}</a>`}')
+              ),
+              Package = colDef(
+                html = TRUE,
+                cell = JS('function(cell) {var url = cell.value; var endpoint = url.split("/").pop(); return `<a href="${url}"target="_blank">${endpoint}</a>`}')
+              ),
+              `Method overview` = colDef(minWidth = 300),
+              `Additional information` = colDef(minWidth = 200)
+            ),
+            # to deal with the large number of observations
+            defaultPageSize = 8,
+            minRows = 8,
+            elementId = "CCC-tools-download",
+            class = "packages-table",
+            rowStyle = list(cursor = "pointer"),
+            theme = reactableTheme(cellPadding = "8px 12px")
+  )
+)
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download as CSV"),
+      onclick = "Reactable.downloadDataCSV('CCC-tools-intra-download', 'CCC-tools-intra.csv')"
+    ),
+    CCC_tools_reactable
+  )
+)
+```
+
+::::
+
+:::: {.content-visible unless-format="html"}
+
+```{r}
+#| eval: !expr knitr::is_latex_output() | knitr::pandoc_to("docx")
+#| tbl-cap: List of cell-cell-communication tool pairing intra- and extra-cellular communication channels, largely inspired from @armingol2024nrg.
+#| label: format-CCC-others
+
+flextable(CCC_tools) |>
+  bold(bold = TRUE, part = "header") |>
+  set_table_properties(layout = "autofit", width = 1)
+```
+
+::::
+
+:::
+
+---
+
+## Methods
+
+### Datasets
+
+#### Prior knowledge: Ligand-receptor and GRN databases
+
+- `NetworkCommons`: 
+  - [Python GitHub repository](https://github.com/saezlab/networkcommons)
+  - Programmatic access to multiple omics datasets
+  - Network inference tools, including CORNETTO
+  - Benchmarking configurations, and relevant associated metrics.
+
+
+- The `LIANA` framework developped by @dimitrov2022nc not only compares the performance of CCC tools using a combination of **consensual comparisons** and comparison against ground truths, but also provides with an unified interface to multiple CCC databases [@fig-CCC-collection], paired with global overlap metrics across databases [@tbl-PKN-LR].
+
+![The **lineages** of CCC interaction database knowledge. [General biological knowledge databases are reported in blue]{fg="#77aadc"}, [CCC-dedicated resources in magenta]{fg="#cb9cbc"}, and [additional resources included in `iTALK` in cyan]{fg="#77cbcc"}, from @dimitrov2022nc](images/CCC_databases.webp){#fig-CCC-collection width=85%}
+
+```{r}
+#| label: tbl-PKN-LR
+#| tbl-cap: Available prior knowledge resources tested in benchmark @dimitrov2022nc are largely composed of **ligand-receptor**, extracellular matrix, and **adhesion interactions**. Note that most of these resources, notably the curated ones, have been collectively collected in the [`OmniPathR` database](https://r.omnipathdb.org), from @turei2021msb.
+
+ligand_databases <- readxl::read_excel("tables/datasets_julio_saez_rodriguez.xlsx",
+  sheet = "SuppTable2", n_max = 16
+) |>
+  rename(
+    Interactions = "Interactions*",
+    `Original curation` = "Original curation☨§",
+    `Overlap with curated set` = "Overlap with curated set✦§"
+  ) |>
+  mutate(`Original curation` = case_when(`Original curation` == "No‡" ~ TRUE,
+    `Original curation` == "Yes†" ~ FALSE,
+    .default = FALSE
+  ))
+
+if (html_bool) {
+  reactable(ligand_databases,
+    defaultColDef = colDef(
+      cell = function(value) format(value, nsmall = 1),
+      align = "center",
+      headerStyle = list(background = "#f7f7f8"),
+      minWidth = 150
+    ),
+    columns = list(
+      `Overlap with curated set` = colDef(
+        name = "% of Curated interactions",
+        defaultSortOrder = "desc",
+        format = colFormat(percent = TRUE, digits = 1)
+      ),
+      `Original Curation` = colDef(header = with_tooltip(
+        "Expert Curatation",
+        "Here expert curated is a synonym for manually- or literature curated, that was evaluated based on the publications, webpages, software manuals and data files"
+      ))
+    ),
+    highlight = TRUE,
+    searchable = TRUE,
+    # to deal with columns exhbiting lots of text
+    resizable = TRUE
+  )
+} else {
+  flextable(ligand_databases) |>
+    bold(bold = TRUE, part = "header") |>
+    set_table_properties(layout = "autofit", width = 1)
+}
+```
+
+
+
+### Hurdles for benchmarking cell-cell communication inference methods {#sec-hurdles-benchmark}
+
+#### Partial overlap between CCC databases
+
+
+
+#### Metric quantifying spatial gene expression distribution.
+
+- **Wasserstein distributions** to compare probability distributions:
+  - Represents the minimum total transport cost between two distributions.
+  - Use of Regularised versions, such as the **Sinkhorn algorithm**, for faster computation and reduces influence of extreme observations. 
+  - Detailled theoretical explanations: [@rolet2016p1icais; @huizing2022; @solomon2017smmo; @peyre].
+  - **Consider truly spatial distributions and statistics** -> the **Fused Gromov-Wasserstein (FGW) distance** is a generalization of the Gromov-Wasserstein (GW) distance that accounts for both **feature** (pointwise) and **structural similarities** (geometric) between two metric measure spaces. Enables to maintain the **graph structure**, as suggested in [@vayer2020a;titouan2019p3icml].
+
+#### Annotate cell-populations in spatial omics
+
+Recent deconvolution papers include: 
+
+- STRIDE
+ 
+  
+  
+Relevant benchmark papers include: 
+  
+  
+- [Systematic comparison of sequencing-based spatial transcriptomic methods](https://www.nature.com/articles/s41592-024-02325-3), from @you2024nm.
+- [A comprehensive benchmarking with practical guidelines for cellular deconvolution of spatial transcriptomics](https://www.nature.com/articles/s41467-023-37168-7), from @li2023nc.
+- [Benchmarking spatial and single-cell transcriptomics integration methods for transcript distribution prediction and cell type deconvolution](https://www.nature.com/articles/s41592-022-01480-9), from @li2022nm. Conclusions from the paper are reported in @imp-spatial-benchmark-deconvolution. 
+
+::: {#imp-spatial-benchmark-deconvolution .callout-important title="Best spatial deconvolution algorithms"}
+
+From @li2022nm, Tangram, gimVI, and SpaGE outperformed other integration methods for predicting the spatial distribution of RNA transcripts, whereas Cell2location, SpatialDWLS, and RCTD are the top-performing methods for the cell type deconvolution of spots.
+
+:::
+
+![Benchmark decision tree for Deconvolution Algorithms applied to Spatial Transcriptomics](images/benchmark_deconvolution.webp)
+
+##### Dynamic integration and mapping of cell populations
+
+- [`SIMO`, for  Spatial Integration of Multi-Omics](https://www.nature.com/articles/s41467-025-56523-4), from @yang2025nc. 
+
+  - Probabilistic alignment relying on the fused **Gromov-Wasserstein optimal transport** algorithm
+  - Integrates multiple single-cell modalities, such as chromatin accessibility and DNA methylation. 
+  - Integrates co-localisation spatial patterns. 
+
+  
+::: {.callout-caution title="Major hurdles when performing cell type annotation with a dynamic dimension" collapse="true"}
+
+Major challenge is to track invidual cells's fate across time points, with both **experimental variability** (distinct technologies and experimental conditions across time points, image rotation and distortion, etc.) and **biological variability** (mutations in tumoral environment, cell differentiation in early-developmental stages, cell deaths, ...).
+
+:::
+
+
+#### Discriminate paracrine or juxtacrine with endocrine signalling (short vs long-range communications)
+
+1. Discriminate between short- and long-range cell-cell communications: 
+- Current Use of $k$-means, to be replaced with: 
+  - Use of mixture models to characterise and automatically retrive the threshold
+  - [`BanditPAM`](https://www.linkedin.com/posts/vlevorato_machinelearning-datascience-unsupervised-activity-7289567831145279490-Ibchs) 
+  - [Selection of the number of clusters](https://www.linkedin.com/posts/vlevorato_datascience-machinelearning-unsupervised-activity-7292093235366121472-jMMg)
+  - Even better, review latest spatial methods tailored to spatial clustering.
+  
+2. Compare distances by:
+  i. Use of **Distance Enrichment Score** (compare the distribution of predicted short-rank and long-rank interactions with what's observed), similar to GSEA as showcased in [@subramanian2005pnas], and theretically largely inspired from the **Kolmogorov-Smirnov** statistical test. 
+    - [General advises for enhanced comparision of statistical distributions](https://www.linkedin.com/posts/adrianolszewski_statistics-datascience-activity-7256312446737387520-J8zk). Indeed, the KS only evaluates the maximal discrepancy between two distributions, and not the whole statistical distribution.  
+  ii. Confusion matrix between predicted **short-range** and **long-range** communications, benchmarked against the consensual setting.  
+  
+
+#### Simulate in-silico spatial transcriptomic distributions
+
+##### Single-cell simulations
+
+- [`Splatter`](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1305-0), from @zappia2017gb. 
+  - A two-stage simulation process: 
+      1.Estimation of the parameters from realistic datasets. 
+      2. Generation of a synthetic dataset from the prior parameters inferred in stage 1.
+  - Avalaible as a [Bioconductor R package](https://www.bioconductor.org/packages/release/bioc/html/splatter.html). 
+  - Six simulation scenarios: 
+    1. **"Simple"**: Negative binomial distributions. 
+    2. Extension to model 1 by adding technical noise resulting from distinct depth sequencing (aka library size factor). 
+    3. Adds an additional **batch effect** to model 2.
+    4. Mixtures of potential distinct probability distributions.
+    5. BASiCS: models both biological and technical variation evaluated through **spike-ins** genes
+    6. Splat: Gamma (for mean gene expression)-Poisson (for cells counts) hierarchical model + inclusion of outliers + inclusion of **drop-outs** + library size + **Biological Coefficient of Variation** to enforce a *mean-variance* trend. 
+    7. [DAGs of the hierarchical models used for simulation](https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-017-1305-0/MediaObjects/13059_2017_1305_MOESM1_ESM.pdf). 
+  - Tailored for modelling scRNASeq datasets only, no accounting for spatial dispersion. 
+
+- [`scDesign2`](https://github.com/JSB-UCLA/scDesign2):
+  - Tailored towards single-cell modelling and simulations only. 
+  - Uses **copulas**, only modelling the marginal distirbution of gene expression. Report to @tip-copula for details. 
+  - Only avalaible as the Github R repository [`scDesign2`](https://github.com/JSB-UCLA/scDesign2) with following  [tutorial](https://htmlpreview.github.io/?https://github.com/JSB-UCLA/scDesign2/blob/master/vignettes/scDesign2.html.)
+  
+::: {#tip-copula .callout-tip collapse="true" title="Copula Decomposition of Multivariate Distributions: the Sklar’s Theorem"}
+
+Considering a multivariate probability distribution, characterised by **random vector** $\mathbf{X} = (X_1, X_2, ..., X_d)$ if dimension $d$, the Sklar's theorem, aka the **copula decomposition**, allows decomposing the **joint cumulative distribution function (CDF)** into their **marginals** (no correlation between them by definition) and a function that describes the **dependence structure** (aka the covariance structure) between them. The *copula* is this coupling function, hence the name. 
+
+
+In details, for a **d-dimensional** random vector $\mathbf{X} = (X_1, ..., X_d)$ with joint CDF $F(x_1, ..., x_d)$ and continuous marginal CDFs $F_1(x_1), \ldots, F_d(x_d)$, there exists a unique **copula function** $C$ that allows decomposition of the **joint probability density function (PDF)** of $\mathbf{X}$ into (see (@eq-sklar-theorem)):
+
+$$
+f(x_1, ..., x_d) = \overbrace{c(F_1(x_1), ..., F_d(x_d))}^{\text{Copula characterising covariance structure}} \overbrace{\prod_{i=1}^{d} f_i(x_i)}^{\text{Marginal density functions}}
+$${#eq-sklar-theorem}
+
+
+**If the marginal distributions are continuous, this decomposition is unique.**
+
+:::
+
+
+
+##### Spatial simulations
+  
+- [`SpatialDE`](https://github.com/Teichlab/SpatialDE), from [@svensson2018nm]: 
+  - Models interactions across gene expression profiles considering a multivariate Gaussian distribution, whose covariance term captures both **spatial covariance** and **non spatial variance** (assumption of IID noise).
+  - Inspired from GP (Gaussian-Process) models, here tailored to spatial transcriptomic data. 
+  - Not really tailored for simulating different kinds of spatial transcriptomc expression, model quite specific. 
+  - Implemented in Python. 
+  
+  
+- [`spasim`](https://www.nature.com/articles/s41467-023-37822-0), from @feng2023nc. 
+  - Tailored for simulating **spatial imaging** rather than spatial omics distribution. 
+  - Relevant enumeration of **cell colocalisation** spatial metrics in [https://www.nature.com/articles/s41467-023-37822-0#Sec10]: 
+    - Average pairwise distance (APD)
+    - Average minimum distance (AMD)
+    - Cells in neighborhood (CIN)
+    - Mixing score (MS) and Normalized mixing score (NMS)
+    - Area under the curve of the cross K function (AUC)
+    - Cross K intersection (CKI)
+    - Localized entropy, Saptial heterogeneity and entropy gradient. 
+    - Average nearest neighbor index (ANNI) to detect clusters of cell. 
+    - Implemented as a [BioConductor package](https://bioconductor.org/packages/spaSim/) apired with [spaSim tutorial](https://trigosteam.github.io/spaSim/).
+    
+
+- [`scMultiSim`](https://github.com/ZhangLabGT/scMultiSim), from @li2023rs:
+  - Certainly, the most comprehensive simulation framework so far. Includes modelling of:
+  
+    - Dynamic variations (changes of GRNs across time points, aka RNA velocity + varying proportions of spliced and unspliced gene expression, in relation with chromatin accessibility quantified by scATACseq + cell line tree lineage).
+    - Multi-modal (gene expression, chromatin accessibility)
+    - Accounts for technical variations (library preparation noise including sequencing depth and cell-specific transcript capture + batch effet), inspired from `SymSim` [@zhang2019nc] scRNASeq simulator.
+  - A [BioConductor package](https://www.bioconductor.org/packages/release/bioc/html/scMultiSim.html), with its [spatial transcriptomics tutorial](https://zhanglabgt.github.io/scMultiSim/articles/spatialCCI.html). See @fig-scMultisim below for details. 
+  
+![Overview of `scMultiSim` from [@li2023rs](https://pmc.ncbi.nlm.nih.gov/articles/PMC10055660/figure/F1). The minimal required input is a **cell differential tree** describing the differentiation relationship of cell types, and a user-input ground truth GRN. Optionally, a ground truth for cell-cell interaction and technical design.](images/scMultisim.png){#fig-scMultisim width=85%}
+  
+
+
+- [`SRTsim`](SRTsim: spatial pattern preserving simulations for spatially resolved transcriptomics), from @zhu2023gb. 
+  - Avalaible as a [CRAN R package](https://cran.r-project.org/web/packages/SRTsim/index.html), a [GitHub repository](https://github.com/xzhoulab/SRTsim) and a [R Shiny App](https://jiaqiangzhu.shinyapps.io/srtsim).
+  - Tutorials are avalaible [here](https://xzhoulab.github.io/SRTsim/02_Reference_Based_Example/), generated using `pkgdown`. 
+  - Three-stage simulation protocol:
+    1. **Stage 1**: Define spatial coordinates for cell locations^[To be paired with `spasim` which focuses only on spatial imaging and tissue generation, without modelling transcriptomic expressions.]. In details, it first uses a **hull** algorithm to define the **outskirt** of the tissue in the shape of a polygon. Secondly, within the polygon, you can either define a square grid within the polygon with the number of points determined by the user, mimmicking the process underlying 10X Visium generation, OR uses a random point process to create locations within the polygon using the [`sp::spsample`](https://www.rdocumentation.org/packages/sp/versions/2.1-4/topics/spsample) R function^[Underlying principle: stratified random sampling, quite similar to survey sampling modelling], looking alike MERFISH or seqFISH+ SRT technologies.
+    2. **Stage 2**, generate cell-specific expression counts: Four statistical generative models are avalaible, namely P for Poisson, NB for negative binomial, ZIP for zero-inflated Poisson; ZINB for zero-inflated negative binomial, the latter 2 accouting for model **zero-inflation** (the so-called *drop-outs* issue common in scRNASeq datasets). All measures are used to infer the expression model for each of the 4 statistical count models implemented, one gene after the other (**strong assumption of gene independence and decorrelation with spatial location!!**).  The model finally selected is the one exhibiting the lowest AIC, whose parameters are subsequently used to generate synthetic expression counts. 
+    3. **Step 3**: assign the simulated counts to the locations in the synthetic data preserving the spatial expression pattern observed in the reference data^[Idea: instead of using rank-order mapping, rely on a spatial version of **optimal transport** for perserving distribution shape -> minimise the Wasserstein distance between real and simulated spatial density distributions]. Specifically, `SRTsim` assigns the simulated expression counts to locations in the synthetic data preserving the rank derived from real data (for instance, the spatial location associated with the highest expression of a given gene in the real data will match the spatial location assigned to synthetic data).
+    4. **Optionnal**: Without prior knowledge, a reference-free simulation is also provided with the simulator, with the possibility of customising spatial patterns from a predefined shape of interest and generate synthetic data with user-specified model parameters.
+    5. **Optionnal 2**: possibility to extrapolate existing domain areas to uncovered spatial areas using an **affine transformation** which preserves most of the topological features. Report to @fig-SRTsim below for details. 
+    
+- **Output**: a S4 object that contains:
+  - One matrix with the spatial tissue coordinates
+  - The corresponding simulated expression counts for all genes across all locations. 
+  - The estimated model parameters, the user-defined parameter inputs and the input random seed.
+  
+![Overview of `SRTsim` from [@zhu2023gb, Fig 1](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02879-z/figures/1). Inputs for the *reference-based* approach include a gene expression count matrix, a location matrix, and an optional domain annotation matrix to depict tissue distributions.](images/SRTsim.webp){#fig-SRTsim width=85%}
+
+#### Evaluation against ground truth estimates
+
+- Correlation between CCC predictions and spatial adjacency
+- Recovering the effect of receptor gene knockouts
+- Robustness to subsampling
+- Agreement with proteomics
+- scRNA-Seq simulated datasets 
+- Ground truth among methods.
+
+
+### Computational platform and paper
+
+- R or Python
+- Nextflow or Snakemake (if you start from raw datasets, or requires combining distinct script languages paired with slurm intensive use.)
+- Package structure, including `./vignettes` folder, or simple call to Quarto or Jupyter Notebook documents. 
+- Github or Gitlab repository, visibility? Contributions?
+- Choice of the Journal:
+  - Which review? Nature? Genome Biology?
+  - Which tool for writing the paper? Overleaf? Shared GitHub repo? Use of Nature quarto extensions (Pro: generate automatically both html and pdf versions)
+  - Which library repository (shared Zotero group has my favour)
+
+  
+## Outlooks
+
+### Statistical perspectives and methods
+
+- [Quantum computing](https://research.ibm.com/publications/a-perspective-on-quantum-computing-for-analyzing-cell-cell-communication-networks)
+
+### Biological perspectives
+
+### Infra and intra-cellular
+
+- Estimate bot extra- and intra- intracellular activities.
+
+#### Multi-scale perspective
+
+- [Niche differential gene expression analysis in spatial transcriptomics data identifies context-dependent cell-cell interactions](https://www.biorxiv.org/content/10.1101/2023.01.03.522646v1.full.pdf)
+
+- **Multi-scale**: Instead of considering a single-cell resolution consider a tissue resolution of the propagation signal 
+  - `Visium`: spots often capture more than one cell
+  - `Xenium`: already at the single cell level. However, lacks of depth resolution.
+  
+  
+#### Cross-sample and cross-study
+
+- Cross-sample and cross-study comparisons, under different environmental conditions (identify the shared and differentiated pathways triggered from one condition to another)
+
+#### Dynamic cell-cell-communication inference
+
+#### Biological use cases
+
+- Wound healing
+- TME deconvolution and niche identification
+
+
+
+
+

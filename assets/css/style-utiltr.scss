@@ -4,11 +4,23 @@ $code-bg: white;
 $code-color: #4c8c8c ;
 $utilitr-color: #93bcbc;
 
+// The left hand sidebar
+$grid-sidebar-width: 250px !default;
+
+// The main body
+$grid-body-width: 1000px !default;
+
+// The right hand margin bar
+$grid-margin-width: 150px !default;
+
+// The gutter that appears between the above columns
+$grid-column-gutter-width: 1.0rem !default;
+
 /*-- scss:rules --*/
 
 /* from https://github.com/InseeFrLab/utilitR/blob/082a38f6073b5513a5fa89fc4249ddc7bad477fd/css/style-utilitr.css */
 body{
-  font-size: 18px;
+  font-size: 12px;
   text-align: justify;
   text-justify: inter-word;
   text-align-last: left;

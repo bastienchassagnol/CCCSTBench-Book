@@ -2,3 +2,166 @@
 title: "Tools review for inferring cell-cell-communication interactions"
 ---
 
+```{r setup-tools}
+#| include: false
+# load packages
+library(readr)
+library(readxl)
+library(dplyr)
+library(knitr)
+
+# table options
+library(flextable)
+library(reactable)
+library(htmltools)
+
+knitr::opts_chunk$set(
+  comment = "#>",
+  out.width = "100%"
+)
+
+```
+
+## Identified collaborations
+
+### ADLab Collaborators:
+
+-   Marie Pier Scott-Boyer: biological expertise
+- Antoine Bodein: network expertise.
+
+### External collaborators:
+
+#### Rafael Gottardo
+
+- Suggested by Danielle Malpetti, met at the 4th Clinic Meets Data Science (CMDS) Symposium, in Zürich. 
+-  Second and mutual interest with pathway integration for improving deconvolution performances using the PLIER algorithm. 
+
+#### Mark Robinson
+
+- Proficient in defining and asserting the respective pros and cons of several statistical spatial transcriptomics. 
+  - [Elixir Spatial statistics](https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics), provided in @fig-mark-robinson.
+  
+::: {#fig-mark-robinson}
+  
+{{< pdf biblio/8_Day3_spatial_stats_MarkRobinson_2025.pdf width=90% height=800 >}}
+
+:::
+
+
+  
+- Strong proficiency in developing robust benchmark's architecture:
+
+  - [Omnibenchmark repository](https://omnibenchmark.org/)
+  - [Omnibenchmark for continuous and open benchmarking in bioinformatics](https://arxiv.org/pdf/2409.17038), from [@mallona2024]
+  - [Building a continuous benchmarking ecosystem in bioinformatics](https://arxiv.org/pdf/2409.15472), from [@mallona2024a]
+  - [2023 Presentation to `Single Cell Plus`](https://www.birs.ca/workshops/2023/23w5090/files/Mark%20Robinson/Robinson_BIRS_benchmarking.pdf), displayed in @fig-mark-robinson2. 
+  
+  
+::: {#fig-mark-robinson2}
+
+{{< pdf biblio/Robinson_BIRS_benchmarking.pdf width=90% height=800 >}}
+
+:::
+  
+- Half-Canadian, half-Swiss
+- Already discussed with him attending one of the [Zürich Compbio](https://compbiozurich.org/news/) meeting.
+
+
+#### Yvan Saeys 
+
+- Proficiency in Cell-cell-communication inference methods, as showcased by Elixir class @fig-yvan-saeys. 
+
+::: {#fig-yvan-saeys}
+
+{{< pdf biblio/9_Day4_CellCellCommuniation_YvanSaeys_2025.pdf width=90% height=800 >}}
+
+:::
+
+
+- [Jupyter Notebook Tutorial on CCC](https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics/blob/main/day_4/practical_6/workdir/p6_ccc.ipynb)
+
+- Collaborating with Julio Saez-Rodriguez lab, and recommended by Professor Mark Robinson. 
+
+#### Others 
+
+
+- Fabian Theis, with [*Modeling intercellular communication in tissues using spatial graphs of cells*](https://www.nature.com/articles/s41587-022-01467-z)'s paper, from @fischer2023nb.
+
+-   Francesca Drummer
+-   Samuel Gunz
+-   Martin Emons (these two contacts interplay with Mark Robinson's lab)
+
+-   The latter 5 associated with the following [Elixir class](https://elixir-europe-training.github.io/ELIXIR-SCO-spatial-omics/schedule.html).
+
+-   Other swiss contacts: Erik van Nimwegen in Basel, Bart Deplancke in Lausanne and Sven Bergmann, Pierre-Luc Germain
+
+-   Other EMBL/EBI contacts: Julio Saez Rodriguez + Pablo + Martin Garrido-Rodriguez
+
+-   Laura Cantini's team on Cell-cell communication.
+
+
+## TODO 
+
+- **ToDo: re-use sent email to Mark Robinson** and complete collaborators section.
+- Finalise integration of Marie-Pier, including Table of exsiting spatial methods + add Table on single-cell approaches. 
+  - Tables of methods to be set in Appendix only, 
+-	Read reviews and benchmarks papers, add dedicated sections.
+-	Methodological hurdles @sec-hurdles-benchmark:
+  - Modern bootstrapping/bagging methods for simulating unknow distributions
+- AI tools for automated litterature review
+- Add litterature citations
+- Add real datasets approaches.
+
+
+
+---
+
+
+## List of CCC tools{#sec-ccc-tools .unnumbered .appendix}
+
+:::: {.content-hidden unless-format="html"}
+
+```{r}
+#| label: tbl-ccc-tools
+#| eval: !expr knitr::is_html_output()
+#| tbl-cap: A comprehensive overview of cell-cell-communication tools, sorted by general functionality and programming language, largely drawn from @armingol2024nrg. Report to Box 1 **Rule-based** and **data-driven** computational strategies for interpretring the variables from the table.
+
+CCC_tools <- readxl::read_xlsx("tables/CCC-tools.xlsx", sheet = "CCC-tools") |>
+  select(-`Real SC`, `Machine Learning`, `Core Functions`) |>
+  rename(Repository = URL) |>
+  arrange(Category, `Tool classification`, Language, desc(Year))
+
+# use of Reactive tables
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download as CSV"),
+      onclick = "Reactable.downloadDataCSV('CCC-tools-download', 'CCC-tools.csv')"
+    ),
+    reactable(CCC_tools,
+              defaultColDef = colDef(
+                cell = function(value) format(value, nsmall = 1),
+                align = "center",
+                headerStyle = list(background = "#f7f7f8"),
+                minWidth = 70
+              ),
+              highlight = TRUE,
+              filterable = TRUE,
+              searchable = TRUE,
+              defaultPageSize = 10,
+              minRows = 10,
+              elementId = "CCC-tools-download"
+    )
+  )
+)
+```
+
+::::
+
+## AI-based litterature review tools{.unnumbered}
+
+Using a **ChatGPT prompt**:
+
+> "Provide me with a detailed summary of this paper, including the methodology, main findings, and comparison to existing methodologies."
+
+

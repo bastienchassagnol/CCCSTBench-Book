@@ -19,14 +19,13 @@ book:
   open-graph: true
   downloads: [pdf, docx]
   sidebar:
-    style: "docked"
+    style: "floating"
     collapse-level: 2
     border: true
     search: true
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
   appendices:
     - references.qmd
     - tools.qmd
@@ -43,7 +42,9 @@ book:
 # quarto extensions
 filters:
   - highlight-text
+  - webp-to-png
 number-depth: 3
+number-sections: true # Required for cross-referencing sections
 # bibliographic options
 bibliography: assets/cellcommunication.bib
 link-citations: true
@@ -69,6 +70,8 @@ subject: "Cell-cell benchmark"
 
 format:
   html:
+    # styling options
+    page-layout: full
     theme:
       light: [cosmo, assets/css/style-utiltr.scss]
       dark:  [darkly, assets/css/style-utiltr.scss]
@@ -96,7 +99,7 @@ format:
   pdf:
     documentclass: book
     # package installation
-    pdf-engine: lualatex
+    pdf-engine: xelatex # supports natively webp images, using graphicx package
     latex-auto-install: true
     # Bibliographic outputs
     colourlinks: true
