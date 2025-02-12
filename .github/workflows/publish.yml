@@ -25,6 +25,10 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tinytex: true # required for pdf outputs
 
       - name: Install R version
         uses: r-lib/actions/setup-r@v2
