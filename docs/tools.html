@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.40">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Bastien CHASSAGNOL, and Marie-Pier">
 <meta name="keywords" content="Benchmark, Cell-cell communication tools, spatial transcriptomics, single-cell">
+
 <title>Appendix A — Tools review for inferring cell-cell-communication interactions – CCCSTBench-Book benchmarking CCC tools integrating pathway information</title>
 <style>
 code{white-space: pre-wrap;}
@@ -41,6 +44,7 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -58,8 +62,9 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f8dc6eab18fde03278982b0b35885446.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-788a8a1ab0e8dc70c035cd237a62452d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-973cedc664671fbecdd2fc2ed3a1de0b.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-c5c5986048f91fcefeb004ab4e541693.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-aa75e61fdbe436dc23cf129f6b4b7305.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -85,24 +90,46 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><style>html{ scroll-behavior: smooth; }</style>
-<script async="" src="https://hypothes.is/embed.js"></script><script>
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     document.body.classList.add('hypothesis-enabled');
   });
-</script><script src="site_libs/core-js-2.5.3/shim.min.js"></script><script src="site_libs/react-18.2.0/react.min.js"></script><script src="site_libs/react-18.2.0/react-dom.min.js"></script><script src="site_libs/reactwidget-2.0.0/react-tools.js"></script><link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
-<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script><link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&amp;display=fallback" rel="stylesheet">
+</script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+
+<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&amp;display=fallback" rel="stylesheet">
+
+
 <link rel="stylesheet" href="assets/css/style-reactable.css">
 <link rel="stylesheet" href="assets/css/style-utiltr.css">
 <meta property="og:title" content="Appendix A — Tools review for inferring cell-cell-communication interactions – CCCSTBench-Book benchmarking CCC tools integrating pathway information">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="CCCSTBench-Book benchmarking CCC tools integrating pathway information">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -113,9 +140,13 @@ div.csl-indent {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">CCCSTBench-Book benchmarking CCC tools integrating pathway information</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -123,7 +154,7 @@ div.csl-indent {
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./CCCSTBench-Book-benchmarking-CCC-tools-integrating-pathway-information.pdf">
               <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
@@ -136,30 +167,30 @@ div.csl-indent {
             </a>
           </li>
       </ul>
-</div>
+    </div>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
               <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
               <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -176,7 +207,7 @@ div.csl-indent {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -196,8 +227,8 @@ div.csl-indent {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
@@ -210,29 +241,33 @@ div.csl-indent {
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#identified-collaborations" id="toc-identified-collaborations" class="nav-link active" data-scroll-target="#identified-collaborations"><span class="header-section-number">A.1</span> Identified collaborations</a>
+  <li><a href="#identified-collaborations" id="toc-identified-collaborations" class="nav-link active" data-scroll-target="#identified-collaborations"><span class="header-section-number">A.1</span> Identified collaborations</a>
   <ul class="collapse">
-<li><a href="#adlab-collaborators" id="toc-adlab-collaborators" class="nav-link" data-scroll-target="#adlab-collaborators"><span class="header-section-number">A.1.1</span> ADLab Collaborators:</a></li>
+  <li><a href="#adlab-collaborators" id="toc-adlab-collaborators" class="nav-link" data-scroll-target="#adlab-collaborators"><span class="header-section-number">A.1.1</span> ADLab Collaborators:</a></li>
   <li><a href="#external-collaborators" id="toc-external-collaborators" class="nav-link" data-scroll-target="#external-collaborators"><span class="header-section-number">A.1.2</span> External collaborators:</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">A.2</span> TODO</a></li>
   <li><a href="#sec-ccc-tools" id="toc-sec-ccc-tools" class="nav-link" data-scroll-target="#sec-ccc-tools">List of CCC tools</a></li>
   <li><a href="#ai-based-litterature-review-tools" id="toc-ai-based-litterature-review-tools" class="nav-link" data-scroll-target="#ai-based-litterature-review-tools">AI-based litterature review tools</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/blob/master/tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/blob/master/tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./tools.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Tools review for inferring cell-cell-communication interactions</span></a></li></ol></nav><div class="quarto-title">
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./tools.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Tools review for inferring cell-cell-communication interactions</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title">Appendix A — Tools review for inferring cell-cell-communication interactions</h1>
 </div>
 
@@ -253,79 +288,91 @@ div.csl-indent {
   </div>
 </div>
 
-</header><section id="identified-collaborations" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="identified-collaborations">
-<span class="header-section-number">A.1</span> Identified collaborations</h2>
-<section id="adlab-collaborators" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="adlab-collaborators">
-<span class="header-section-number">A.1.1</span> ADLab Collaborators:</h3>
+</header>
+
+
+<section id="identified-collaborations" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="identified-collaborations"><span class="header-section-number">A.1</span> Identified collaborations</h2>
+<section id="adlab-collaborators" class="level3" data-number="A.1.1">
+<h3 data-number="A.1.1" class="anchored" data-anchor-id="adlab-collaborators"><span class="header-section-number">A.1.1</span> ADLab Collaborators:</h3>
 <ul>
 <li>Marie Pier Scott-Boyer: biological expertise</li>
 <li>Antoine Bodein: network expertise.</li>
-</ul></section><section id="external-collaborators" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="external-collaborators">
-<span class="header-section-number">A.1.2</span> External collaborators:</h3>
-<section id="rafael-gottardo" class="level4"><h4 class="anchored" data-anchor-id="rafael-gottardo">Rafael Gottardo</h4>
+</ul>
+</section>
+<section id="external-collaborators" class="level3" data-number="A.1.2">
+<h3 data-number="A.1.2" class="anchored" data-anchor-id="external-collaborators"><span class="header-section-number">A.1.2</span> External collaborators:</h3>
+<section id="rafael-gottardo" class="level4">
+<h4 class="anchored" data-anchor-id="rafael-gottardo">Rafael Gottardo</h4>
 <ul>
 <li>Suggested by Danielle Malpetti, met at the 4th Clinic Meets Data Science (CMDS) Symposium, in Zürich.</li>
 <li>Second and mutual interest with pathway integration for improving deconvolution performances using the PLIER algorithm.</li>
-</ul></section><section id="mark-robinson" class="level4"><h4 class="anchored" data-anchor-id="mark-robinson">Mark Robinson</h4>
+</ul>
+</section>
+<section id="mark-robinson" class="level4">
+<h4 class="anchored" data-anchor-id="mark-robinson">Mark Robinson</h4>
 <ul>
 <li>Proficient in defining and asserting the respective pros and cons of several statistical spatial transcriptomics.
 <ul>
-<li>
-<a href="https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics">Elixir Spatial statistics</a>, provided in <a href="#fig-mark-robinson" class="quarto-xref">Figure&nbsp;<span>A.1</span></a>.</li>
-</ul>
-</li>
+<li><a href="https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics">Elixir Spatial statistics</a>, provided in <a href="#fig-mark-robinson" class="quarto-xref">Figure&nbsp;<span>A.1</span></a>.</li>
+</ul></li>
 </ul>
 <div id="fig-mark-robinson" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mark-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mark-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><object data="biblio/8_Day3_spatial_stats_MarkRobinson_2025.pdf" type="application/pdf" width="90%" height="800"><a href="biblio/8_Day3_spatial_stats_MarkRobinson_2025.pdf" download="">Download PDF file.</a></object></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mark-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;A.1
-</figcaption></figure>
+</figcaption>
+</figure>
 </div>
 <ul>
-<li>
-<p>Strong proficiency in developing robust benchmark’s architecture:</p>
+<li><p>Strong proficiency in developing robust benchmark’s architecture:</p>
 <ul>
 <li><a href="https://omnibenchmark.org/">Omnibenchmark repository</a></li>
-<li>
-<a href="https://arxiv.org/pdf/2409.17038">Omnibenchmark for continuous and open benchmarking in bioinformatics</a>, from <span class="citation" data-cites="mallona2024">(<a href="references.html#ref-mallona2024" role="doc-biblioref">Mallona et al. 2024</a>)</span>
-</li>
-<li>
-<a href="https://arxiv.org/pdf/2409.15472">Building a continuous benchmarking ecosystem in bioinformatics</a>, from <span class="citation" data-cites="mallona2024a">(<a href="references.html#ref-mallona2024a" role="doc-biblioref"><strong>mallona2024a?</strong></a>)</span>
-</li>
-<li>
-<a href="https://www.birs.ca/workshops/2023/23w5090/files/Mark%20Robinson/Robinson_BIRS_benchmarking.pdf">2023 Presentation to <code>Single Cell Plus</code></a>, displayed in <a href="#fig-mark-robinson2" class="quarto-xref">Figure&nbsp;<span>A.2</span></a>.</li>
-</ul>
-</li>
+<li><a href="https://arxiv.org/pdf/2409.17038">Omnibenchmark for continuous and open benchmarking in bioinformatics</a>, from <span class="citation" data-cites="mallona2024">(<a href="references.html#ref-mallona2024" role="doc-biblioref">Mallona et al. 2024</a>)</span></li>
+<li><a href="https://arxiv.org/pdf/2409.15472">Building a continuous benchmarking ecosystem in bioinformatics</a>, from <span class="citation" data-cites="mallona2024a">(<a href="references.html#ref-mallona2024a" role="doc-biblioref"><strong>mallona2024a?</strong></a>)</span></li>
+<li><a href="https://www.birs.ca/workshops/2023/23w5090/files/Mark%20Robinson/Robinson_BIRS_benchmarking.pdf">2023 Presentation to <code>Single Cell Plus</code></a>, displayed in <a href="#fig-mark-robinson2" class="quarto-xref">Figure&nbsp;<span>A.2</span></a>.</li>
+</ul></li>
 </ul>
 <div id="fig-mark-robinson2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mark-robinson2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mark-robinson2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><object data="biblio/Robinson_BIRS_benchmarking.pdf" type="application/pdf" width="90%" height="800"><a href="biblio/Robinson_BIRS_benchmarking.pdf" download="">Download PDF file.</a></object></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mark-robinson2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;A.2
-</figcaption></figure>
+</figcaption>
+</figure>
 </div>
 <ul>
 <li>Half-Canadian, half-Swiss</li>
 <li>Already discussed with him attending one of the <a href="https://compbiozurich.org/news/">Zürich Compbio</a> meeting.</li>
-</ul></section><section id="yvan-saeys" class="level4"><h4 class="anchored" data-anchor-id="yvan-saeys">Yvan Saeys</h4>
+</ul>
+</section>
+<section id="yvan-saeys" class="level4">
+<h4 class="anchored" data-anchor-id="yvan-saeys">Yvan Saeys</h4>
 <ul>
 <li>Proficiency in Cell-cell-communication inference methods, as showcased by Elixir class <a href="#fig-yvan-saeys" class="quarto-xref">Figure&nbsp;<span>A.3</span></a>.</li>
 </ul>
 <div id="fig-yvan-saeys" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-yvan-saeys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yvan-saeys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><object data="biblio/9_Day4_CellCellCommuniation_YvanSaeys_2025.pdf" type="application/pdf" width="90%" height="800"><a href="biblio/9_Day4_CellCellCommuniation_YvanSaeys_2025.pdf" download="">Download PDF file.</a></object></p>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-yvan-saeys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;A.3
-</figcaption></figure>
+</figcaption>
+</figure>
 </div>
 <ul>
 <li><p><a href="https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics/blob/main/day_4/practical_6/workdir/p6_ccc.ipynb">Jupyter Notebook Tutorial on CCC</a></p></li>
 <li><p>Collaborating with Julio Saez-Rodriguez lab, and recommended by Professor Mark Robinson.</p></li>
-</ul></section><section id="others" class="level4"><h4 class="anchored" data-anchor-id="others">Others</h4>
+</ul>
+</section>
+<section id="others" class="level4">
+<h4 class="anchored" data-anchor-id="others">Others</h4>
 <ul>
 <li><p>Fabian Theis, with <a href="https://www.nature.com/articles/s41587-022-01467-z"><em>Modeling intercellular communication in tissues using spatial graphs of cells</em></a>’s paper, from <span class="citation" data-cites="fischer2023nb">Fischer, Schaar, and Theis (<a href="references.html#ref-fischer2023nb" role="doc-biblioref">2023</a>)</span>.</p></li>
 <li><p>Francesca Drummer</p></li>
@@ -335,16 +382,18 @@ Figure&nbsp;A.3
 <li><p>Other swiss contacts: Erik van Nimwegen in Basel, Bart Deplancke in Lausanne and Sven Bergmann, Pierre-Luc Germain</p></li>
 <li><p>Other EMBL/EBI contacts: Julio Saez Rodriguez + Pablo + Martin Garrido-Rodriguez</p></li>
 <li><p>Laura Cantini’s team on Cell-cell communication.</p></li>
-</ul></section></section></section><section id="todo" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="todo">
-<span class="header-section-number">A.2</span> TODO</h2>
+</ul>
+</section>
+</section>
+</section>
+<section id="todo" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="todo"><span class="header-section-number">A.2</span> TODO</h2>
 <ul>
-<li>
-<strong>ToDo: re-use sent email to Mark Robinson</strong> and complete collaborators section.</li>
+<li><strong>ToDo: re-use sent email to Mark Robinson</strong> and complete collaborators section.</li>
 <li>Finalise integration of Marie-Pier, including Table of exsiting spatial methods + add Table on single-cell approaches.
 <ul>
 <li>Tables of methods to be set in Appendix only,</li>
-</ul>
-</li>
+</ul></li>
 <li>Read reviews and benchmarks papers, add dedicated sections.</li>
 <li>Methodological hurdles <a href="intro.html#sec-hurdles-benchmark" class="quarto-xref"><span>Section 1.3.2</span></a>:</li>
 <li>Modern bootstrapping/bagging methods for simulating unknow distributions</li>
@@ -352,10 +401,14 @@ Figure&nbsp;A.3
 <li>Add litterature citations</li>
 <li>Add real datasets approaches.</li>
 </ul>
-<hr></section><section id="sec-ccc-tools" class="level2 unnumbered appendix"><h2 class="unnumbered appendix anchored" data-anchor-id="sec-ccc-tools">List of CCC tools</h2>
+<hr>
+</section>
+<section id="sec-ccc-tools" class="level2 unnumbered appendix">
+<h2 class="unnumbered appendix anchored" data-anchor-id="sec-ccc-tools">List of CCC tools</h2>
 <div class="cell">
 <div id="tbl-ccc-tools" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-ccc-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-ccc-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <button onclick="Reactable.downloadDataCSV('CCC-tools-download', 'CCC-tools.csv')">
 <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path></svg>
@@ -367,10 +420,13 @@ Download as CSV
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-ccc-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;A.1: A comprehensive overview of cell-cell-communication tools, sorted by general functionality and programming language, largely drawn from <span class="citation" data-cites="armingol2024nrg">Armingol, Baghdassarian, and Lewis (<a href="references.html#ref-armingol2024nrg" role="doc-biblioref">2024</a>)</span>. Report to Box 1 <strong>Rule-based</strong> and <strong>data-driven</strong> computational strategies for interpretring the variables from the table.
-</figcaption></figure>
+</figcaption>
+</figure>
 </div>
 </div>
-</section><section id="ai-based-litterature-review-tools" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="ai-based-litterature-review-tools">AI-based litterature review tools</h2>
+</section>
+<section id="ai-based-litterature-review-tools" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="ai-based-litterature-review-tools">AI-based litterature review tools</h2>
 <p>Using a <strong>ChatGPT prompt</strong>:</p>
 <blockquote class="blockquote">
 <p>“Provide me with a detailed summary of this paper, including the methodology, main findings, and comparison to existing methodologies.”</p>
@@ -388,7 +444,10 @@ Fischer, David S., Anna C. Schaar, and Fabian J. Theis. 2023. <span>‘Modeling 
 Mallona, Izaskun, Almut Luetge, Ben Carrillo, Daniel Incicau, Reto Gerber, Anthony Sonrel, Charlotte Soneson, and Mark D. Robinson. 2024. <span>‘Omnibenchmark (Alpha) for Continuous and Open Benchmarking in Bioinformatics’</span>. 25 September 2024. <a href="https://doi.org/10.48550/arXiv.2409.17038">https://doi.org/10.48550/arXiv.2409.17038</a>.
 </div>
 </div>
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -948,7 +1007,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
       <a href="./references.html" class="pagination-link" aria-label="References">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
       </a>          
@@ -957,7 +1018,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
 <p>Written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>   
@@ -966,16 +1028,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/blob/master/tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/bastienchassagnol/CCCSTBench-Book.git">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
 </footer>
+
+
 
 
 <script src="site_libs/quarto-html/zenscroll-min.js"></script>
