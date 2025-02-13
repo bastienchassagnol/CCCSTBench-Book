@@ -15,6 +15,7 @@ library(reactable)
 library(htmltools)
 library(fontawesome)
 
+
 knitr::opts_chunk$set(
   comment = "#>",
   out.width = "100%"

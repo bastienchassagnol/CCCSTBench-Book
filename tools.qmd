@@ -16,10 +16,8 @@ library(reactable)
 library(htmltools)
 
 knitr::opts_chunk$set(
-  comment = "#>",
   out.width = "100%"
 )
-
 ```
 
 ## Identified collaborations

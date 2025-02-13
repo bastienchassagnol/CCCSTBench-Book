@@ -6,3 +6,20 @@ This is a Quarto book.
 <a class="github-button" href="https://github.com/bastienchassagnol/CCCSTBench-Book" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star this website on Github">Star this website on Github</a><script async defer src="https://buttons.github.io/buttons.js"></script>
 ```
 
+
+```{r}
+#| label: global-setup
+
+# detect relevant packages
+library(downlit)
+library(gdtools)
+
+# deal with fucking fonts
+gdtools::register_gfont("Open Sans")
+flextable::set_flextable_defaults(
+  font.family = "Open Sans",
+  font.size = 11,
+  padding = 2,
+  border.color = "#CCCCCC")
+```
+

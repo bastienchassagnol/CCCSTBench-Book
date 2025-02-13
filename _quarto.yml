@@ -1,8 +1,8 @@
 project:
   type: book
   output-dir: docs
-  pre-render:
-    - table_formating.R
+  # pre-render:
+  #   - table_formating.R
 
 book:
   title: "CCCSTBench-Book benchmarking CCC tools integrating pathway information"
@@ -95,9 +95,9 @@ format:
     code-overflow: wrap
     collapse: true
     smooth-scroll: true
-  docx:
-    toc-title: Contents
-    # reference-doc: custom-reference-doc.docx To add a docx reference.
+  # docx:
+  #   toc-title: Contents
+  #   # reference-doc: custom-reference-doc.docx To add a docx reference.
   pdf:
     documentclass: book
     keep-tex: true # for litterature publishers
