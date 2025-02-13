@@ -9,7 +9,7 @@
 <meta name="author" content="Bastien CHASSAGNOL, and Marie-Pier">
 <meta name="keywords" content="Benchmark, Cell-cell communication tools, spatial transcriptomics, single-cell">
 
-<title>References – CCCSTBench-Book benchmarking CCC tools integrating pathway information.</title>
+<title>References – CCCSTBench-Book benchmarking CCC tools integrating pathway information</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -52,7 +52,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./tools.html" rel="next">
-<link href="./summary.html" rel="prev">
+<link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -62,8 +62,8 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f8dc6eab18fde03278982b0b35885446.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cd1bed43580f2692e0cf9dee6b925ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-132acb67803e357d832210c2a06babc1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1e456860d8997fe61fd142c5937c4586.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ae7c7b43d348cabcfa21383dadcac09a.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -91,6 +91,7 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <script async="" src="https://hypothes.is/embed.js"></script>
 <script>
   window.document.addEventListener("DOMContentLoaded", function (_event) {
@@ -100,7 +101,10 @@ div.csl-indent {
 <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&amp;display=fallback" rel="stylesheet">
 
 
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/style-reactable.css">
+<link rel="stylesheet" href="assets/css/style-utiltr.css">
+<meta property="og:title" content="References – CCCSTBench-Book benchmarking CCC tools integrating pathway information">
+<meta property="og:site_name" content="CCCSTBench-Book benchmarking CCC tools integrating pathway information">
 </head>
 
 <body class="nav-sidebar floating">
@@ -112,7 +116,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -122,17 +126,34 @@ div.csl-indent {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">CCCSTBench-Book benchmarking CCC tools integrating pathway information.</a> 
+      <a href="./">CCCSTBench-Book benchmarking CCC tools integrating pathway information</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/bastienchassagnol/CCCSTBench-Book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CCCSTBench-Book-benchmarking-CCC-tools-integrating-pathway-information.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CCCSTBench-Book-benchmarking-CCC-tools-integrating-pathway-information.docx">
+              <i class="bi bi-file-word pe-1"></i>
+            Download Docx
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
@@ -178,19 +199,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">References</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">General overview of CCC pipeline</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -204,6 +213,12 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./tools.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Tools review for inferring cell-cell-communication interactions</span></span></a>
   </div>
@@ -212,23 +227,23 @@ div.csl-indent {
   </li>
     </ul>
     </div>
-    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">References</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -246,8 +261,159 @@ div.csl-indent {
 </header>
 
 
-
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-armingol2024nrg" class="csl-entry" role="listitem">
+Armingol, Erick, Hratch M. Baghdassarian, and Nathan E. Lewis. 2024.
+<span>“The Diversification of Methods for Studying Cell–Cell
+Interactions and Communication.”</span> <em>Nature Reviews Genetics</em>
+25 (6): 381–400. <a href="https://doi.org/10.1038/s41576-023-00685-8">https://doi.org/10.1038/s41576-023-00685-8</a>.
+</div>
+<div id="ref-armingol2021nrg" class="csl-entry" role="listitem">
+Armingol, Erick, Adam Officer, Olivier Harismendy, and Nathan E. Lewis.
+2021. <span>“Deciphering Cell–Cell Interactions and Communication from
+Gene Expression.”</span> <em>Nature Reviews Genetics</em> 22 (2): 71–88.
+<a href="https://doi.org/10.1038/s41576-020-00292-x">https://doi.org/10.1038/s41576-020-00292-x</a>.
+</div>
+<div id="ref-dimitrov2022nc" class="csl-entry" role="listitem">
+Dimitrov, Daniel, Dénes Türei, Martin Garrido-Rodriguez, Paul L.
+Burmedi, James S. Nagai, Charlotte Boys, Ricardo O. Ramirez Flores, et
+al. 2022. <span>“Comparison of Methods and Resources for Cell-Cell
+Communication Inference from Single-Cell <span>RNA-Seq</span>
+Data.”</span> <em>Nature Communications</em> 13 (1): 3224. <a href="https://doi.org/10.1038/s41467-022-30755-0">https://doi.org/10.1038/s41467-022-30755-0</a>.
+</div>
+<div id="ref-dries2021gr" class="csl-entry" role="listitem">
+Dries, Ruben, Jiaji Chen, Natalie del Rossi, Mohammed Muzamil Khan,
+Adriana Sistig, and Guo-Cheng Yuan. 2021. <span>“Advances in Spatial
+Transcriptomic Data Analysis.”</span> <em>Genome Research</em> 31 (10):
+1706–18. <a href="https://doi.org/10.1101/gr.275224.121">https://doi.org/10.1101/gr.275224.121</a>.
+</div>
+<div id="ref-du2023jotm" class="csl-entry" role="listitem">
+Du, Jun, Yu-Chen Yang, Zhi-Jie An, Ming-Hui Zhang, Xue-Hang Fu, Zou-Fang
+Huang, Ye Yuan, and Jian Hou. 2023. <span>“Advances in Spatial
+Transcriptomics and Related Data Analysis Strategies.”</span>
+<em>Journal of Translational Medicine</em> 21 (1): 330. <a href="https://doi.org/10.1186/s12967-023-04150-2">https://doi.org/10.1186/s12967-023-04150-2</a>.
+</div>
+<div id="ref-feng2023nc" class="csl-entry" role="listitem">
+Feng, Yuzhou, Tianpei Yang, John Zhu, Mabel Li, Maria Doyle, Volkan
+Ozcoban, Greg T. Bass, et al. 2023. <span>“Spatial Analysis with
+<span>SPIAT</span> and <span class="nocase">spaSim</span> to
+Characterize and Simulate Tissue Microenvironments.”</span> <em>Nature
+Communications</em> 14 (1): 2697. <a href="https://doi.org/10.1038/s41467-023-37822-0">https://doi.org/10.1038/s41467-023-37822-0</a>.
+</div>
+<div id="ref-fischer2023nb" class="csl-entry" role="listitem">
+Fischer, David S., Anna C. Schaar, and Fabian J. Theis. 2023.
+<span>“Modeling Intercellular Communication in Tissues Using Spatial
+Graphs of Cells.”</span> <em>Nature Biotechnology</em> 41 (3): 332–36.
+<a href="https://doi.org/10.1038/s41587-022-01467-z">https://doi.org/10.1038/s41587-022-01467-z</a>.
+</div>
+<div id="ref-huizing2022" class="csl-entry" role="listitem">
+Huizing, Geert-Jan, Laura Cantini, and Gabriel Peyré. 2022.
+<span>“Unsupervised <span>Ground Metric Learning</span> Using
+<span>Wasserstein Singular Vectors</span>.”</span> July 19, 2022. <a href="https://doi.org/10.48550/arXiv.2102.06278">https://doi.org/10.48550/arXiv.2102.06278</a>.
+</div>
+<div id="ref-li2022nm" class="csl-entry" role="listitem">
+Li, Bin, Wen Zhang, Chuang Guo, Hao Xu, Longfei Li, Minghao Fang, Yinlei
+Hu, et al. 2022. <span>“Benchmarking Spatial and Single-Cell
+Transcriptomics Integration Methods for Transcript Distribution
+Prediction and Cell Type Deconvolution.”</span> <em>Nature Methods</em>
+19 (6): 662–70. <a href="https://doi.org/10.1038/s41592-022-01480-9">https://doi.org/10.1038/s41592-022-01480-9</a>.
+</div>
+<div id="ref-li2023nc" class="csl-entry" role="listitem">
+Li, Haoyang, Juexiao Zhou, Zhongxiao Li, Siyuan Chen, Xingyu Liao, Bin
+Zhang, Ruochi Zhang, Yu Wang, Shiwei Sun, and Xin Gao. 2023. <span>“A
+Comprehensive Benchmarking with Practical Guidelines for Cellular
+Deconvolution of Spatial Transcriptomics.”</span> <em>Nature
+Communications</em> 14 (1): 1548. <a href="https://doi.org/10.1038/s41467-023-37168-7">https://doi.org/10.1038/s41467-023-37168-7</a>.
+</div>
+<div id="ref-li2023rs" class="csl-entry" role="listitem">
+Li, Hechen, Ziqi Zhang, Michael Squires, Xi Chen, and Xiuwei Zhang.
+2023. <span>“<span class="nocase">scMultiSim</span>: Simulation of
+Multi-Modality Single Cell Data Guided by Cell-Cell Interactions and
+Gene Regulatory Networks.”</span> <em>Research Square</em>, March,
+rs.3.rs–2675530. <a href="https://doi.org/10.21203/rs.3.rs-2675530/v1">https://doi.org/10.21203/rs.3.rs-2675530/v1</a>.
+</div>
+<div id="ref-mallona2024" class="csl-entry" role="listitem">
+Mallona, Izaskun, Almut Luetge, Ben Carrillo, Daniel Incicau, Reto
+Gerber, Anthony Sonrel, Charlotte Soneson, and Mark D. Robinson. 2024.
+<span>“Omnibenchmark (Alpha) for Continuous and Open Benchmarking in
+Bioinformatics.”</span> September 25, 2024. <a href="https://doi.org/10.48550/arXiv.2409.17038">https://doi.org/10.48550/arXiv.2409.17038</a>.
+</div>
+<div id="ref-peyre" class="csl-entry" role="listitem">
+Peyre, Gabriel. n.d. <span>“Course Notes on <span>Computational Optimal
+Transport</span>.”</span>
+</div>
+<div id="ref-rolet2016p1icais" class="csl-entry" role="listitem">
+Rolet, Antoine, Marco Cuturi, and Gabriel Peyré. 2016. <span>“Fast
+<span>Dictionary Learning</span> with a <span>Smoothed Wasserstein
+Loss</span>.”</span> In <em>Proceedings of the 19th <span>International
+Conference</span> on <span>Artificial Intelligence</span> and
+<span>Statistics</span></em>, 630–38. PMLR. <a href="https://proceedings.mlr.press/v51/rolet16.html">https://proceedings.mlr.press/v51/rolet16.html</a>.
+</div>
+<div id="ref-solomon2017smmo" class="csl-entry" role="listitem">
+Solomon, Justin. 2017. <span>“Computational <span>Optimal
+Transport</span>.”</span> <em>Snapshots of Modern Mathematics from
+Oberwolfach;2017</em>, 08. <a href="https://doi.org/10.14760/SNAP-2017-008-EN">https://doi.org/10.14760/SNAP-2017-008-EN</a>.
+</div>
+<div id="ref-su2024sttt" class="csl-entry" role="listitem">
+Su, Jimeng, Ying Song, Zhipeng Zhu, Xinyue Huang, Jibiao Fan, Jie Qiao,
+and Fengbiao Mao. 2024. <span>“Cell–Cell Communication: New Insights and
+Clinical Implications.”</span> <em>Signal Transduction and Targeted
+Therapy</em> 9 (1): 1–52. <a href="https://doi.org/10.1038/s41392-024-01888-z">https://doi.org/10.1038/s41392-024-01888-z</a>.
+</div>
+<div id="ref-subramanian2005pnas" class="csl-entry" role="listitem">
+Subramanian, Aravind, Pablo Tamayo, Vamsi K. Mootha, Sayan Mukherjee,
+Benjamin L. Ebert, Michael A. Gillette, Amanda Paulovich, et al. 2005.
+<span>“Gene Set Enrichment Analysis: <span>A</span> Knowledge-Based
+Approach for Interpreting Genome-Wide Expression Profiles.”</span>
+<em>Proceedings of the National Academy of Sciences</em> 102 (43):
+15545–50. <a href="https://doi.org/10.1073/pnas.0506580102">https://doi.org/10.1073/pnas.0506580102</a>.
+</div>
+<div id="ref-svensson2018nm" class="csl-entry" role="listitem">
+Svensson, Valentine, Sarah A. Teichmann, and Oliver Stegle. 2018.
+<span>“<span>SpatialDE</span>: Identification of Spatially Variable
+Genes.”</span> <em>Nature Methods</em> 15 (5): 343–46. <a href="https://doi.org/10.1038/nmeth.4636">https://doi.org/10.1038/nmeth.4636</a>.
+</div>
+<div id="ref-turei2021msb" class="csl-entry" role="listitem">
+Türei, Dénes, Alberto Valdeolivas, Lejla Gul, Nicolàs Palacio‐Escat,
+Michal Klein, Olga Ivanova, Márton Ölbei, et al. 2021. <span>“Integrated
+Intra‐ and Intercellular Signaling Knowledge for Multicellular Omics
+Analysis.”</span> <em>Molecular Systems Biology</em> 17 (3): e9923. <a href="https://doi.org/10.15252/msb.20209923">https://doi.org/10.15252/msb.20209923</a>.
+</div>
+<div id="ref-vayer2020a" class="csl-entry" role="listitem">
+Vayer, Titouan, Laetitia Chapel, Remi Flamary, Romain Tavenard, and
+Nicolas Courty. 2020. <span>“Fused <span>Gromov-Wasserstein
+Distance</span> for <span>Structured Objects</span>.”</span>
+<em>Algorithms</em> 13 (9, 9): 212. <a href="https://doi.org/10.3390/a13090212">https://doi.org/10.3390/a13090212</a>.
+</div>
+<div id="ref-yang2025nc" class="csl-entry" role="listitem">
+Yang, Penghui, Kaiyu Jin, Yue Yao, Lijun Jin, Xin Shao, Chengyu Li,
+Xiaoyan Lu, and Xiaohui Fan. 2025. <span>“Spatial Integration of
+Multi-Omics Single-Cell Data with <span>SIMO</span>.”</span> <em>Nature
+Communications</em> 16 (1): 1265. <a href="https://doi.org/10.1038/s41467-025-56523-4">https://doi.org/10.1038/s41467-025-56523-4</a>.
+</div>
+<div id="ref-you2024nm" class="csl-entry" role="listitem">
+You, Yue, Yuting Fu, Lanxiang Li, Zhongmin Zhang, Shikai Jia, Shihong
+Lu, Wenle Ren, et al. 2024. <span>“Systematic Comparison of
+Sequencing-Based Spatial Transcriptomic Methods.”</span> <em>Nature
+Methods</em> 21 (9): 1743–54. <a href="https://doi.org/10.1038/s41592-024-02325-3">https://doi.org/10.1038/s41592-024-02325-3</a>.
+</div>
+<div id="ref-zappia2017gb" class="csl-entry" role="listitem">
+Zappia, Luke, Belinda Phipson, and Alicia Oshlack. 2017.
+<span>“Splatter: Simulation of Single-Cell <span>RNA</span> Sequencing
+Data.”</span> <em>Genome Biology</em> 18 (1): 174. <a href="https://doi.org/10.1186/s13059-017-1305-0">https://doi.org/10.1186/s13059-017-1305-0</a>.
+</div>
+<div id="ref-zhang2019nc" class="csl-entry" role="listitem">
+Zhang, Xiuwei, Chenling Xu, and Nir Yosef. 2019. <span>“Simulating
+Multiple Faceted Variability in Single Cell <span>RNA</span>
+Sequencing.”</span> <em>Nature Communications</em> 10 (1): 2611. <a href="https://doi.org/10.1038/s41467-019-10500-w">https://doi.org/10.1038/s41467-019-10500-w</a>.
+</div>
+<div id="ref-zhu2023gb" class="csl-entry" role="listitem">
+Zhu, Jiaqiang, Lulu Shang, and Xiang Zhou. 2023.
+<span>“<span>SRTsim</span>: Spatial Pattern Preserving Simulations for
+Spatially Resolved Transcriptomics.”</span> <em>Genome Biology</em> 24
+(1): 39. <a href="https://doi.org/10.1186/s13059-023-02879-z">https://doi.org/10.1186/s13059-023-02879-z</a>.
+</div>
+</div>
 
 
 
@@ -486,7 +652,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/bastienchassagnol\.github\.io\/CCCSTBench-Book");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -813,10 +979,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="./summary.html" class="pagination-link" aria-label="Summary">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Summary</span></span>
+      <a href="./intro.html" class="pagination-link" aria-label="General overview of CCC pipeline">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">General overview of CCC pipeline</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -829,11 +995,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>The book on cell-cell communication tools was written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+<p>Written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/references.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/references.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/blob/master/references.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -850,4 +1016,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
