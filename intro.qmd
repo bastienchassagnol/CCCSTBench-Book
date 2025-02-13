@@ -30,6 +30,14 @@ with_tooltip <- function(value, tooltip) {
     title = tooltip, value
   )
 }
+
+
+gdtools::register_gfont("Open Sans")
+flextable::set_flextable_defaults(
+  font.family = "Open Sans",
+  font.size = 11,
+  padding = 2,
+  border.color = "#CCCCCC")
 ```
 
 

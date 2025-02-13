@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Bastien CHASSAGNOL, and Marie-Pier">
+<meta name="keywords" content="Benchmark, Cell-cell communication tools, spatial transcriptomics, single-cell">
+<title>Appendix A — Tools review for inferring cell-cell-communication interactions – CCCSTBench-Book benchmarking CCC tools integrating pathway information</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-86daaaaad7353f9cc0c554efc1dd6d94.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f8dc6eab18fde03278982b0b35885446.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c5c5986048f91fcefeb004ab4e541693.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-aa75e61fdbe436dc23cf129f6b4b7305.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script async="" src="https://hypothes.is/embed.js"></script><script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script><script src="site_libs/core-js-2.5.3/shim.min.js"></script><script src="site_libs/react-18.2.0/react.min.js"></script><script src="site_libs/react-18.2.0/react-dom.min.js"></script><script src="site_libs/reactwidget-2.0.0/react-tools.js"></script><link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script><link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&amp;display=fallback" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style-reactable.css">
+<link rel="stylesheet" href="assets/css/style-utiltr.css">
+<meta property="og:title" content="Appendix A — Tools review for inferring cell-cell-communication interactions – CCCSTBench-Book benchmarking CCC tools integrating pathway information">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="CCCSTBench-Book benchmarking CCC tools integrating pathway information">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./tools.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Tools review for inferring cell-cell-communication interactions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">CCCSTBench-Book benchmarking CCC tools integrating pathway information</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/bastienchassagnol/CCCSTBench-Book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CCCSTBench-Book-benchmarking-CCC-tools-integrating-pathway-information.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./CCCSTBench-Book-benchmarking-CCC-tools-integrating-pathway-information.docx">
+              <i class="bi bi-file-word pe-1"></i>
+            Download Docx
+            </a>
+          </li>
+      </ul>
+</div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">General overview of CCC pipeline</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tools.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Tools review for inferring cell-cell-communication interactions</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#identified-collaborations" id="toc-identified-collaborations" class="nav-link active" data-scroll-target="#identified-collaborations"><span class="header-section-number">A.1</span> Identified collaborations</a>
+  <ul class="collapse">
+<li><a href="#adlab-collaborators" id="toc-adlab-collaborators" class="nav-link" data-scroll-target="#adlab-collaborators"><span class="header-section-number">A.1.1</span> ADLab Collaborators:</a></li>
+  <li><a href="#external-collaborators" id="toc-external-collaborators" class="nav-link" data-scroll-target="#external-collaborators"><span class="header-section-number">A.1.2</span> External collaborators:</a></li>
+  </ul>
+</li>
+  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">A.2</span> TODO</a></li>
+  <li><a href="#sec-ccc-tools" id="toc-sec-ccc-tools" class="nav-link" data-scroll-target="#sec-ccc-tools"><span class="header-section-number">A.3</span> List of CCC tools</a></li>
+  <li><a href="#ai-based-litterature-review-tools" id="toc-ai-based-litterature-review-tools" class="nav-link" data-scroll-target="#ai-based-litterature-review-tools">AI-based litterature review tools</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/blob/master/tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./tools.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Tools review for inferring cell-cell-communication interactions</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">Appendix A — Tools review for inferring cell-cell-communication interactions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>Benchmark, Cell-cell communication tools, spatial transcriptomics, single-cell</p>
+  </div>
+</div>
+
+</header><section id="identified-collaborations" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="identified-collaborations">
+<span class="header-section-number">A.1</span> Identified collaborations</h2>
+<section id="adlab-collaborators" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="adlab-collaborators">
+<span class="header-section-number">A.1.1</span> ADLab Collaborators:</h3>
+<ul>
+<li>Marie Pier Scott-Boyer: biological expertise</li>
+<li>Antoine Bodein: network expertise.</li>
+</ul></section><section id="external-collaborators" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="external-collaborators">
+<span class="header-section-number">A.1.2</span> External collaborators:</h3>
+<section id="rafael-gottardo" class="level4"><h4 class="anchored" data-anchor-id="rafael-gottardo">Rafael Gottardo</h4>
+<ul>
+<li>Suggested by Danielle Malpetti, met at the 4th Clinic Meets Data Science (CMDS) Symposium, in Zürich.</li>
+<li>Second and mutual interest with pathway integration for improving deconvolution performances using the PLIER algorithm.</li>
+</ul></section><section id="mark-robinson" class="level4"><h4 class="anchored" data-anchor-id="mark-robinson">Mark Robinson</h4>
+<ul>
+<li>Proficient in defining and asserting the respective pros and cons of several statistical spatial transcriptomics.
+<ul>
+<li>
+<a href="https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics">Elixir Spatial statistics</a>, provided in <a href="#fig-mark-robinson" class="quarto-xref">Figure&nbsp;<span>A.1</span></a>.</li>
+</ul>
+</li>
+</ul>
+<div id="fig-mark-robinson" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mark-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><object data="biblio/8_Day3_spatial_stats_MarkRobinson_2025.pdf" type="application/pdf" width="90%" height="800"><a href="biblio/8_Day3_spatial_stats_MarkRobinson_2025.pdf" download="">Download PDF file.</a></object></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mark-robinson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.1
+</figcaption></figure>
+</div>
+<ul>
+<li>
+<p>Strong proficiency in developing robust benchmark’s architecture:</p>
+<ul>
+<li><a href="https://omnibenchmark.org/">Omnibenchmark repository</a></li>
+<li>
+<a href="https://arxiv.org/pdf/2409.17038">Omnibenchmark for continuous and open benchmarking in bioinformatics</a>, from <span class="citation" data-cites="mallona2024">(<a href="references.html#ref-mallona2024" role="doc-biblioref">Mallona et al. 2024</a>)</span>
+</li>
+<li>
+<a href="https://arxiv.org/pdf/2409.15472">Building a continuous benchmarking ecosystem in bioinformatics</a>, from <span class="citation" data-cites="mallona2024a">(<a href="references.html#ref-mallona2024a" role="doc-biblioref"><strong>mallona2024a?</strong></a>)</span>
+</li>
+<li>
+<a href="https://www.birs.ca/workshops/2023/23w5090/files/Mark%20Robinson/Robinson_BIRS_benchmarking.pdf">2023 Presentation to <code>Single Cell Plus</code></a>, displayed in <a href="#fig-mark-robinson2" class="quarto-xref">Figure&nbsp;<span>A.2</span></a>.</li>
+</ul>
+</li>
+</ul>
+<div id="fig-mark-robinson2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mark-robinson2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><object data="biblio/Robinson_BIRS_benchmarking.pdf" type="application/pdf" width="90%" height="800"><a href="biblio/Robinson_BIRS_benchmarking.pdf" download="">Download PDF file.</a></object></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mark-robinson2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.2
+</figcaption></figure>
+</div>
+<ul>
+<li>Half-Canadian, half-Swiss</li>
+<li>Already discussed with him attending one of the <a href="https://compbiozurich.org/news/">Zürich Compbio</a> meeting.</li>
+</ul></section><section id="yvan-saeys" class="level4"><h4 class="anchored" data-anchor-id="yvan-saeys">Yvan Saeys</h4>
+<ul>
+<li>Proficiency in Cell-cell-communication inference methods, as showcased by Elixir class <a href="#fig-yvan-saeys" class="quarto-xref">Figure&nbsp;<span>A.3</span></a>.</li>
+</ul>
+<div id="fig-yvan-saeys" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-yvan-saeys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><object data="biblio/9_Day4_CellCellCommuniation_YvanSaeys_2025.pdf" type="application/pdf" width="90%" height="800"><a href="biblio/9_Day4_CellCellCommuniation_YvanSaeys_2025.pdf" download="">Download PDF file.</a></object></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-yvan-saeys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.3
+</figcaption></figure>
+</div>
+<ul>
+<li><p><a href="https://github.com/elixir-europe-training/ELIXIR-SCO-spatial-omics/blob/main/day_4/practical_6/workdir/p6_ccc.ipynb">Jupyter Notebook Tutorial on CCC</a></p></li>
+<li><p>Collaborating with Julio Saez-Rodriguez lab, and recommended by Professor Mark Robinson.</p></li>
+</ul></section><section id="others" class="level4"><h4 class="anchored" data-anchor-id="others">Others</h4>
+<ul>
+<li><p>Fabian Theis, with <a href="https://www.nature.com/articles/s41587-022-01467-z"><em>Modeling intercellular communication in tissues using spatial graphs of cells</em></a>’s paper, from <span class="citation" data-cites="fischer2023nb">Fischer, Schaar, and Theis (<a href="references.html#ref-fischer2023nb" role="doc-biblioref">2023</a>)</span>.</p></li>
+<li><p>Francesca Drummer</p></li>
+<li><p>Samuel Gunz</p></li>
+<li><p>Martin Emons (these two contacts interplay with Mark Robinson’s lab)</p></li>
+<li><p>The latter 5 associated with the following <a href="https://elixir-europe-training.github.io/ELIXIR-SCO-spatial-omics/schedule.html">Elixir class</a>.</p></li>
+<li><p>Other swiss contacts: Erik van Nimwegen in Basel, Bart Deplancke in Lausanne and Sven Bergmann, Pierre-Luc Germain</p></li>
+<li><p>Other EMBL/EBI contacts: Julio Saez Rodriguez + Pablo + Martin Garrido-Rodriguez</p></li>
+<li><p>Laura Cantini’s team on Cell-cell communication.</p></li>
+</ul></section></section></section><section id="todo" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="todo">
+<span class="header-section-number">A.2</span> TODO</h2>
+<ul>
+<li>
+<strong>ToDo: re-use sent email to Mark Robinson</strong> and complete collaborators section.</li>
+<li>Finalise integration of Marie-Pier, including Table of exsiting spatial methods + add Table on single-cell approaches.
+<ul>
+<li>Tables of methods to be set in Appendix only,</li>
+</ul>
+</li>
+<li>Read reviews and benchmarks papers, add dedicated sections.</li>
+<li>Methodological hurdles <a href="intro.html#sec-hurdles-benchmark" class="quarto-xref"><span>Section 1.3.2</span></a>:</li>
+<li>Modern bootstrapping/bagging methods for simulating unknow distributions</li>
+<li>AI tools for automated litterature review</li>
+<li>Add litterature citations</li>
+<li>Add real datasets approaches.</li>
+</ul>
+<hr></section><section id="sec-ccc-tools" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="sec-ccc-tools">
+<span class="header-section-number">A.3</span> List of CCC tools</h2>
+<div class="cell">
+<div id="tbl-ccc-tools" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-ccc-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<button onclick="Reactable.downloadDataCSV('CCC-tools-download', 'CCC-tools.csv')">
+<svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path></svg>
+Download as CSV
+</button>
+<div class="reactable html-widget html-fill-item" id="CCC-tools-download" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="CCC-tools-download">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Tool":["scTenifoldXct","CINS","Tensor-cell2cell","PyMINEr","MOFAcell","MultiNicheNet","TimeTalk","CommPath","Connectome","DIALOGUE","Differential NicheNet","LIRICS","scITD","scLR","CrossTalkeR","COMUNET","TraSig","scDiffCom","CellChat (V1.6)","iTALK","NATMI","CellTalker","BulkSignalR","CCInx","CCCExplorer","DiSiR","CellPhoneDB (V1&2)","InterCellDB","PlantPhoneDB","CellChat (V1)","FlyPhoneDB","ICELLNET","SingleCellSignalR","LRLoop","scSeqComm","CytoTalk","Domino","FunRes","scMLnet","SEARCHIN","NicheNet","CellPhoneDB (V4)","MEBOCOST","scConnect","NeuronChat","CellComm","CellCall","SoptSC","exFINDER","SPRUCE","DeepCOLOR","Scriabin","NICHES","CLARIFY","COMMOT","HoloNet","spaCI","SpatialDM","DeepLinc","NCEM","SpaCeNet","SPROUT","Topic Modeling","GCNG","MESSI","SpaOTsc","SVCA","BATCOM","STcomm","CCPLS","MISTy","Neighbor-seq","stMLnet","CellNeighborEX","GraphComm","Renoir","stLearn","cell2cell","Squidpy","CellPhoneDB (V3)","SpaCET","SpaTalk","Giotto","RNA-Magnet","CSOmap","HiVAE","Calligraphy","CellComNet","CellEnBoost","DeepCCI","RaCinG","RobustCCC","scTensor","REMI","scMultiSim","LR Hunting","CellAgentChat","CellPhoneDB (V5)","LIANA+","LIANA","CellChat (V2)","ESICCC","TALKIEN","InterCellar","Cellinker"],"Category":["Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Finer: Real single-cell resolution","Finer: Real single-cell resolution","Finer: Real single-cell resolution","Finer: Real single-cell resolution","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other"],"Method overview":["Computes scores for any gene pair between two cell types. In parallel builds a gene network per cell type using principal component regression. To infer CCIs between two cell types, it uses the score matrix and the respective gene networks as inputs of two neural networks (one per cell type), which embed the genes per cell. Then an embedding alignment is performed, and used to determine significant LRIs.","Learns a cell type Bayesian network based on the cellular composition in each sample and computes a joint probability between cell types depending on their mixture per sample. Then a regression model is built based on the DE expression of ligands in sender cells to explain changes in their intracellular target genes in receiver cells. Both models are combined to infer changes of cell-cell communication across samples.","Performs a non-negative CP tensor decomposition on communication scores arranged as a 4D tensor. The dimensions of this tensor represent multiple contexts or samples, ligand-receptor interactions, sender cells, and receiver cells. The resulting factors capture context-driven patterns of cell-cell communication.","Performs a DE analysis and builds co-expression networks. Identifies cell-type-enriched ligands and receptors pairs to generate autocrine and paracrine interactions.","Uses a dimensionality reduction approach to find multicellular programs of gene expression. It relies on the method behind MOFA, based on a probabilistic group factor analysis. Then, it can associate specific factors of the latent space with cell-cell communication events, given that the relevant genes could be associated with ligands, receptors, and signaling genes.","Prioritizes ligand-receptor pairs that are strongly expressed in the condition of interest, are cell-type specific, are present in most samples of the condition of interest, and whose target genes are enriched in the receiver cell type. It relies on edgeR analysis to score ligand-receptor pairs from differential expression and ligand activity.","Designed for detecting CCIs in early embryo development. It computes a Spearman coefficient for LRIs between cell types along pseudotimes. Then, it computes a Granger's causality between the interaction score the co-varying LRI and the gene expression of their downstream master TFs.","Evaluates cell-cell communication chains, which corresponds to the effect that a receiver cell could have on a third cell. It uses CellA-CellB-CellC chain by weighting ligands from Cell A to receptors on Cell B, and ligand from Cell B to receptors on Cell C. Also evaluates the intracellular changes within Cell B connecting activity from Cell A to C. Identifies the differential activation of pathways between two conditions.","Computes a perturbation score between a test and a reference condition. This score is based on the logFC of the expression of the ligand and the receptor.","Uses a matrix factorization method to identify MultiCellular Programs (MCPs) across multiple niches within the same tissue, or across multiple samples from different individuals. A MCP is captured per factor, and they can be integrated with ligand-receptor interactions to summarize communication represented by each MCP.","Combines NicheNet with differential expression analysis between two conditions. This method returns a score that prioritizes up-regulation of the ligand and/or receptor in the condition of interest, expression level within the group, cell-type-specific expression, and high NicheNet score.","First queries a DB to evaluate plausible LRIs between a pair of cell types. Then, it uses the deconvolved gene-expression matrix obtained with CODEFACS to use cell-type resolution, and predicts enriched LRI in each condition with a Fisher's exact test.","Extracts “multicellular gene expression patterns” across different biological samples. It uses a Tucker tensor decomposition, generating factors that represent gene expression patterns. These patterns can be integrated with ligand-receptor interactions to summarize communication represented by each factor.","Models the distribution of the expression product of ligands and receptors and accounts for intersample variances and small sample sizes. It evaluate differential changes in the expression products between two conditions.","Builds a CCC network per dataset based on the expression of the ligands and the receptors in a cell-cell pair. Compares two conditions by a differential analysis of the resulting CCC from the network.","Uses multiplex networks to represent different ligand-receptor pairs between cell types. Performs comparative analysis between two conditions by computing a dissimilarity metric for each pair of networks representing the same ligand-receptor pair in each condition.","Identifies ligands and receptors in different cell types that follow coherent expression patterns along time. It uses a Continuous-state Hidden Markov Model (CSHMM), which is a probabilistic graphical model, to learn trajectories and to assign cells to specific points along the trajectories.","Infers CCIs in each condition separately, then performs a differential analysis on the resulting communication scores. scDiffCom builds a null distribution to select significant changes.","Compares multiple cell-cell communication across multiple scRNA-seq datasets by leveraging CellChat V1.","Identifies differentially expressed ligands and receptors using the software of interest to identify changes in CCC.","Generates CCC networks assigning edge weights to each ligand-receptor interaction between a sender-receiver cell pairs. Compares two conditions purely based on the differences between their CCC networks.","Evaluates the binary use of a ligand-receptor pair between sender and receiver cell types within a group of samples, then compares different groups to see shared and specific LR pairs per sender-receiver cell pair.","Computes a Spearman correlation between ligands (L), and receptors (R), and another between receptors and target genes (T). To compute significance, relies on a null distribution of Spearman coefficients generated from randomized expression datasets. Assuming that distributions of LR and RT are independent, joint significance is the multiplication of their individual significances.","Builds a ligand-receptor and ECM-receptor database using GO terms to filter known PPI databases. CCIs are inferred based on LR interactions expressed in cell types. To investigate condition-associated perturbations, DGE metrics based on the tool MAST are used (e.g., logFC and P-value).","Uses networks of ligand-receptor interactions connected to their TFs, and links the TFs with their target genes. CCCExplorer is based on differential expression of ligands and target genes (vs WT), while receptors and TFs are considered expressed if they are over a threshold.","Identifies multi-subunit ligand-receptor interactions at the cell type level by computing expression products of all possible combinations between ligand subunits and receptor subunits. It calculates average expressions of ligand and receptor subunits across cell clusters, and removes the LR pair if any subunit is not expressed in these averages. It then shuffles the cluster annotations and recalculates average expressions. If the product of the original clusters' average expressions significantly exceeds that of the shuffled clusters, the subunit interaction is deemed significant. DiSiR identifies an interaction as significant if all subunit combinations in the input list are significant.","Computes a communication score as the expression mean between the ligand and the receptor in a pair of cell types.","Selects differentially expressed genes per cluster, then computes communication scores using those genes as the expression product between the ligand and the receptor in a pair of cell types. Computes an overall CCI score as the sum of the communication scores.","Implements multiple communication scores, including a regularized product, weight product, mean, and product of gene expression between the ligand and the receptor in a pair of cell types. Uses target genes of the receptors to inspect intracellular signaling. For target genes, it uses differential expression analysis.","Computes a communication probability using the law of mass action (hill function). Prior to compute the probability, it performs an identification of over-expressed genes per cell group. CellChat can perform an aggregation of the probabilities for individual LR pairs into a pathway level. Also, it can detect patterns of communication either at the sender or receiver level.","Computes a communication score as the expression product between the ligand and the receptor in a pair of cell types. FlyPhoneDB uses the log1p transformed expression as input.","Computes a communication score as the expression product between the ligand and the receptor in a pair of cell types. Multimeric ligands or receptors are computed as the geometric mean of the expression across their components. An overall CCI score is computed as the sum of all communication scores.","Uses a regularized expression product as the communication score. The regularization factor scales each communication score in relation to the mean expression level of the data. Thus, communication scores are bound between 0 and 1.","Builds upon NicheNet to compute the regulatory potential between receptors and target genes, instead of ligands and target genes. By using a Personalized PageRank to compute that potential, it is able to detect responsive ligands and receptors, connected through the intracellular signaling information. Thus, LRLoop detects [L1–R1]<->[L2–R2] interactions where L1 and L2 are ligands that are among the target genes of R2 and R1 receptors, respectively.","Predicts communication scores by selecting the minimum expression between a ligand and a receptor. It incorporates intracellular signaling by assigning scores to receptor-TF associations using a Personalized PageRank algorithm. It also includes TF activity on the final score.","Connects two intracellular networks (from different cells) through known ligand-receptor interactions. It prioritizes LR pairs that are not used for autocrine interactions (low correlation within the same cluster) to assign a high crosstalk score. Then, it employs a network propagation based on the gene expression of intracellular genes. Finally it identifies signaling networks as a prize-collecting steiner forest problem to find intracellular genes that are close to highly-scored LR pairs.","Uses a network of ligand-receptor-TF-targets, and considers only pathways whose ligands and receptors are expressed. This means that they are over a z-value when comparing all clusters or cell types. It connects receptors to TF using Pearson correlation. It excludes receptors that are downstream to a TF in the network.","Binary presence of TFs by fraction of cells within a cluster. It uses a Markov Chain model to infer the probability of a receptor to induce present TFs, considering intermediate genes. Finally computes LR score as the product of the average expression of the ligand and the receptor in their respective populations (only applies for ligands and receptors selected in a CCI scaffold)","Builds a multilayer network of Ligand-Receptor pairs, Receptor-TF pathways, and TF-target genes. It uses the cell-type-specific highly-expressed genes to infer CCIs. LR pairs are scored with their expression product. It uses Fisher's exact test to consider active TFs, by using information of expressed target genes. Then LR pairs and enriched TFs are connected with another Fisher's test, considering whether active TFs are enriched in a given receptor. Thus, only LR pairs passing these test are retained.","Integrates multiple sources of information such as PPI networks and membrane-receptor regulatory networks. It relies on other tools to compute the receptor activity as a regulator of target genes. Finally, aggregates all the scores through a Robust Rank Aggregation method, generating a final rank of LR pairs.","Uses a Personalized PageRank algorithm to identify important ligands having an effect on downstream target genes. Its analysis incorporates gene expression of the ligand in the sender cells, and the target genes in the receiver cells.","Accounts for non-protein ligands by considering the gene expression of their last bona fide enzyme in the biosynthesis pathway. It computes a communication score as the mean of the ligand and receptor expressions. It builds upon previous versions of CellPhoneDB, so it also incorporates protein complexes and spatial location of cells.","Infers metabolite-mediated intercellular communication from the gene expression level of producing and consuming enzymes of the metabolite and the cognate receptor. The metabolite score is computed as the difference between the expression of the producing and consuming enzymes. This score is later used with the expression level of the receptor to compute a final communication score for the metabolite-receptor interaction.","Computes the geometric mean between the scores assigned to the ligand and the receptor in a LR interaction. Ligands can include small compounds, which incorporate the expression level of producing enzymes (geometric mean among all synthesis enzymes), vesicle transporters, and reuptake transporters.","Computes communication scores as the product of ligand and receptor-target abundances. Ligand abundances of metabolites are inferred from the gene expression of producing enzymes and transporters.","Computes a score for each LR pair based on their expression levels in each interacting cluster. It associates this score with target genes by computing a pathway activity score from a weighted protein-protein interaction network. This activity is computed from a gene set enrichment analysis on the regulons of a transcriptional regulator.","Integrates ligand-receptor-TF relationships as well as TF-Target Genes. It computes the interaction scores by weighing with the TF activity score. This TF activity comes from a gene set enrichment analysis using the coexpressed target genes of that TF (regulons).","Incorporates gene expression of genes that are downstream to a receptor in a ligand-receptor interaction. By using their expression levels, it can weigh a communication score accordingly resulting in a probability that a signal is sent by a given cell to another cell via a given pathway.","Infers the signaling activity in pathways encompassing external signals, receptors, TFs, and target genes. Thus, it infers the ligand-target GRN from their gene expression, and assigns a signaling strength using a mass-action-based score.","Integrates an embedded topic model and a variational autoencoder to infer cell-cell communication in a single-cell resolution. This approach projects single-cell data into a low-dimension topic space, based on natural language processing to find meaningful topics (here LR gene-driven patterns of CCIs).","Uses a deep generative model based on a variational autoencoder (VAE) to integrate spatial and single-cell transcriptomics to obtain inter-cellular colocalization networks. These networks allow to identify cell-cell interactions between colocalized single cells, relying on NicheNet method.","Computes communication scores as the geometric mean of ligand and receptor expression levels, using single cells as the senders and receivers. Scriabin can focus on biologically meaningful interactions by using highly-variable genes within a dataset or most variable genes between conditions. It computes an overall CCI score by summing the communication scores between a pair of cells.","Computes communication scores as the product of ligand and receptor expression levels, using single cells as the senders and receivers. When using spatial transcriptomics, it computes CCIs only of neighboring cells, defined with a distance threshold or with a k-nearest neighbor graph. Subsamples single cells when the cell number is too high.","Uses a multi-level graph autoencoder to infer CCIs. One graph considers cell-cell relationships to represent the proximity of cells and their potential to interact. The other graph considers gene-gene relationships to represent the intracellular activity and ligand-receptor interactions. Thus, the autoencoder model includes two encoders, one for each graph, to project the CCIs into a latent space that is able to reconstruct a physical adjacency matrix of cells.","Applies a collective optimal transport model to infer CCIs using spatial transcriptomics. This preserves the comparability between distributions (total signal does not exceed the individual species amounts - ligand or receptor - , and enforces spatial range limits and handles multiple competing species.","Uses spatial transcriptomics to weigh LR interactions based on intercellular distances. LR interactions are filtered out given a permutation analysis. This tool mainly focuses on the effect on target genes and tries to identify the important LR pairs contributing to those effects.","Uses an adaptive graph model to infer CCIs. By using a gene-based linear encoder and a cell-based attentive graph encoder, genes are projected into the latent space. The resulting embeddings reflect gene expression and spatial organization, which are then used to define triplets including interacting and non-interacting genes, helping to identify the use of given LR pairs.","Identifies LR pairs with significant spatial co-expression within a reasonable physical distance. For doing so, it uses a bi-variate Moran's correlation coefficient as a test statistic. This test statistic includes intercellular distance and a scale factor to control the weight that LR interactions receive.","Implements a variational graph autoencoder (VGAE) as a deep generational model to infer spatially-relevant CCI networks. It learns from spatial transcriptomic data.","Uses spatial graphs of cells to identify niches to model cell's observed gene expression considering the effects of the niche composition. NCEM can use linear and nonlinear graph neural networks as well as conditional variational autoencoder models. These models identify statistical dependencies between cells on physiologically relevant length scales and interpret fits based on model parameters.","Uses Gaussian Graphical Models and the concept of Spatial Conditional Independence to infer potential intercellular interactions. This method uses a function of intercellular distance to infer the potential of interactions. It can also infer spatial interactions between molecular variables.","Computes a cell-cell affinity matrix as the sum of the expression products of ligand-receptor pairs in both directions of CCIs. Then, sparsifies this matrix by using partial correlation, spectral graph sparsification and spatial coordinate refinement. Using the processed affinity matrix, performs a local fuzzy set embedding to constrain the number of neighbors of each cell while maintaining the affinity relationships. Finally, it uses a cross-entropy approach to obtain low dimensional embeddings of CCIs.","Uses a Latent Dirichlet allocation (LDA) approach to find latent topics of cells and genes. It applies a LDA to regular single-cell data and another to data coming from doublets (interacting cells). These two LDAs help to identify topics that are a consequence of the CCIs. Afterwards, topics are associated to cell types and genes, so specific molecular and cellular properties of CCIs can be interpreted.","Uses graph convolutional neural networks to infer gene interactions involved in cell-cell communication from spatial single-cell expression data. GCNG encodes the spatial information as a graph and combines it with expression data to infer extracellular gene-gene interactions.","Applies a Mixture of Experts (MoE) model using an expectation-maximization algorithm. It considers the expression of ligands and receptors in a cell, and the expression of ligands in its neighboring cells, as well their annotations to compute a conditional likelihood of CCI.","Uses an optimal transport model to compute a distance matrix for gene-gene dissimilarity and cell-cell dissimilarity given their spatial locations. Then, another optimal transport model is used based on the probability of cells for using ligand-receptor pairs. It employs distributions of the sources (ligands) and receivers (receptors and downstream genes) based on their cognate gene expressions. The distance matrix here is used as a cost matrix.","Models the variance across cells of the gene expression level due to the additive effect of an intrinsic effect due to the cell state, a cell-cell interaction effect due to the state of the neighboring cells, and an environmental effect due to unobserved factors in the cell microenvironment. Thus, it can decompose the gene expression into these three effects and potentially identify CCIs given the spatial organization of cells.","Uses a generalized linear regression model to infer CCIs from spatial transcriptomics. It models the CCI as an exponential decay depending on the intercellular distance, and includes the cellular composition or labeling of spots and single-cells, respectively. This model infers the overall potential of CCIs.","Evaluates the colocalization of cell types and their use of LR pairs in a spatial spot. By using a Fisher's exact test, identifies significant LR pairs in colocalized cell types within a spot. It relies on the expression product as the communication score, and considers those that are greater to zero. Finally, it runs CellChat and evaluates CCIs only on those that were significant from Fisher's exact test.","Uses a partial least square regression model to identify the CCI effects on multiple neighboring cell types. This model assumes that the expression of highly variable genes specific to a cell type are explained by a linear sum of the effects by neighboring cell types.","Builds multiple views focusing on different spatial or functional contexts to dissect different effects. Each view represents a potential source of variability in the measured marker expressions. The models for each view are trained independently, while the fusion parameters of the meta-model are estimated after training the view-specific models independently, by regularized linear regression.","Uses machine learning to infer physical cell-cell communications by identifying, annotating, and analyzing cell multiplets from the undissociated cell fractions in single-cell RNA-seq data. It generates a network of physical cell-cell interactions.","Uses intercellular distance to weigh interaction score between ligands and receptors of a pair of cells. Also, it includes intracellular genes to build a ligand-target gene network from a Fisher's exact test. It integrates the interaction score and the ligand-target-gene network into a random forest regression model to infer a regulation score indicative of CCIs.","Infers neighbor-dependent genes given spatial transcriptomes. It uses statistical approaches to identify genes that are up- or down regulated given their neighborhood. It explores which of these genes could be used for CCIs.","Constructs a directed graph connecting cell types to ligand/receptor to cell types, if the sender and receiver cells significantly express the ligand and receptor. It uses the expression product as the communication score. It uses a Graph Attention Network to rank LR pairs.","Computes a neighborhood activity score for each curated ligand-target pair for each spot in the spatial transcriptomic data. This score includes within and between spots terms of activity. The activity score for a ligand-target pair in a given pair of spots is calculated based on cell type-specific mRNA levels, cell type proportions, and mutual information between the two genes across cell types within the two spots.","Combines the cell type density in an area of the tissue and the co-expression of LR pairs to infer CCIs. It runs CellPhoneDB to infer the CCIs of a spot with its nearest spots, generating a spot x spot matrix with the overall potential of interactions. Finally, it integrates the cell type diversity to find cell-type specific areas that are more likely to interact with their neighbors.","Introduces a Bray-Curtis overall CCI score and employs a genetic algorithm to prioritize ligand-receptor pairs correlating the CCI score and intercellular distances.","Identifies cellular neighborhoods from the spatial graph of cells, then infers CCIs within a neighborhood. Computes the expression mean between the ligand and the receptors from a pair of interacting cell types. Uses the approach of CellPhoneDB.","Based on previous versions of CellPhoneDB, computes CCIs by considering information about specific spatial niches and time points.","Computes CCIs within a spot after cell type deconvolution of each spot. Then, evaluates within each spot the enrichment of ligand-receptor pairs for the deconvoluted cell types. The communication score for each LR is the expression product, and the overall CCI score is the sum of the expression products divided by the average sum of expression products across all randomized networks.","Relies on graph network and knowledge graph. It first performs a cell-type decomposition in each spot/cell, then infers spatially resolved CCIs and downstream signal pathways. It incorporates communication score for LR pairs, and network propagation for Receptor-TF signaling, then ranks receptors combining both.","Evaluates the enrichment of the frequency that each pair of cell types is proximal to each other to use them as proximal cell types. Similarly, it uses enriched expression of gene pairs within an environment. Then, Giotto computes the sum of ligand and receptor average expression in cell types that are proximal. Using this score and a null distribution, it can identify differential activity.","Identifies the cell type that each cell is most likely to physically interact with given the estimated strength of adhesion computed from the expression of ligand-receptor pairs that are both present on the cell surface.","Computes an affinity matrix of cells from the ligand-receptor pairs they use. Then, projects the affinity scores into a 3D spatial space.","Employs two hierarchical variational autoencoders (HiVAEs): One to learn from protein-protein interactions, and the other to learn from single-cell expression profiles. Using the embeddings in their latent space through a transfer entropy method, computes the overall CCI potential of aggregated cell types.","Builds a co-expression network of communication genes based on Pearson correlation across a given cell state or type. It also uses a Jaccard similarity metric accounting for the degree of neighbor-sharing between all pairs of genes. Then Calligraphy identifies communication modules, establishing the incoming and outgoing communication that each cell state can participate in. Next, Calligraphy identifies communication events between cell states given LR interactions represented between pairs of modules of different cell states. Finally it generates a module-module network where edges are the counts of LR pairs that are significant between modules. Cell states can be assigned to each module.","Uses an ensemble of heterogeneous Newton boosting machine and deep neural network to infer ligand-receptor interactions. Then, integrates gene expression by using combining expression thresholding and expression product to infer CCIs.","Uses a boosting-based model to infer ligand-receptor interactions, then infer the communication score for each of them based on the gene expression product, and other derived scores.","Uses a Residual neural network (ResNet) together with a graph convolutional network to learn from the gene expression of ligands and receptors. It uses the outputs of both neural networks to jointly infer cell-cell interactions.","Performs a monte carlo simulation using random graphs. To do so, it requires information including cellular composition (cell distribution), potential of LR interactions (LR distribution), expressed ligands and receptors per cell. Multiple simulations are run per sample, then by applying a kernel method a consensus is computed per patient.","Implements 14 existing CCC methods and can generate simulated single-cell transcriptomics data to evaluate the robustness of methods.","Applies a non-negative Tucker decomposition to factorize a 3D tensor of CCIs. The dimensions are LR pairs, sender cell types, and receiver cell types. This method outputs factors separating elements of each dimension, and a core tensor that allows multi-to-multi representation of CCIs.","Creates bi-partite networks considering ligands and receptors as nodes. Ligands are connected with their cognate receptors, and the edge weight is their correlation across all cell types. Then, it runs a community detection approach to identify conditionally dependent LR pairs. Conditionally independent LR pairs are removed through a GLasso algorithm. Finally, it creates interactomes between cell types by using only conditionally dependent LR pairs.","Simulates gene expression in two steps: (1) Employing a kinetic model to generate the true gene expression levels in cells, and (2) introducing technical variations (library preparation noise, batch effects, etc) to generate data that are statistically comparable to real data. Then, the user inputs a ligand-receptor database to simulate the CCI ground truth data. scMultiSim can generate spatiotemporal variations of CCIs","Uses random forest models (RFs) to first impute gene expression of ligands and receptors in each cell type, then to detect significant LR interactions.","Uses agent-based modeling to study CCIs. Each cell is represented as a single agent in the model, with different statuses. Agents are defined by various attributes such as cell label, gene expression profiles, LR universe, spatial coordinates, and pseudotime. To compute probability of using LRIs, it uses ligand diffusion rate, receptor receiving rate and receptor conversion rate.","Builds upon previous CellPhoneDB versions to incorporate multiple functionalities in one computational framework.","Extends existing methods and knowledge to study CCIs in single-cell, spatially-resolved, and multi-modal omics data.","Implements natively multiple tools to infer CCIs and resources of ligand-receptor interactions. Can compute a consensus inference across implemented tools. Implements other methods for visualization and downstream analysis.","Leverages previous versions of CellChat using the mass-action-based score to infer CCIs from multiple other scenarios such as using spatial transcriptomics, comparing conditions, and including non-protein ligands.","Systematic benchmark framework designed for evaluating, selecting, and integrating CCI inference methods.","Takes a list of genes or proteins and transcriptomic data to build a network of CCIs. Then, the topology of this network can be studied by using centrality metrics. In addition, TALKIEN can analyze intracellular pathways, perform enrichment analysis, and look for drugs that inhibit significant LR pairs.","Supports outputs coming from any tool or method to infer CCIs. This information is used for data exploration including properties of clusters, genes, and functions based on CCIs. It detects interaction-pair modules associated with biological functions. Also, it allows comparing conditions.","Computes the communication score as the root square of the sum of the squared expression of the ligand and the receptor in a pair of cell types. Expression level of multimeric proteins is computed as the geometric mean of their components."],"Additional information":["Computes differences between two samples by generating a joint matrix and calculating a Euclidean distance per gene pair. Finds significant changes through a chi-square test and FDR adjustment. Unbiased method that allows detecting LR pairs that are not in a DB.","Performs pairwise comparisons between a test condition and a reference condition. The model learns across conditions, but the inputs are dependent on the reference condition.","Detection of latent patterns or programs of CCIs across multiple samples simultaneously. Dimensionality reduction method that preserves the correlation structure of data.","Performs pairwise comparisons between two conditions through a DE analysis.","Allows the comparison of multiple conditions simultaneously and associates them with different factors given their loadings in the latent space. Similarly, it allows associating specific cell types with factors, given their expression profiles projected into the latent space. Multiple other downstream analyses can be performed, such as enrichment analysis, covariate association with factors, among others. Multicellular programs can be spatially mapped when using spatial transcriptomics.","Allows the study of between- and within-group differences. Batch and covariates variables can be added to the model to account for them when performing the DE analysis.","This method prioritizes co-varying LRIs along pseudotimes that also form regulatory feedbacks with their downstream master TFs.","Performs pairwise comparisons between the CCC inferred for each condition separately. Also available in a web interface.","Performs pairwise comparisons between two conditions through a DE analysis. Increases and decreases are for a test condition with respect to the reference condition. It can rank important sender and receiver cells through a network centrality approach.","Detects factors or latent patterns of gene expression across multiple samples simultaneously, which can be used a posteriori to infer CCC. Dimensionality reduction method.","Performs pairwise comparisons between two conditions through a DE analysis. The method is powered by NicheNet.","LIRICS considers enriched LRI when the ligand and the receptor are overexpressed in their respective sender and receiver cell types. To estimate overexpression, it uses the median deconvolved expression in the corresponding cell type across all samples.","Detects factors or latent patterns of gene expression across multiple samples simultaneously, which can be used a posteriori to infer CCC. Dimensionality reduction method that preserves correlation structure of data.","scLR uses as the the null hypothesis that the mean of ligand–receptor interaction strengths are the same under two conditions, and as the alternative hypothesis that they are not the same.","Performs pairwise comparisons between the CCC inferred for each condition separately.","Accepts any CCC tool to compute the edge weights. It can perform pairwise comparisons between the CCC inferred for each condition separately.","Allows detecting patterns in genes that are expressed by few cells. Performs an ordering of points along time and enables the use of pseudo times.","Performs pairwise comparisons between the CCC inferred for each dataset separately. Implements a pathway enrichment analysis to identify changes in functions.","Performs pairwise comparisons between the CCC inferred for each dataset separately. Integrates intracellular signaling as well to compute the communication scores.","Performs pairwise comparisons between two conditions through a DE analysis. Provides visualizations to facilitate interpretation.","Performs pairwise comparisons between the CCC inferred for each condition separately. Provides visualizations to facilitate interpretation.","Performs pairwise comparisons between the CCC inferred for each group separately. Includes visualizations to facilitate interpretation","BulkSignalR can be applied to spatial transcriptomics with localized bulk data (e.g., spots). Compares samples by standardizing the communication scores across samples. Employs a non-negative LASSO model to associate LRI with cell types.","Provides a shiny app for studying aging in the mouse brain.","Uses bulk RNA-seq data coming from multiple cell types separately.","Authors used a melanoma disease map as the gold standard for LR interactions, and benchmark multiple tools.","Includes multimeric ligand-receptor pairs. It performs permutations to select significant interactions.","It performs permutations to select significant interactions.","It performs permutations to select significant interactions. Intended for studying 5 different species of plants.","Includes multimeric ligand-receptor pairs, and information about agonist and antagonist ligands, as well as co-inhibitory/stimulatory receptors. CellChat can weigh the probability of interaction based on the number of single cells per cell group. It performs permutations to select significant interactions. CellChat can compare up two conditions simultaneously.","Intended for Drosophila. It performs permutations to select significant interactions.","Includes multimeric ligand-receptor pairs.","Makes comparison across distinct LR pairs comparable. In addition, regularize scores enable using a threshold to set active vs inactive LR pairs.","LRLoop prioritizes bi-directional ligand–receptor interactions forming a closed feedback loop.","It performs permutations to select significant interactions.","Employs a degree-preserving network permutation to reduce false positives.","Domino is able to compare two conditions. Also, it can extract condition-specific signaling.","FunRes builds a CCI network from LR pairs with significantly higher score compared to other interactions in the interaction scaffold.","Method based on multilayer networks.","Includes multiple sources of information, such as mass spec data, prior-knowledge of protein-protein interactions and regulation. It computes a consensus score across \"experimental\" evidence.","Allows detecting important ligands based on their potential to regulate specific gene sets (e.g. within a given pathway)","Additionally incorporates intracellular signaling through a module called CellSign. This module accounts for receptor-TF associations. This version can identify differences between conditions by using information from differential expression analysis. It performs permutations to select significant interactions.","MEBOCOST includes a database of multiple metabolite-sensor interactions, where sensors can be nuclear receptors, surface receptors, or surface transporters. It performs permutations to select significant interactions.","scConnect provides an interactive web application. It performs permutations to select significant interactions.","Its database is focused on neuronal communication and includes small-molecule neurotransmitters, neuropeptides, gap junction proteins, gasotransmitters, and synaptic adhesion molecules. In addition, NeuronChat allows visualizing communication scores in raw images of spatial transcriptomics. It performs permutations to select significant interactions.","CellComm has been applied to spatial transcriptomics by using the centroid of the distinct clusters/cell types to compute the physical distance. It uses the normalized distance to weigh the CCI score.","CellCall uses protein complexes, performs pathway activity analysis, and has visualizations to help interpret the results.","SoptSC can weigh the signaling probabilities by the cell number within a cluster. Additionally, it can use consensus signaling networks across all different ligand-receptor pairs and their cognate pathways, co-signaling factors, or co-receptors. Also, it can weigh the probability given the \"inhibitory\" effect of certain downstream genes.","exFINDER can perform unsupervised analyses from the expression of the signal-target GRN. For example, signal outflows and target inflows can be computed. Clustering of signal-target pairs can be performed to understand functionalities. Finally, GO enrichment analysis can be done based on the proportion of involved genes and their expression levels.","SPRUCE is able to analyze tens of millions of cell pairs in a scalable way. Cell-cell pairs can be projected into a latent space to find groups based on their interactions. It can compare conditions by prioritizing differentially expressed genes.","It accounts for spatial location of cells with single-cell resolution. It also accounts for intracellular signaling and gene regulatory networks.","Scriabin supports the use of 15 different protein-protein interaction databases. It uses an implementation of NicheNet to detect ligands affecting signatures identified with multiple correspondence analysis. When cell number is too high, it can use the CCI score to identify relevant cell pairs and generate the matrix of communication scores only for those pairs. It includes a workflow for finding modules of co-expressed ligand–receptor pairs based on weighted gene correlation network analysis. It can also use data denoising algorithms to deal with dropouts.","NICHES allows using spatial transcriptomics to infer CCIs. Cell-cell pairs can be projected into a latent space.","CLARIFY can uses ground truth physical interactions or spatial transcriptomics as inputs. In addition, for gene regulatory networks it can use celltype-specific networks.","Accounts for the competition between different ligand and receptor species as well as spatial distances between cells. It can perform downstream analyses for inferring directionality of the signaling (vector fields) and differential expression of genes.","HoloNet builds a CCI network for each LR pair, where cells could be cell types or tissue spots. It uses network centrality metrics to identify important cells or spots. Instead of using the Fick’s second law for ligand diffusion, it adopts a Gaussian model purely based on the intercellular distance. HoloNet also employs a graph neural network.","spaCI infers gene expression of dropouts by analyzing the co-expression of upstream TFs of a ligand, and of receptors. It is able to infer the interaction of LR pairs, but also of the interactions of any gene pairs.","SpatialDM assumes that ligands and receptors are spatially independent as the null hypothesis. Thus, it is possible to select those that are actually spatially dependent. It also allows interpreting local communication patterns through enrichment tests and visualization of pathways associated with the patterns. It allows single-cell resolution.","Learns a latent representation that allows inferring missing distal and proximal interactions, and signature genes contributing to the cell interaction landscapes. It does not depend on prior knowledge of LR pairs.","The complexity of the graph neural network used in the NCEM defines the complexity of the motifs of cell communication that can be discovered and may be expanded given more complex datasets. NCEM can use multiple spatial technologies including MERFISH, CODEX, MIBI-TOF, MELC, and chip cytometry. It does not need ligand-receptor pairs, working in an unbiased manner.","SpaCeNet introduces intracellular and intercellular SCI relations. Intracellular SCI relations between variables within one cell are expressed with the term “rest” referring to all other variables of the cell and to all variables of all other cells. Intercellular SCI relations between variables in different cells are conditioned on all remaining variables, with the set “rest” referring to all variables of the cells except the variables in question.","SPROUT can use any tool to deconvolve the cellular composition of spatial spots. It can also obtain relevant LR pairs used by cell pairs in single-cell and cell type resolution. The contribution of each LR pair is computed as the ratio of the gene expression product for the LR pair divided by the sum of expression products across all LR pairs, considering both directions that a pair of cell could interact.","Based on physically interacting cells, uses PIC-seq or a network of physically interacting cells from doublets as inputs.","GCNG can infer both autocrine and extracellular gene interactions involved in cell-cell interactions. It can infer interacting genes that are not necessarily ligand-receptor pairs. Functional downstream analysis can be done to assign functions to interacting genes.","MESSI accounts for cell subtypes. It computes the conditional likelihood for multiple genes. Neighboring cells are defined through Delaunay triangulation with a specific distance cutoff.","SpaOTsc approximates the direction of signal flow from the signal sending positions based on the position to position communication. It can also infer spatial ranges of signaling and intercellular regulation between genes using random forest models.","SVCA can study the variance of all genes, without focusing on ligands and receptors. It performs permutations of labels for neighboring cells of a given cell to identify significant CCIs. SVCA can use different spatial technologies.","The GLM employed by BATCOM assumes Poisson-Gamma distributions (Tweedie distributions) while using a Bayesian inference.","STcomm analyzes spots in spatial transcriptomics, and relies on CellChat to identify how LR pairs behave.","Statistical framework for studying CCIs from spatial transcriptomics. CCPLS does not need prior knowledge of ligand-receptor pairs since it evaluates the expression of HVGs. The model relies on neighboring cell types defined from an exponential decay of intercellular distances. It clusters HVGs from the PLS coefficients to assign the effect of individual neighboring cell types.","The views computed by MISTy can capture functional relationships, such as pathway activities and crosstalk, cell-type-specific relationships, or focus on relations between different anatomical regions. It can use data from imaging mass spectrometry and spatial transcriptomics.","It provides a framework to study the cellular interactome in health and disease using standard single-cell RNA-seq data. It identifies enriched cell-cell interactions using an enrichment score. Neighbor-seq can identify pertinent ligand-receptor pairs.","stMLnet includes intracellular activities to infer CCIs. It prioritizes ligands, receptors or pairs regulating target genes.","Finds immediate neighbors of cells for inferring CCIs. For imaging-based methods, it uses various algorithms including Delaunay triangulation, radial distance, and KNN. For spot-based methods the tool employs an approach of heterotypic beads, consisting of two cell types, to infer immediate neighbors.","It can incorporate spatial information, using the Euclidean distance between cells. It can compare two conditions.","Renoir can use the ligand-target neighborhood activity score matrix to perform downstream analyses. This tool identifies communication regions by clustering data points based on ligand-target activity scores. It determines specific ligand-target activities within these regions and ranks ligands based on their cumulative activity across target genes of major cell types in the region.","stLearn performs multiple analyses on spatial transcriptomics, including cell type identification, clustering, trajectory analysis, and CCI analysis.","cell2cell can identify LR pairs that are enriched in tissue/body zones. It is based on binary scores.","General framework to analyze spatial transcriptomics. Squidpy implements multiple methods to process spatial data and to generate spatial graphs of cells, facilitating the identification of neighborhoods and clusters of cells. In addition, it runs the CellPhoneDB approach within a neighborhood. It performs permutations to select significant interactions.","Includes spatiotemporal information to compute CCIs.","Evaluates cell type colocalization by linear correlations of cell fractions computed across all spots. It performs a network permutation of the LR network while preserving directed degree distributions.","SpaTalk allows either spot or single-cell resolution. LR interactions are restricted by physical proximity. It computes an overall CCI score.","Giotto is a general framework for analyzing spatial transcriptomic data. It includes methods to process, integrate, and visualize data, among other features. For analyzing cell-cell interactions, It performs permutations to select significant interactions.","Infers spatial organization of cells given the expression of surface ligands and receptors. RNA-Magnet computes the potential of cells to physically interact and to attract each other.","Infers a pseudo-spatial organization of cells from the ligand-receptor pairs they use.","Uses single-cell information but reports aggregated CCIs into cell types.","Calligraphy is context-specific and uses gene coregulation to improve the sensitivity and robustness of inferred interactions. For dropouts, it uses imputed gene expression using MAGIC. It uses community detection to find functional modules of genes, while allowing gene sharing between modules by using the Order Statistics Local Optimization Method. CCI outputs are on cell state resolutions, even though the correlation network is built from single-cell resolution. It performs permutations on the module labels for each gene to select significant interactions.","Combines multiple machine learning methods to infer high-confidence ligand-receptor interactions.","Uses Light gradient boosting machine and AdaBoost combining Convolutional Neural Networks for inferring high-confidence LR pairs.","Uses the dot product of the ResNet and GNC outputs to infer CCIs.","Uses patient-specific bulk RNA-seq data. Comparisons between groups can be performed.","RobustCCC is designed to benchmark different tools by using simulated data that includes effects of replicates, noise, and other aspects that could affect real data.","Tensor decomposition in a sample, allowing multi-to-multi relationship.","Method based on correlation metrics and community detection.","Applicable for data simulation and tool benchmarking. Can use GRN information to control gene expression.","Uses random forest models to aggregate IMDI scores and computing p-values, enabling the detection of significant LR pairs.","It can integrate temporal and spatial information. It also enables the study of in silico perturbations. CellAgentChat offers animated visualizations. It allows controling rules or parameters to simulate and prioritize different scenarios (e.g., focus on short-range interactions).","Incorporates an interactive website to explore different resources.","Includes LR tools previously in the LIANA V1, adds MISTy and correlation approaches for spatial data, and integrates PyDeSeq2, MOFAcell, and Tensor-cell2cell to study multiple conditions.","Provides a consensus scoring for more reliability of the results. Includes visualization options. Offers a smooth implementation with scanpy. Analysis across multiple samples can be done.","Enables the analysis of CCIs physically proximal cells, evaluating LR pairs involving non-protein ligands, and comparing conditions. It also implements an interactive interface.","Provides evaluation of 18 LR tools and 5 intracellular signaling methods across 116 datasets, including spatial transcriptomics datasets, cell line perturbation data, and scRNA-seq data.","Interactive website to infer CCIs. TALKIEN can use bulk and single-cell transcriptomics.","Interactive user-friendly interface implemented in R/Shiny, allowing downstream analysis and facilitating biological interpretation. It can perform enrichment analysis.","Includes multimeric ligand-receptor pairs. Performs a term frequency-inverse document frequency (TF-IDF) transformation to the gene expression matrix. It performs permutations to select significant interactions."],"Tool classification":["Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Rule-based","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Rule-based","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Rule-based","Data-driven","Data-driven","Rule-based","Rule-based","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid"],"Language":["Python","Python","Python","Python","R","R","R","R","R","R","R","R","R","R","R","R","Python","R","R","R","Python","R","R","R","Standalone application","Python","Python","R","R","R","R","R","R","R","R","R","R","R","R","R","R","Python","Python","Python","R","R","R","MATLAB & R","R","Python","Python","R","R","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","R","R","R","R","R","R","Python","Python","Python","Python","Python","Python","Python","R","R","R","R","MATLAB","-","Python","Python","Python","Python","Python & R","Python & R","R","R","R","R","Python","Python","Python","Python & R","R","R","R","R","Standalone application"],"Repository":["https://github.com/cailab-tamu/scTenifoldXct","https://github.com/xiaoyeye/CINS","https://github.com/earmingol/cell2cell","https://www.sciencescott.com/pyminer","https://github.com/saezlab/MOFAcell","https://github.com/saeyslab/multinichenetr","https://github.com/ChengLiLab/TimeTalk","https://github.com/yingyonghui/CommPath","https://github.com/msraredon/Connectome","https://github.com/livnatje/DIALOGUE","https://github.com/saeyslab/nichenetr/","https://zenodo.org/record/5790343","https://github.com/kharchenkolab/scITD","https://github.com/cyhsuTN/scLR","https://github.com/CostaLab/CrossTalkeR","https://github.com/ScialdoneLab/COMUNET","https://github.com/doraadong/TraSig","https://github.com/CyrilLagger/scDiffCom","https://github.com/sqjin/CellChat","https://github.com/Coolgenome/iTALK","https://github.com/asrhou/NATMI","https://github.com/arc85/celltalker","https://github.com/jcolinge/BulkSignalR","https://github.com/BaderLab/CCInx","https://github.com/methodistsmab/CCCExplorer","https://github.com/miladrafiee/disir_package","https://github.com/ventolab/CellphoneDB","https://github.com/ZJUDBlab/InterCellDB","https://github.com/Jasonxu0109/PlantPhoneDB","https://github.com/sqjin/CellChat","https://github.com/liuyifang/FlyPhoneDB","https://github.com/soumelis-lab/ICELLNET","https://github.com/SCA-IRCM","https://github.com/Pinlyu3/LRLoop","https://gitlab.com/sysbiobig/scseqcomm","https://github.com/tanlabcode/CytoTalk","https://github.com/chris-cherry/domino","https://git-r3lab.uni.lu/kartikeya.singh/funres","https://github.com/SunXQlab/scMLnet","https://github.com/califano-lab/SEARCHIN/","https://github.com/saeyslab/nichenetr/","https://github.com/ventolab/CellphoneDB","https://github.com/zhengrongbin/MEBOCOST","https://github.com/JonETJakobsson/scConnect","https://github.com/Wei-BioMath/NeuronChat","https://github.com/edroaldo/fusca","https://github.com/ShellyCoder/cellcall","https://github.com/WangShuxiong/SoptSC","https://github.com/ChanghanGitHub/exFINDER","https://github.com/causalpathlab/spruceTopic","https://www.github.com/kojikoji/deepcolor","https://github.com/BlishLab/scriabin","http://github.com/msraredon/NICHES","https://github.com/MihirBafna/CLARIFY","https://github.com/zcang/COMMOT","https://github.com/lhc17/HoloNet","https://github.com/QSong-github/spaCI","https://github.com/StatBiomed/SpatialDM/","https://github.com/xryanglab/DeepLinc","https://github.com/theislab/ncem","https://gitlab.gwdg.de/MedBioinf/NetworkInference/SpaCeNet","https://github.com/deepomicslab/SPROUT","https://github.com/alexpancheva/ldapaper","https://github.com/xiaoyeye/GCNG","https://github.com/doraadong/MESSI","https://github.com/zcang/SpaOTsc","https://github.com/damienArnol/svca","https://github.com/dongyuanwu/BATCOM","https://github.com/gpenglab/STcomm","https://github.com/bioinfo-tsukuba/CCPLS","https://github.com/saezlab/mistyR","https://github.com/sjdlabgroup/Neighborseq","https://github.com/SunXQlab/stMLnet","https://github.com/hkim240/CellNeighborEX","https://github.com/bhklab/GraphComm","https://github.com/Zafar-Lab/Renoir","https://github.com/BiomedicalMachineLearning/stLearn","https://github.com/earmingol/cell2cell","https://github.com/scverse/squidpy","https://github.com/ventolab/CellphoneDB","https://github.com/data2intelligence/SpaCET","https://github.com/ZJUFanLab/SpaTalk","https://github.com/drieslab/Giotto","https://github.com/veltenlab/rnamagnet","https://doi.org/10.24433/CO.8641073.v1","NOT AVAILABLE","https://github.com/dpeerlab/pdac-progression","https://github.com/plhhnu/CellComNet/","https://github.com/plhhnu/CellEnBoost","https://github.com/JiangBioLab/DeepCCI","https://github.com/SysBioOncology/RaCInG","https://github.com/GaoLabXDU/RobustCCC","https://github.com/rikenbit/scTensor","https://github.com/plevritis-lab/REMI","https://github.com/ZhangLabGT/scMultiSim","https://github.com/TransBioInfoLab/LRinteractions","https://github.com/mcgilldinglab/CellAgentChat","https://github.com/ventolab/CellphoneDB","https://github.com/saezlab/liana-py","https://github.com/saezlab/liana-py","https://github.com/jinworks/CellChat","https://github.com/SunXQlab/ESICCC","https://github.com/odap-ubs/TALKIEN","https://github.com/martaint/InterCellar","http://www.rna-society.org/cellinker/"],"Refs":["https://doi.org/10.1016/j.cels.2023.01.004","https://doi.org/10.1371/journal.pcbi.1010468","https://doi.org/10.1038/s41467-022-31369-2","https://doi.org/10.1016/j.celrep.2019.01.063","https://doi.org/10.7554/eLife.93161","https://doi.org/10.1101/2023.06.13.544751","https://doi.org/10.1038/s42003-023-05283-2","https://doi.org/10.1016/j.csbj.2022.10.028","https://doi.org/10.1038/s41598-022-07959-x","https://doi.org/10.1038/s41587-022-01288-0","https://doi.org/10.1016/j.cell.2021.12.018","https://doi.org/10.1158/2159-8290.cd-21-0887","https://doi.org/10.1101/2022.02.16.480703","https://doi.org/10.1093/bioinformatics/btac294","https://doi.org/10.1093/bioinformatics/btab370","https://doi.org/10.1093/bioinformatics/btaa482","https://doi.org/10.1186/s13059-022-02629-7","https://doi.org/10.1038/s43587-023-00514-x","https://doi.org/10.3389/fgene.2021.751158","https://doi.org/10.1101/507871","https://doi.org/10.1038/s41467-020-18873-z","https://doi.org/10.1016%2Fj.immuni.2019.11.014","https://doi.org/10.1093/nar/gkad352","https://doi.org/10.1038/s41593-019-0491-3","https://doi.org/10.1016/j.celrep.2015.01.040","https://doi.org/10.1093/nargab/lqad030","https://doi.org/10.1038/s41596-020-0292-x","https://doi.org/10.1002/advs.202200045","https://doi.org/10.1111/pbi.13893","https://doi.org/10.1038/s41467-021-21246-9","https://doi.org/10.1093/genetics/iyab235","https://doi.org/10.1038/s41467-021-21244-x","https://doi.org/10.1093/nar/gkaa183","https://doi.org/10.1093/bioinformatics/btac447","https://doi.org/10.1093/bioinformatics/btac036","https://doi.org/10.1126/sciadv.abf1356","https://doi.org/10.1038/s41551-021-00770-5","https://doi.org/10.1093/bib/bbaa283","https://doi.org/10.1093/bib/bbaa327","https://doi.org/10.1038/s41467-020-19177-y","https://doi.org/10.1038/s41592-019-0667-5","https://doi.org/10.1038/s41586-022-04918-4","https://doi.org/10.1101/2022.05.30.494067","https://doi.org/10.1093/bioinformatics/btab245","https://doi.org/10.1038/s41467-023-36800-w","https://doi.org/10.1038/s41556-022-00884-1","https://doi.org/10.1093/nar/gkab638","https://doi.org/10.1093/nar/gkz204","https://doi.org/10.1093/nar/gkad262","https://doi.org/10.1016/j.isci.2023.106025","https://doi.org/10.1101/2022.04.10.487815","https://doi.org/10.1038/s41587-023-01782-z","https://doi.org/10.1093/bioinformatics/btac775","https://doi.org/10.1093/bioinformatics/btad269","https://doi.org/10.1038/s41592-022-01728-4","https://doi.org/10.1093/bib/bbad359","https://doi.org/10.1093/bib/bbac563","https://doi.org/10.1038/s41467-023-39608-w","https://doi.org/10.1186/s13059-022-02692-0","https://doi.org/10.1038/s41587-022-01467-z","https://doi.org/10.1101/2022.09.01.506219","https://doi.org/10.1093/nargab/lqac069","https://doi.org/10.1371/journal.pcbi.1009975\r\n","https://doi.org/10.1186/s13059-020-02214-w","https://doi.org/10.1093/bioinformatics/btaa769","https://doi.org/10.1038/s41467-020-15968-5","https://doi.org/10.1016/j.celrep.2019.08.077","https://doi.org/10.3390/genes14071368","https://doi.org/10.1038/s41467-023-40155-7","https://doi.org/10.1093/bioinformatics/btac599","https://doi.org/10.1186/s13059-022-02663-5","https://doi.org/10.1093/nar/gkac333","https://doi.org/10.1101/2022.06.27.497696","https://doi.org/10.15252/msb.202311670","https://doi.org/10.1101/2023.04.26.538432","https://doi.org/10.1101/2023.04.14.536833","https://doi.org/10.1038/s41467-023-43120-6","https://doi.org/10.1371/journal.pcbi.1010715","https://doi.org/10.1038/s41592-021-01358-2","https://doi.org/10.1038/s41588-021-00972-2","https://doi.org/10.1038/s41467-023-36062-6","https://doi.org/10.1038/s41467-022-32111-8","https://doi.org/10.1186/s13059-021-02286-2","https://doi.org/10.1038/s41556-019-0439-6","https://doi.org/10.1038/s41422-020-0353-2","https://doi.org/10.1093/bfgp/elac056","https://doi.org/10.1126/science.add5327","https://doi.org/10.1016/j.compbiomed.2023.107137","https://doi.org/10.1109/tnb.2023.3278685","https://doi.org/10.1093/bioinformatics/btad596","https://doi.org/10.1101/2023.02.03.526946","https://doi.org/10.3389/fgene.2023.1236956","https://doi.org/10.1186/s12859-023-05490-y","https://doi.org/10.1126/sciadv.abi4757","https://doi.org/10.1101/2022.10.15.512320","https://doi.org/10.3389/fgene.2021.708835","https://doi.org/10.1101/2023.08.23.554489","https://doi.org/10.48550/arXiv.2311.04567","https://doi.org/10.1101/2023.08.19.553863","https://doi.org/10.1038/s41467-022-30755-0","https://doi.org/10.1101/2023.11.05.565674","https://doig.org/10.1101/gr.278001.123","https://doi.org/10.1039/d3mo00049d","https://doi.org/10.1038/s42003-021-02986-2","https://doi.org/10.1093/bioinformatics/btab036"],"Year":[2023,2022,2022,2019,2023,2023,2023,2022,2022,2022,2022,2022,2022,2022,2021,2020,2022,2023,2021,2019,2020,2019,2023,2019,2015,2023,2020,2022,2022,2021,2021,2021,2020,2022,2022,2021,2021,2021,2020,2020,2019,2022,2022,2021,2023,2022,2021,2019,2023,2023,2022,2023,2022,2023,2023,2023,2023,2023,2022,2022,2022,2022,2022,2020,2020,2020,2019,2023,2023,2022,2022,2022,2022,2023,2023,2023,2023,2022,2022,2021,2022,2022,2021,2020,2020,2023,2023,2023,2023,2023,2023,2023,2023,2022,2022,2021,2023,2023,2023,2022,2023,2023,2023,2022,2021],"Conditions":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,1,1,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,1,1,0,1,1,1,1,1,0,1,0],"Spatial":[0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,0,0,0],"Metabolites":[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0],"Intracellular":[0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,1,1,0,0,1,1,0,0],"Core Functions":[1,0,1,1,0,1,1,1,1,0,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,0,0,1,0,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1],"Deep Learning":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],"Classical Stats":[1,1,0,1,1,1,1,0,0,0,1,1,0,1,0,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"Machine Learning":[1,1,1,0,1,0,0,0,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,1,0,1,1,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0]},"columns":[{"id":"Tool","name":"Tool","type":"character","cell":["scTenifoldXct","CINS","Tensor-cell2cell","PyMINEr","MOFAcell","MultiNicheNet","TimeTalk","CommPath","Connectome","DIALOGUE","Differential NicheNet","LIRICS","scITD","scLR","CrossTalkeR","COMUNET","TraSig","scDiffCom","CellChat (V1.6)","iTALK","NATMI","CellTalker","BulkSignalR","CCInx","CCCExplorer","DiSiR","CellPhoneDB (V1&2)","InterCellDB","PlantPhoneDB","CellChat (V1)","FlyPhoneDB","ICELLNET","SingleCellSignalR","LRLoop","scSeqComm","CytoTalk","Domino","FunRes","scMLnet","SEARCHIN","NicheNet","CellPhoneDB (V4)","MEBOCOST","scConnect","NeuronChat","CellComm","CellCall","SoptSC","exFINDER","SPRUCE","DeepCOLOR","Scriabin","NICHES","CLARIFY","COMMOT","HoloNet","spaCI","SpatialDM","DeepLinc","NCEM","SpaCeNet","SPROUT","Topic Modeling","GCNG","MESSI","SpaOTsc","SVCA","BATCOM","STcomm","CCPLS","MISTy","Neighbor-seq","stMLnet","CellNeighborEX","GraphComm","Renoir","stLearn","cell2cell","Squidpy","CellPhoneDB (V3)","SpaCET","SpaTalk","Giotto","RNA-Magnet","CSOmap","HiVAE","Calligraphy","CellComNet","CellEnBoost","DeepCCI","RaCinG","RobustCCC","scTensor","REMI","scMultiSim","LR Hunting","CellAgentChat","CellPhoneDB (V5)","LIANA+","LIANA","CellChat (V2)","ESICCC","TALKIEN","InterCellar","Cellinker"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Category","name":"Category","type":"character","cell":["Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Broader: Accounting for multiple conditions","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Core Tool","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Deeper: New ligand types and intracellular signaling","Finer: Real single-cell resolution","Finer: Real single-cell resolution","Finer: Real single-cell resolution","Finer: Real single-cell resolution","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","More localized: Incorporation of Spatial Context","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other","Other"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Method overview","name":"Method overview","type":"character","cell":["Computes scores for any gene pair between two cell types. In parallel builds a gene network per cell type using principal component regression. To infer CCIs between two cell types, it uses the score matrix and the respective gene networks as inputs of two neural networks (one per cell type), which embed the genes per cell. Then an embedding alignment is performed, and used to determine significant LRIs.","Learns a cell type Bayesian network based on the cellular composition in each sample and computes a joint probability between cell types depending on their mixture per sample. Then a regression model is built based on the DE expression of ligands in sender cells to explain changes in their intracellular target genes in receiver cells. Both models are combined to infer changes of cell-cell communication across samples.","Performs a non-negative CP tensor decomposition on communication scores arranged as a 4D tensor. The dimensions of this tensor represent multiple contexts or samples, ligand-receptor interactions, sender cells, and receiver cells. The resulting factors capture context-driven patterns of cell-cell communication.","Performs a DE analysis and builds co-expression networks. Identifies cell-type-enriched ligands and receptors pairs to generate autocrine and paracrine interactions.","Uses a dimensionality reduction approach to find multicellular programs of gene expression. It relies on the method behind MOFA, based on a probabilistic group factor analysis. Then, it can associate specific factors of the latent space with cell-cell communication events, given that the relevant genes could be associated with ligands, receptors, and signaling genes.","Prioritizes ligand-receptor pairs that are strongly expressed in the condition of interest, are cell-type specific, are present in most samples of the condition of interest, and whose target genes are enriched in the receiver cell type. It relies on edgeR analysis to score ligand-receptor pairs from differential expression and ligand activity.","Designed for detecting CCIs in early embryo development. It computes a Spearman coefficient for LRIs between cell types along pseudotimes. Then, it computes a Granger's causality between the interaction score the co-varying LRI and the gene expression of their downstream master TFs.","Evaluates cell-cell communication chains, which corresponds to the effect that a receiver cell could have on a third cell. It uses CellA-CellB-CellC chain by weighting ligands from Cell A to receptors on Cell B, and ligand from Cell B to receptors on Cell C. Also evaluates the intracellular changes within Cell B connecting activity from Cell A to C. Identifies the differential activation of pathways between two conditions.","Computes a perturbation score between a test and a reference condition. This score is based on the logFC of the expression of the ligand and the receptor.","Uses a matrix factorization method to identify MultiCellular Programs (MCPs) across multiple niches within the same tissue, or across multiple samples from different individuals. A MCP is captured per factor, and they can be integrated with ligand-receptor interactions to summarize communication represented by each MCP.","Combines NicheNet with differential expression analysis between two conditions. This method returns a score that prioritizes up-regulation of the ligand and/or receptor in the condition of interest, expression level within the group, cell-type-specific expression, and high NicheNet score.","First queries a DB to evaluate plausible LRIs between a pair of cell types. Then, it uses the deconvolved gene-expression matrix obtained with CODEFACS to use cell-type resolution, and predicts enriched LRI in each condition with a Fisher's exact test.","Extracts “multicellular gene expression patterns” across different biological samples. It uses a Tucker tensor decomposition, generating factors that represent gene expression patterns. These patterns can be integrated with ligand-receptor interactions to summarize communication represented by each factor.","Models the distribution of the expression product of ligands and receptors and accounts for intersample variances and small sample sizes. It evaluate differential changes in the expression products between two conditions.","Builds a CCC network per dataset based on the expression of the ligands and the receptors in a cell-cell pair. Compares two conditions by a differential analysis of the resulting CCC from the network.","Uses multiplex networks to represent different ligand-receptor pairs between cell types. Performs comparative analysis between two conditions by computing a dissimilarity metric for each pair of networks representing the same ligand-receptor pair in each condition.","Identifies ligands and receptors in different cell types that follow coherent expression patterns along time. It uses a Continuous-state Hidden Markov Model (CSHMM), which is a probabilistic graphical model, to learn trajectories and to assign cells to specific points along the trajectories.","Infers CCIs in each condition separately, then performs a differential analysis on the resulting communication scores. scDiffCom builds a null distribution to select significant changes.","Compares multiple cell-cell communication across multiple scRNA-seq datasets by leveraging CellChat V1.","Identifies differentially expressed ligands and receptors using the software of interest to identify changes in CCC.","Generates CCC networks assigning edge weights to each ligand-receptor interaction between a sender-receiver cell pairs. Compares two conditions purely based on the differences between their CCC networks.","Evaluates the binary use of a ligand-receptor pair between sender and receiver cell types within a group of samples, then compares different groups to see shared and specific LR pairs per sender-receiver cell pair.","Computes a Spearman correlation between ligands (L), and receptors (R), and another between receptors and target genes (T). To compute significance, relies on a null distribution of Spearman coefficients generated from randomized expression datasets. Assuming that distributions of LR and RT are independent, joint significance is the multiplication of their individual significances.","Builds a ligand-receptor and ECM-receptor database using GO terms to filter known PPI databases. CCIs are inferred based on LR interactions expressed in cell types. To investigate condition-associated perturbations, DGE metrics based on the tool MAST are used (e.g., logFC and P-value).","Uses networks of ligand-receptor interactions connected to their TFs, and links the TFs with their target genes. CCCExplorer is based on differential expression of ligands and target genes (vs WT), while receptors and TFs are considered expressed if they are over a threshold.","Identifies multi-subunit ligand-receptor interactions at the cell type level by computing expression products of all possible combinations between ligand subunits and receptor subunits. It calculates average expressions of ligand and receptor subunits across cell clusters, and removes the LR pair if any subunit is not expressed in these averages. It then shuffles the cluster annotations and recalculates average expressions. If the product of the original clusters' average expressions significantly exceeds that of the shuffled clusters, the subunit interaction is deemed significant. DiSiR identifies an interaction as significant if all subunit combinations in the input list are significant.","Computes a communication score as the expression mean between the ligand and the receptor in a pair of cell types.","Selects differentially expressed genes per cluster, then computes communication scores using those genes as the expression product between the ligand and the receptor in a pair of cell types. Computes an overall CCI score as the sum of the communication scores.","Implements multiple communication scores, including a regularized product, weight product, mean, and product of gene expression between the ligand and the receptor in a pair of cell types. Uses target genes of the receptors to inspect intracellular signaling. For target genes, it uses differential expression analysis.","Computes a communication probability using the law of mass action (hill function). Prior to compute the probability, it performs an identification of over-expressed genes per cell group. CellChat can perform an aggregation of the probabilities for individual LR pairs into a pathway level. Also, it can detect patterns of communication either at the sender or receiver level.","Computes a communication score as the expression product between the ligand and the receptor in a pair of cell types. FlyPhoneDB uses the log1p transformed expression as input.","Computes a communication score as the expression product between the ligand and the receptor in a pair of cell types. Multimeric ligands or receptors are computed as the geometric mean of the expression across their components. An overall CCI score is computed as the sum of all communication scores.","Uses a regularized expression product as the communication score. The regularization factor scales each communication score in relation to the mean expression level of the data. Thus, communication scores are bound between 0 and 1.","Builds upon NicheNet to compute the regulatory potential between receptors and target genes, instead of ligands and target genes. By using a Personalized PageRank to compute that potential, it is able to detect responsive ligands and receptors, connected through the intracellular signaling information. Thus, LRLoop detects [L1–R1]<->[L2–R2] interactions where L1 and L2 are ligands that are among the target genes of R2 and R1 receptors, respectively.","Predicts communication scores by selecting the minimum expression between a ligand and a receptor. It incorporates intracellular signaling by assigning scores to receptor-TF associations using a Personalized PageRank algorithm. It also includes TF activity on the final score.","Connects two intracellular networks (from different cells) through known ligand-receptor interactions. It prioritizes LR pairs that are not used for autocrine interactions (low correlation within the same cluster) to assign a high crosstalk score. Then, it employs a network propagation based on the gene expression of intracellular genes. Finally it identifies signaling networks as a prize-collecting steiner forest problem to find intracellular genes that are close to highly-scored LR pairs.","Uses a network of ligand-receptor-TF-targets, and considers only pathways whose ligands and receptors are expressed. This means that they are over a z-value when comparing all clusters or cell types. It connects receptors to TF using Pearson correlation. It excludes receptors that are downstream to a TF in the network.","Binary presence of TFs by fraction of cells within a cluster. It uses a Markov Chain model to infer the probability of a receptor to induce present TFs, considering intermediate genes. Finally computes LR score as the product of the average expression of the ligand and the receptor in their respective populations (only applies for ligands and receptors selected in a CCI scaffold)","Builds a multilayer network of Ligand-Receptor pairs, Receptor-TF pathways, and TF-target genes. It uses the cell-type-specific highly-expressed genes to infer CCIs. LR pairs are scored with their expression product. It uses Fisher's exact test to consider active TFs, by using information of expressed target genes. Then LR pairs and enriched TFs are connected with another Fisher's test, considering whether active TFs are enriched in a given receptor. Thus, only LR pairs passing these test are retained.","Integrates multiple sources of information such as PPI networks and membrane-receptor regulatory networks. It relies on other tools to compute the receptor activity as a regulator of target genes. Finally, aggregates all the scores through a Robust Rank Aggregation method, generating a final rank of LR pairs.","Uses a Personalized PageRank algorithm to identify important ligands having an effect on downstream target genes. Its analysis incorporates gene expression of the ligand in the sender cells, and the target genes in the receiver cells.","Accounts for non-protein ligands by considering the gene expression of their last bona fide enzyme in the biosynthesis pathway. It computes a communication score as the mean of the ligand and receptor expressions. It builds upon previous versions of CellPhoneDB, so it also incorporates protein complexes and spatial location of cells.","Infers metabolite-mediated intercellular communication from the gene expression level of producing and consuming enzymes of the metabolite and the cognate receptor. The metabolite score is computed as the difference between the expression of the producing and consuming enzymes. This score is later used with the expression level of the receptor to compute a final communication score for the metabolite-receptor interaction.","Computes the geometric mean between the scores assigned to the ligand and the receptor in a LR interaction. Ligands can include small compounds, which incorporate the expression level of producing enzymes (geometric mean among all synthesis enzymes), vesicle transporters, and reuptake transporters.","Computes communication scores as the product of ligand and receptor-target abundances. Ligand abundances of metabolites are inferred from the gene expression of producing enzymes and transporters.","Computes a score for each LR pair based on their expression levels in each interacting cluster. It associates this score with target genes by computing a pathway activity score from a weighted protein-protein interaction network. This activity is computed from a gene set enrichment analysis on the regulons of a transcriptional regulator.","Integrates ligand-receptor-TF relationships as well as TF-Target Genes. It computes the interaction scores by weighing with the TF activity score. This TF activity comes from a gene set enrichment analysis using the coexpressed target genes of that TF (regulons).","Incorporates gene expression of genes that are downstream to a receptor in a ligand-receptor interaction. By using their expression levels, it can weigh a communication score accordingly resulting in a probability that a signal is sent by a given cell to another cell via a given pathway.","Infers the signaling activity in pathways encompassing external signals, receptors, TFs, and target genes. Thus, it infers the ligand-target GRN from their gene expression, and assigns a signaling strength using a mass-action-based score.","Integrates an embedded topic model and a variational autoencoder to infer cell-cell communication in a single-cell resolution. This approach projects single-cell data into a low-dimension topic space, based on natural language processing to find meaningful topics (here LR gene-driven patterns of CCIs).","Uses a deep generative model based on a variational autoencoder (VAE) to integrate spatial and single-cell transcriptomics to obtain inter-cellular colocalization networks. These networks allow to identify cell-cell interactions between colocalized single cells, relying on NicheNet method.","Computes communication scores as the geometric mean of ligand and receptor expression levels, using single cells as the senders and receivers. Scriabin can focus on biologically meaningful interactions by using highly-variable genes within a dataset or most variable genes between conditions. It computes an overall CCI score by summing the communication scores between a pair of cells.","Computes communication scores as the product of ligand and receptor expression levels, using single cells as the senders and receivers. When using spatial transcriptomics, it computes CCIs only of neighboring cells, defined with a distance threshold or with a k-nearest neighbor graph. Subsamples single cells when the cell number is too high.","Uses a multi-level graph autoencoder to infer CCIs. One graph considers cell-cell relationships to represent the proximity of cells and their potential to interact. The other graph considers gene-gene relationships to represent the intracellular activity and ligand-receptor interactions. Thus, the autoencoder model includes two encoders, one for each graph, to project the CCIs into a latent space that is able to reconstruct a physical adjacency matrix of cells.","Applies a collective optimal transport model to infer CCIs using spatial transcriptomics. This preserves the comparability between distributions (total signal does not exceed the individual species amounts - ligand or receptor - , and enforces spatial range limits and handles multiple competing species.","Uses spatial transcriptomics to weigh LR interactions based on intercellular distances. LR interactions are filtered out given a permutation analysis. This tool mainly focuses on the effect on target genes and tries to identify the important LR pairs contributing to those effects.","Uses an adaptive graph model to infer CCIs. By using a gene-based linear encoder and a cell-based attentive graph encoder, genes are projected into the latent space. The resulting embeddings reflect gene expression and spatial organization, which are then used to define triplets including interacting and non-interacting genes, helping to identify the use of given LR pairs.","Identifies LR pairs with significant spatial co-expression within a reasonable physical distance. For doing so, it uses a bi-variate Moran's correlation coefficient as a test statistic. This test statistic includes intercellular distance and a scale factor to control the weight that LR interactions receive.","Implements a variational graph autoencoder (VGAE) as a deep generational model to infer spatially-relevant CCI networks. It learns from spatial transcriptomic data.","Uses spatial graphs of cells to identify niches to model cell's observed gene expression considering the effects of the niche composition. NCEM can use linear and nonlinear graph neural networks as well as conditional variational autoencoder models. These models identify statistical dependencies between cells on physiologically relevant length scales and interpret fits based on model parameters.","Uses Gaussian Graphical Models and the concept of Spatial Conditional Independence to infer potential intercellular interactions. This method uses a function of intercellular distance to infer the potential of interactions. It can also infer spatial interactions between molecular variables.","Computes a cell-cell affinity matrix as the sum of the expression products of ligand-receptor pairs in both directions of CCIs. Then, sparsifies this matrix by using partial correlation, spectral graph sparsification and spatial coordinate refinement. Using the processed affinity matrix, performs a local fuzzy set embedding to constrain the number of neighbors of each cell while maintaining the affinity relationships. Finally, it uses a cross-entropy approach to obtain low dimensional embeddings of CCIs.","Uses a Latent Dirichlet allocation (LDA) approach to find latent topics of cells and genes. It applies a LDA to regular single-cell data and another to data coming from doublets (interacting cells). These two LDAs help to identify topics that are a consequence of the CCIs. Afterwards, topics are associated to cell types and genes, so specific molecular and cellular properties of CCIs can be interpreted.","Uses graph convolutional neural networks to infer gene interactions involved in cell-cell communication from spatial single-cell expression data. GCNG encodes the spatial information as a graph and combines it with expression data to infer extracellular gene-gene interactions.","Applies a Mixture of Experts (MoE) model using an expectation-maximization algorithm. It considers the expression of ligands and receptors in a cell, and the expression of ligands in its neighboring cells, as well their annotations to compute a conditional likelihood of CCI.","Uses an optimal transport model to compute a distance matrix for gene-gene dissimilarity and cell-cell dissimilarity given their spatial locations. Then, another optimal transport model is used based on the probability of cells for using ligand-receptor pairs. It employs distributions of the sources (ligands) and receivers (receptors and downstream genes) based on their cognate gene expressions. The distance matrix here is used as a cost matrix.","Models the variance across cells of the gene expression level due to the additive effect of an intrinsic effect due to the cell state, a cell-cell interaction effect due to the state of the neighboring cells, and an environmental effect due to unobserved factors in the cell microenvironment. Thus, it can decompose the gene expression into these three effects and potentially identify CCIs given the spatial organization of cells.","Uses a generalized linear regression model to infer CCIs from spatial transcriptomics. It models the CCI as an exponential decay depending on the intercellular distance, and includes the cellular composition or labeling of spots and single-cells, respectively. This model infers the overall potential of CCIs.","Evaluates the colocalization of cell types and their use of LR pairs in a spatial spot. By using a Fisher's exact test, identifies significant LR pairs in colocalized cell types within a spot. It relies on the expression product as the communication score, and considers those that are greater to zero. Finally, it runs CellChat and evaluates CCIs only on those that were significant from Fisher's exact test.","Uses a partial least square regression model to identify the CCI effects on multiple neighboring cell types. This model assumes that the expression of highly variable genes specific to a cell type are explained by a linear sum of the effects by neighboring cell types.","Builds multiple views focusing on different spatial or functional contexts to dissect different effects. Each view represents a potential source of variability in the measured marker expressions. The models for each view are trained independently, while the fusion parameters of the meta-model are estimated after training the view-specific models independently, by regularized linear regression.","Uses machine learning to infer physical cell-cell communications by identifying, annotating, and analyzing cell multiplets from the undissociated cell fractions in single-cell RNA-seq data. It generates a network of physical cell-cell interactions.","Uses intercellular distance to weigh interaction score between ligands and receptors of a pair of cells. Also, it includes intracellular genes to build a ligand-target gene network from a Fisher's exact test. It integrates the interaction score and the ligand-target-gene network into a random forest regression model to infer a regulation score indicative of CCIs.","Infers neighbor-dependent genes given spatial transcriptomes. It uses statistical approaches to identify genes that are up- or down regulated given their neighborhood. It explores which of these genes could be used for CCIs.","Constructs a directed graph connecting cell types to ligand/receptor to cell types, if the sender and receiver cells significantly express the ligand and receptor. It uses the expression product as the communication score. It uses a Graph Attention Network to rank LR pairs.","Computes a neighborhood activity score for each curated ligand-target pair for each spot in the spatial transcriptomic data. This score includes within and between spots terms of activity. The activity score for a ligand-target pair in a given pair of spots is calculated based on cell type-specific mRNA levels, cell type proportions, and mutual information between the two genes across cell types within the two spots.","Combines the cell type density in an area of the tissue and the co-expression of LR pairs to infer CCIs. It runs CellPhoneDB to infer the CCIs of a spot with its nearest spots, generating a spot x spot matrix with the overall potential of interactions. Finally, it integrates the cell type diversity to find cell-type specific areas that are more likely to interact with their neighbors.","Introduces a Bray-Curtis overall CCI score and employs a genetic algorithm to prioritize ligand-receptor pairs correlating the CCI score and intercellular distances.","Identifies cellular neighborhoods from the spatial graph of cells, then infers CCIs within a neighborhood. Computes the expression mean between the ligand and the receptors from a pair of interacting cell types. Uses the approach of CellPhoneDB.","Based on previous versions of CellPhoneDB, computes CCIs by considering information about specific spatial niches and time points.","Computes CCIs within a spot after cell type deconvolution of each spot. Then, evaluates within each spot the enrichment of ligand-receptor pairs for the deconvoluted cell types. The communication score for each LR is the expression product, and the overall CCI score is the sum of the expression products divided by the average sum of expression products across all randomized networks.","Relies on graph network and knowledge graph. It first performs a cell-type decomposition in each spot/cell, then infers spatially resolved CCIs and downstream signal pathways. It incorporates communication score for LR pairs, and network propagation for Receptor-TF signaling, then ranks receptors combining both.","Evaluates the enrichment of the frequency that each pair of cell types is proximal to each other to use them as proximal cell types. Similarly, it uses enriched expression of gene pairs within an environment. Then, Giotto computes the sum of ligand and receptor average expression in cell types that are proximal. Using this score and a null distribution, it can identify differential activity.","Identifies the cell type that each cell is most likely to physically interact with given the estimated strength of adhesion computed from the expression of ligand-receptor pairs that are both present on the cell surface.","Computes an affinity matrix of cells from the ligand-receptor pairs they use. Then, projects the affinity scores into a 3D spatial space.","Employs two hierarchical variational autoencoders (HiVAEs): One to learn from protein-protein interactions, and the other to learn from single-cell expression profiles. Using the embeddings in their latent space through a transfer entropy method, computes the overall CCI potential of aggregated cell types.","Builds a co-expression network of communication genes based on Pearson correlation across a given cell state or type. It also uses a Jaccard similarity metric accounting for the degree of neighbor-sharing between all pairs of genes. Then Calligraphy identifies communication modules, establishing the incoming and outgoing communication that each cell state can participate in. Next, Calligraphy identifies communication events between cell states given LR interactions represented between pairs of modules of different cell states. Finally it generates a module-module network where edges are the counts of LR pairs that are significant between modules. Cell states can be assigned to each module.","Uses an ensemble of heterogeneous Newton boosting machine and deep neural network to infer ligand-receptor interactions. Then, integrates gene expression by using combining expression thresholding and expression product to infer CCIs.","Uses a boosting-based model to infer ligand-receptor interactions, then infer the communication score for each of them based on the gene expression product, and other derived scores.","Uses a Residual neural network (ResNet) together with a graph convolutional network to learn from the gene expression of ligands and receptors. It uses the outputs of both neural networks to jointly infer cell-cell interactions.","Performs a monte carlo simulation using random graphs. To do so, it requires information including cellular composition (cell distribution), potential of LR interactions (LR distribution), expressed ligands and receptors per cell. Multiple simulations are run per sample, then by applying a kernel method a consensus is computed per patient.","Implements 14 existing CCC methods and can generate simulated single-cell transcriptomics data to evaluate the robustness of methods.","Applies a non-negative Tucker decomposition to factorize a 3D tensor of CCIs. The dimensions are LR pairs, sender cell types, and receiver cell types. This method outputs factors separating elements of each dimension, and a core tensor that allows multi-to-multi representation of CCIs.","Creates bi-partite networks considering ligands and receptors as nodes. Ligands are connected with their cognate receptors, and the edge weight is their correlation across all cell types. Then, it runs a community detection approach to identify conditionally dependent LR pairs. Conditionally independent LR pairs are removed through a GLasso algorithm. Finally, it creates interactomes between cell types by using only conditionally dependent LR pairs.","Simulates gene expression in two steps: (1) Employing a kinetic model to generate the true gene expression levels in cells, and (2) introducing technical variations (library preparation noise, batch effects, etc) to generate data that are statistically comparable to real data. Then, the user inputs a ligand-receptor database to simulate the CCI ground truth data. scMultiSim can generate spatiotemporal variations of CCIs","Uses random forest models (RFs) to first impute gene expression of ligands and receptors in each cell type, then to detect significant LR interactions.","Uses agent-based modeling to study CCIs. Each cell is represented as a single agent in the model, with different statuses. Agents are defined by various attributes such as cell label, gene expression profiles, LR universe, spatial coordinates, and pseudotime. To compute probability of using LRIs, it uses ligand diffusion rate, receptor receiving rate and receptor conversion rate.","Builds upon previous CellPhoneDB versions to incorporate multiple functionalities in one computational framework.","Extends existing methods and knowledge to study CCIs in single-cell, spatially-resolved, and multi-modal omics data.","Implements natively multiple tools to infer CCIs and resources of ligand-receptor interactions. Can compute a consensus inference across implemented tools. Implements other methods for visualization and downstream analysis.","Leverages previous versions of CellChat using the mass-action-based score to infer CCIs from multiple other scenarios such as using spatial transcriptomics, comparing conditions, and including non-protein ligands.","Systematic benchmark framework designed for evaluating, selecting, and integrating CCI inference methods.","Takes a list of genes or proteins and transcriptomic data to build a network of CCIs. Then, the topology of this network can be studied by using centrality metrics. In addition, TALKIEN can analyze intracellular pathways, perform enrichment analysis, and look for drugs that inhibit significant LR pairs.","Supports outputs coming from any tool or method to infer CCIs. This information is used for data exploration including properties of clusters, genes, and functions based on CCIs. It detects interaction-pair modules associated with biological functions. Also, it allows comparing conditions.","Computes the communication score as the root square of the sum of the squared expression of the ligand and the receptor in a pair of cell types. Expression level of multimeric proteins is computed as the geometric mean of their components."],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Additional information","name":"Additional information","type":"character","cell":["Computes differences between two samples by generating a joint matrix and calculating a Euclidean distance per gene pair. Finds significant changes through a chi-square test and FDR adjustment. Unbiased method that allows detecting LR pairs that are not in a DB.","Performs pairwise comparisons between a test condition and a reference condition. The model learns across conditions, but the inputs are dependent on the reference condition.","Detection of latent patterns or programs of CCIs across multiple samples simultaneously. Dimensionality reduction method that preserves the correlation structure of data.","Performs pairwise comparisons between two conditions through a DE analysis.","Allows the comparison of multiple conditions simultaneously and associates them with different factors given their loadings in the latent space. Similarly, it allows associating specific cell types with factors, given their expression profiles projected into the latent space. Multiple other downstream analyses can be performed, such as enrichment analysis, covariate association with factors, among others. Multicellular programs can be spatially mapped when using spatial transcriptomics.","Allows the study of between- and within-group differences. Batch and covariates variables can be added to the model to account for them when performing the DE analysis.","This method prioritizes co-varying LRIs along pseudotimes that also form regulatory feedbacks with their downstream master TFs.","Performs pairwise comparisons between the CCC inferred for each condition separately. Also available in a web interface.","Performs pairwise comparisons between two conditions through a DE analysis. Increases and decreases are for a test condition with respect to the reference condition. It can rank important sender and receiver cells through a network centrality approach.","Detects factors or latent patterns of gene expression across multiple samples simultaneously, which can be used a posteriori to infer CCC. Dimensionality reduction method.","Performs pairwise comparisons between two conditions through a DE analysis. The method is powered by NicheNet.","LIRICS considers enriched LRI when the ligand and the receptor are overexpressed in their respective sender and receiver cell types. To estimate overexpression, it uses the median deconvolved expression in the corresponding cell type across all samples.","Detects factors or latent patterns of gene expression across multiple samples simultaneously, which can be used a posteriori to infer CCC. Dimensionality reduction method that preserves correlation structure of data.","scLR uses as the the null hypothesis that the mean of ligand–receptor interaction strengths are the same under two conditions, and as the alternative hypothesis that they are not the same.","Performs pairwise comparisons between the CCC inferred for each condition separately.","Accepts any CCC tool to compute the edge weights. It can perform pairwise comparisons between the CCC inferred for each condition separately.","Allows detecting patterns in genes that are expressed by few cells. Performs an ordering of points along time and enables the use of pseudo times.","Performs pairwise comparisons between the CCC inferred for each dataset separately. Implements a pathway enrichment analysis to identify changes in functions.","Performs pairwise comparisons between the CCC inferred for each dataset separately. Integrates intracellular signaling as well to compute the communication scores.","Performs pairwise comparisons between two conditions through a DE analysis. Provides visualizations to facilitate interpretation.","Performs pairwise comparisons between the CCC inferred for each condition separately. Provides visualizations to facilitate interpretation.","Performs pairwise comparisons between the CCC inferred for each group separately. Includes visualizations to facilitate interpretation","BulkSignalR can be applied to spatial transcriptomics with localized bulk data (e.g., spots). Compares samples by standardizing the communication scores across samples. Employs a non-negative LASSO model to associate LRI with cell types.","Provides a shiny app for studying aging in the mouse brain.","Uses bulk RNA-seq data coming from multiple cell types separately.","Authors used a melanoma disease map as the gold standard for LR interactions, and benchmark multiple tools.","Includes multimeric ligand-receptor pairs. It performs permutations to select significant interactions.","It performs permutations to select significant interactions.","It performs permutations to select significant interactions. Intended for studying 5 different species of plants.","Includes multimeric ligand-receptor pairs, and information about agonist and antagonist ligands, as well as co-inhibitory/stimulatory receptors. CellChat can weigh the probability of interaction based on the number of single cells per cell group. It performs permutations to select significant interactions. CellChat can compare up two conditions simultaneously.","Intended for Drosophila. It performs permutations to select significant interactions.","Includes multimeric ligand-receptor pairs.","Makes comparison across distinct LR pairs comparable. In addition, regularize scores enable using a threshold to set active vs inactive LR pairs.","LRLoop prioritizes bi-directional ligand–receptor interactions forming a closed feedback loop.","It performs permutations to select significant interactions.","Employs a degree-preserving network permutation to reduce false positives.","Domino is able to compare two conditions. Also, it can extract condition-specific signaling.","FunRes builds a CCI network from LR pairs with significantly higher score compared to other interactions in the interaction scaffold.","Method based on multilayer networks.","Includes multiple sources of information, such as mass spec data, prior-knowledge of protein-protein interactions and regulation. It computes a consensus score across \"experimental\" evidence.","Allows detecting important ligands based on their potential to regulate specific gene sets (e.g. within a given pathway)","Additionally incorporates intracellular signaling through a module called CellSign. This module accounts for receptor-TF associations. This version can identify differences between conditions by using information from differential expression analysis. It performs permutations to select significant interactions.","MEBOCOST includes a database of multiple metabolite-sensor interactions, where sensors can be nuclear receptors, surface receptors, or surface transporters. It performs permutations to select significant interactions.","scConnect provides an interactive web application. It performs permutations to select significant interactions.","Its database is focused on neuronal communication and includes small-molecule neurotransmitters, neuropeptides, gap junction proteins, gasotransmitters, and synaptic adhesion molecules. In addition, NeuronChat allows visualizing communication scores in raw images of spatial transcriptomics. It performs permutations to select significant interactions.","CellComm has been applied to spatial transcriptomics by using the centroid of the distinct clusters/cell types to compute the physical distance. It uses the normalized distance to weigh the CCI score.","CellCall uses protein complexes, performs pathway activity analysis, and has visualizations to help interpret the results.","SoptSC can weigh the signaling probabilities by the cell number within a cluster. Additionally, it can use consensus signaling networks across all different ligand-receptor pairs and their cognate pathways, co-signaling factors, or co-receptors. Also, it can weigh the probability given the \"inhibitory\" effect of certain downstream genes.","exFINDER can perform unsupervised analyses from the expression of the signal-target GRN. For example, signal outflows and target inflows can be computed. Clustering of signal-target pairs can be performed to understand functionalities. Finally, GO enrichment analysis can be done based on the proportion of involved genes and their expression levels.","SPRUCE is able to analyze tens of millions of cell pairs in a scalable way. Cell-cell pairs can be projected into a latent space to find groups based on their interactions. It can compare conditions by prioritizing differentially expressed genes.","It accounts for spatial location of cells with single-cell resolution. It also accounts for intracellular signaling and gene regulatory networks.","Scriabin supports the use of 15 different protein-protein interaction databases. It uses an implementation of NicheNet to detect ligands affecting signatures identified with multiple correspondence analysis. When cell number is too high, it can use the CCI score to identify relevant cell pairs and generate the matrix of communication scores only for those pairs. It includes a workflow for finding modules of co-expressed ligand–receptor pairs based on weighted gene correlation network analysis. It can also use data denoising algorithms to deal with dropouts.","NICHES allows using spatial transcriptomics to infer CCIs. Cell-cell pairs can be projected into a latent space.","CLARIFY can uses ground truth physical interactions or spatial transcriptomics as inputs. In addition, for gene regulatory networks it can use celltype-specific networks.","Accounts for the competition between different ligand and receptor species as well as spatial distances between cells. It can perform downstream analyses for inferring directionality of the signaling (vector fields) and differential expression of genes.","HoloNet builds a CCI network for each LR pair, where cells could be cell types or tissue spots. It uses network centrality metrics to identify important cells or spots. Instead of using the Fick’s second law for ligand diffusion, it adopts a Gaussian model purely based on the intercellular distance. HoloNet also employs a graph neural network.","spaCI infers gene expression of dropouts by analyzing the co-expression of upstream TFs of a ligand, and of receptors. It is able to infer the interaction of LR pairs, but also of the interactions of any gene pairs.","SpatialDM assumes that ligands and receptors are spatially independent as the null hypothesis. Thus, it is possible to select those that are actually spatially dependent. It also allows interpreting local communication patterns through enrichment tests and visualization of pathways associated with the patterns. It allows single-cell resolution.","Learns a latent representation that allows inferring missing distal and proximal interactions, and signature genes contributing to the cell interaction landscapes. It does not depend on prior knowledge of LR pairs.","The complexity of the graph neural network used in the NCEM defines the complexity of the motifs of cell communication that can be discovered and may be expanded given more complex datasets. NCEM can use multiple spatial technologies including MERFISH, CODEX, MIBI-TOF, MELC, and chip cytometry. It does not need ligand-receptor pairs, working in an unbiased manner.","SpaCeNet introduces intracellular and intercellular SCI relations. Intracellular SCI relations between variables within one cell are expressed with the term “rest” referring to all other variables of the cell and to all variables of all other cells. Intercellular SCI relations between variables in different cells are conditioned on all remaining variables, with the set “rest” referring to all variables of the cells except the variables in question.","SPROUT can use any tool to deconvolve the cellular composition of spatial spots. It can also obtain relevant LR pairs used by cell pairs in single-cell and cell type resolution. The contribution of each LR pair is computed as the ratio of the gene expression product for the LR pair divided by the sum of expression products across all LR pairs, considering both directions that a pair of cell could interact.","Based on physically interacting cells, uses PIC-seq or a network of physically interacting cells from doublets as inputs.","GCNG can infer both autocrine and extracellular gene interactions involved in cell-cell interactions. It can infer interacting genes that are not necessarily ligand-receptor pairs. Functional downstream analysis can be done to assign functions to interacting genes.","MESSI accounts for cell subtypes. It computes the conditional likelihood for multiple genes. Neighboring cells are defined through Delaunay triangulation with a specific distance cutoff.","SpaOTsc approximates the direction of signal flow from the signal sending positions based on the position to position communication. It can also infer spatial ranges of signaling and intercellular regulation between genes using random forest models.","SVCA can study the variance of all genes, without focusing on ligands and receptors. It performs permutations of labels for neighboring cells of a given cell to identify significant CCIs. SVCA can use different spatial technologies.","The GLM employed by BATCOM assumes Poisson-Gamma distributions (Tweedie distributions) while using a Bayesian inference.","STcomm analyzes spots in spatial transcriptomics, and relies on CellChat to identify how LR pairs behave.","Statistical framework for studying CCIs from spatial transcriptomics. CCPLS does not need prior knowledge of ligand-receptor pairs since it evaluates the expression of HVGs. The model relies on neighboring cell types defined from an exponential decay of intercellular distances. It clusters HVGs from the PLS coefficients to assign the effect of individual neighboring cell types.","The views computed by MISTy can capture functional relationships, such as pathway activities and crosstalk, cell-type-specific relationships, or focus on relations between different anatomical regions. It can use data from imaging mass spectrometry and spatial transcriptomics.","It provides a framework to study the cellular interactome in health and disease using standard single-cell RNA-seq data. It identifies enriched cell-cell interactions using an enrichment score. Neighbor-seq can identify pertinent ligand-receptor pairs.","stMLnet includes intracellular activities to infer CCIs. It prioritizes ligands, receptors or pairs regulating target genes.","Finds immediate neighbors of cells for inferring CCIs. For imaging-based methods, it uses various algorithms including Delaunay triangulation, radial distance, and KNN. For spot-based methods the tool employs an approach of heterotypic beads, consisting of two cell types, to infer immediate neighbors.","It can incorporate spatial information, using the Euclidean distance between cells. It can compare two conditions.","Renoir can use the ligand-target neighborhood activity score matrix to perform downstream analyses. This tool identifies communication regions by clustering data points based on ligand-target activity scores. It determines specific ligand-target activities within these regions and ranks ligands based on their cumulative activity across target genes of major cell types in the region.","stLearn performs multiple analyses on spatial transcriptomics, including cell type identification, clustering, trajectory analysis, and CCI analysis.","cell2cell can identify LR pairs that are enriched in tissue/body zones. It is based on binary scores.","General framework to analyze spatial transcriptomics. Squidpy implements multiple methods to process spatial data and to generate spatial graphs of cells, facilitating the identification of neighborhoods and clusters of cells. In addition, it runs the CellPhoneDB approach within a neighborhood. It performs permutations to select significant interactions.","Includes spatiotemporal information to compute CCIs.","Evaluates cell type colocalization by linear correlations of cell fractions computed across all spots. It performs a network permutation of the LR network while preserving directed degree distributions.","SpaTalk allows either spot or single-cell resolution. LR interactions are restricted by physical proximity. It computes an overall CCI score.","Giotto is a general framework for analyzing spatial transcriptomic data. It includes methods to process, integrate, and visualize data, among other features. For analyzing cell-cell interactions, It performs permutations to select significant interactions.","Infers spatial organization of cells given the expression of surface ligands and receptors. RNA-Magnet computes the potential of cells to physically interact and to attract each other.","Infers a pseudo-spatial organization of cells from the ligand-receptor pairs they use.","Uses single-cell information but reports aggregated CCIs into cell types.","Calligraphy is context-specific and uses gene coregulation to improve the sensitivity and robustness of inferred interactions. For dropouts, it uses imputed gene expression using MAGIC. It uses community detection to find functional modules of genes, while allowing gene sharing between modules by using the Order Statistics Local Optimization Method. CCI outputs are on cell state resolutions, even though the correlation network is built from single-cell resolution. It performs permutations on the module labels for each gene to select significant interactions.","Combines multiple machine learning methods to infer high-confidence ligand-receptor interactions.","Uses Light gradient boosting machine and AdaBoost combining Convolutional Neural Networks for inferring high-confidence LR pairs.","Uses the dot product of the ResNet and GNC outputs to infer CCIs.","Uses patient-specific bulk RNA-seq data. Comparisons between groups can be performed.","RobustCCC is designed to benchmark different tools by using simulated data that includes effects of replicates, noise, and other aspects that could affect real data.","Tensor decomposition in a sample, allowing multi-to-multi relationship.","Method based on correlation metrics and community detection.","Applicable for data simulation and tool benchmarking. Can use GRN information to control gene expression.","Uses random forest models to aggregate IMDI scores and computing p-values, enabling the detection of significant LR pairs.","It can integrate temporal and spatial information. It also enables the study of in silico perturbations. CellAgentChat offers animated visualizations. It allows controling rules or parameters to simulate and prioritize different scenarios (e.g., focus on short-range interactions).","Incorporates an interactive website to explore different resources.","Includes LR tools previously in the LIANA V1, adds MISTy and correlation approaches for spatial data, and integrates PyDeSeq2, MOFAcell, and Tensor-cell2cell to study multiple conditions.","Provides a consensus scoring for more reliability of the results. Includes visualization options. Offers a smooth implementation with scanpy. Analysis across multiple samples can be done.","Enables the analysis of CCIs physically proximal cells, evaluating LR pairs involving non-protein ligands, and comparing conditions. It also implements an interactive interface.","Provides evaluation of 18 LR tools and 5 intracellular signaling methods across 116 datasets, including spatial transcriptomics datasets, cell line perturbation data, and scRNA-seq data.","Interactive website to infer CCIs. TALKIEN can use bulk and single-cell transcriptomics.","Interactive user-friendly interface implemented in R/Shiny, allowing downstream analysis and facilitating biological interpretation. It can perform enrichment analysis.","Includes multimeric ligand-receptor pairs. Performs a term frequency-inverse document frequency (TF-IDF) transformation to the gene expression matrix. It performs permutations to select significant interactions."],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Tool classification","name":"Tool classification","type":"character","cell":["Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Rule-based","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Rule-based","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Rule-based","Data-driven","Data-driven","Rule-based","Rule-based","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Rule-based","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Data-driven","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Language","name":"Language","type":"character","cell":["Python","Python","Python","Python","R","R","R","R","R","R","R","R","R","R","R","R","Python","R","R","R","Python","R","R","R","Standalone application","Python","Python","R","R","R","R","R","R","R","R","R","R","R","R","R","R","Python","Python","Python","R","R","R","MATLAB & R","R","Python","Python","R","R","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","Python","R","R","R","R","R","R","Python","Python","Python","Python","Python","Python","Python","R","R","R","R","MATLAB","-","Python","Python","Python","Python","Python & R","Python & R","R","R","R","R","Python","Python","Python","Python & R","R","R","R","R","Standalone application"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Repository","name":"Repository","type":"character","cell":["https://github.com/cailab-tamu/scTenifoldXct","https://github.com/xiaoyeye/CINS","https://github.com/earmingol/cell2cell","https://www.sciencescott.com/pyminer","https://github.com/saezlab/MOFAcell","https://github.com/saeyslab/multinichenetr","https://github.com/ChengLiLab/TimeTalk","https://github.com/yingyonghui/CommPath","https://github.com/msraredon/Connectome","https://github.com/livnatje/DIALOGUE","https://github.com/saeyslab/nichenetr/","https://zenodo.org/record/5790343","https://github.com/kharchenkolab/scITD","https://github.com/cyhsuTN/scLR","https://github.com/CostaLab/CrossTalkeR","https://github.com/ScialdoneLab/COMUNET","https://github.com/doraadong/TraSig","https://github.com/CyrilLagger/scDiffCom","https://github.com/sqjin/CellChat","https://github.com/Coolgenome/iTALK","https://github.com/asrhou/NATMI","https://github.com/arc85/celltalker","https://github.com/jcolinge/BulkSignalR","https://github.com/BaderLab/CCInx","https://github.com/methodistsmab/CCCExplorer","https://github.com/miladrafiee/disir_package","https://github.com/ventolab/CellphoneDB","https://github.com/ZJUDBlab/InterCellDB","https://github.com/Jasonxu0109/PlantPhoneDB","https://github.com/sqjin/CellChat","https://github.com/liuyifang/FlyPhoneDB","https://github.com/soumelis-lab/ICELLNET","https://github.com/SCA-IRCM","https://github.com/Pinlyu3/LRLoop","https://gitlab.com/sysbiobig/scseqcomm","https://github.com/tanlabcode/CytoTalk","https://github.com/chris-cherry/domino","https://git-r3lab.uni.lu/kartikeya.singh/funres","https://github.com/SunXQlab/scMLnet","https://github.com/califano-lab/SEARCHIN/","https://github.com/saeyslab/nichenetr/","https://github.com/ventolab/CellphoneDB","https://github.com/zhengrongbin/MEBOCOST","https://github.com/JonETJakobsson/scConnect","https://github.com/Wei-BioMath/NeuronChat","https://github.com/edroaldo/fusca","https://github.com/ShellyCoder/cellcall","https://github.com/WangShuxiong/SoptSC","https://github.com/ChanghanGitHub/exFINDER","https://github.com/causalpathlab/spruceTopic","https://www.github.com/kojikoji/deepcolor","https://github.com/BlishLab/scriabin","http://github.com/msraredon/NICHES","https://github.com/MihirBafna/CLARIFY","https://github.com/zcang/COMMOT","https://github.com/lhc17/HoloNet","https://github.com/QSong-github/spaCI","https://github.com/StatBiomed/SpatialDM/","https://github.com/xryanglab/DeepLinc","https://github.com/theislab/ncem","https://gitlab.gwdg.de/MedBioinf/NetworkInference/SpaCeNet","https://github.com/deepomicslab/SPROUT","https://github.com/alexpancheva/ldapaper","https://github.com/xiaoyeye/GCNG","https://github.com/doraadong/MESSI","https://github.com/zcang/SpaOTsc","https://github.com/damienArnol/svca","https://github.com/dongyuanwu/BATCOM","https://github.com/gpenglab/STcomm","https://github.com/bioinfo-tsukuba/CCPLS","https://github.com/saezlab/mistyR","https://github.com/sjdlabgroup/Neighborseq","https://github.com/SunXQlab/stMLnet","https://github.com/hkim240/CellNeighborEX","https://github.com/bhklab/GraphComm","https://github.com/Zafar-Lab/Renoir","https://github.com/BiomedicalMachineLearning/stLearn","https://github.com/earmingol/cell2cell","https://github.com/scverse/squidpy","https://github.com/ventolab/CellphoneDB","https://github.com/data2intelligence/SpaCET","https://github.com/ZJUFanLab/SpaTalk","https://github.com/drieslab/Giotto","https://github.com/veltenlab/rnamagnet","https://doi.org/10.24433/CO.8641073.v1","NOT AVAILABLE","https://github.com/dpeerlab/pdac-progression","https://github.com/plhhnu/CellComNet/","https://github.com/plhhnu/CellEnBoost","https://github.com/JiangBioLab/DeepCCI","https://github.com/SysBioOncology/RaCInG","https://github.com/GaoLabXDU/RobustCCC","https://github.com/rikenbit/scTensor","https://github.com/plevritis-lab/REMI","https://github.com/ZhangLabGT/scMultiSim","https://github.com/TransBioInfoLab/LRinteractions","https://github.com/mcgilldinglab/CellAgentChat","https://github.com/ventolab/CellphoneDB","https://github.com/saezlab/liana-py","https://github.com/saezlab/liana-py","https://github.com/jinworks/CellChat","https://github.com/SunXQlab/ESICCC","https://github.com/odap-ubs/TALKIEN","https://github.com/martaint/InterCellar","http://www.rna-society.org/cellinker/"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Refs","name":"Refs","type":"character","cell":["https://doi.org/10.1016/j.cels.2023.01.004","https://doi.org/10.1371/journal.pcbi.1010468","https://doi.org/10.1038/s41467-022-31369-2","https://doi.org/10.1016/j.celrep.2019.01.063","https://doi.org/10.7554/eLife.93161","https://doi.org/10.1101/2023.06.13.544751","https://doi.org/10.1038/s42003-023-05283-2","https://doi.org/10.1016/j.csbj.2022.10.028","https://doi.org/10.1038/s41598-022-07959-x","https://doi.org/10.1038/s41587-022-01288-0","https://doi.org/10.1016/j.cell.2021.12.018","https://doi.org/10.1158/2159-8290.cd-21-0887","https://doi.org/10.1101/2022.02.16.480703","https://doi.org/10.1093/bioinformatics/btac294","https://doi.org/10.1093/bioinformatics/btab370","https://doi.org/10.1093/bioinformatics/btaa482","https://doi.org/10.1186/s13059-022-02629-7","https://doi.org/10.1038/s43587-023-00514-x","https://doi.org/10.3389/fgene.2021.751158","https://doi.org/10.1101/507871","https://doi.org/10.1038/s41467-020-18873-z","https://doi.org/10.1016%2Fj.immuni.2019.11.014","https://doi.org/10.1093/nar/gkad352","https://doi.org/10.1038/s41593-019-0491-3","https://doi.org/10.1016/j.celrep.2015.01.040","https://doi.org/10.1093/nargab/lqad030","https://doi.org/10.1038/s41596-020-0292-x","https://doi.org/10.1002/advs.202200045","https://doi.org/10.1111/pbi.13893","https://doi.org/10.1038/s41467-021-21246-9","https://doi.org/10.1093/genetics/iyab235","https://doi.org/10.1038/s41467-021-21244-x","https://doi.org/10.1093/nar/gkaa183","https://doi.org/10.1093/bioinformatics/btac447","https://doi.org/10.1093/bioinformatics/btac036","https://doi.org/10.1126/sciadv.abf1356","https://doi.org/10.1038/s41551-021-00770-5","https://doi.org/10.1093/bib/bbaa283","https://doi.org/10.1093/bib/bbaa327","https://doi.org/10.1038/s41467-020-19177-y","https://doi.org/10.1038/s41592-019-0667-5","https://doi.org/10.1038/s41586-022-04918-4","https://doi.org/10.1101/2022.05.30.494067","https://doi.org/10.1093/bioinformatics/btab245","https://doi.org/10.1038/s41467-023-36800-w","https://doi.org/10.1038/s41556-022-00884-1","https://doi.org/10.1093/nar/gkab638","https://doi.org/10.1093/nar/gkz204","https://doi.org/10.1093/nar/gkad262","https://doi.org/10.1016/j.isci.2023.106025","https://doi.org/10.1101/2022.04.10.487815","https://doi.org/10.1038/s41587-023-01782-z","https://doi.org/10.1093/bioinformatics/btac775","https://doi.org/10.1093/bioinformatics/btad269","https://doi.org/10.1038/s41592-022-01728-4","https://doi.org/10.1093/bib/bbad359","https://doi.org/10.1093/bib/bbac563","https://doi.org/10.1038/s41467-023-39608-w","https://doi.org/10.1186/s13059-022-02692-0","https://doi.org/10.1038/s41587-022-01467-z","https://doi.org/10.1101/2022.09.01.506219","https://doi.org/10.1093/nargab/lqac069","https://doi.org/10.1371/journal.pcbi.1009975\r\n","https://doi.org/10.1186/s13059-020-02214-w","https://doi.org/10.1093/bioinformatics/btaa769","https://doi.org/10.1038/s41467-020-15968-5","https://doi.org/10.1016/j.celrep.2019.08.077","https://doi.org/10.3390/genes14071368","https://doi.org/10.1038/s41467-023-40155-7","https://doi.org/10.1093/bioinformatics/btac599","https://doi.org/10.1186/s13059-022-02663-5","https://doi.org/10.1093/nar/gkac333","https://doi.org/10.1101/2022.06.27.497696","https://doi.org/10.15252/msb.202311670","https://doi.org/10.1101/2023.04.26.538432","https://doi.org/10.1101/2023.04.14.536833","https://doi.org/10.1038/s41467-023-43120-6","https://doi.org/10.1371/journal.pcbi.1010715","https://doi.org/10.1038/s41592-021-01358-2","https://doi.org/10.1038/s41588-021-00972-2","https://doi.org/10.1038/s41467-023-36062-6","https://doi.org/10.1038/s41467-022-32111-8","https://doi.org/10.1186/s13059-021-02286-2","https://doi.org/10.1038/s41556-019-0439-6","https://doi.org/10.1038/s41422-020-0353-2","https://doi.org/10.1093/bfgp/elac056","https://doi.org/10.1126/science.add5327","https://doi.org/10.1016/j.compbiomed.2023.107137","https://doi.org/10.1109/tnb.2023.3278685","https://doi.org/10.1093/bioinformatics/btad596","https://doi.org/10.1101/2023.02.03.526946","https://doi.org/10.3389/fgene.2023.1236956","https://doi.org/10.1186/s12859-023-05490-y","https://doi.org/10.1126/sciadv.abi4757","https://doi.org/10.1101/2022.10.15.512320","https://doi.org/10.3389/fgene.2021.708835","https://doi.org/10.1101/2023.08.23.554489","https://doi.org/10.48550/arXiv.2311.04567","https://doi.org/10.1101/2023.08.19.553863","https://doi.org/10.1038/s41467-022-30755-0","https://doi.org/10.1101/2023.11.05.565674","https://doig.org/10.1101/gr.278001.123","https://doi.org/10.1039/d3mo00049d","https://doi.org/10.1038/s42003-021-02986-2","https://doi.org/10.1093/bioinformatics/btab036"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Year","name":"Year","type":"numeric","cell":["2023.0","2022.0","2022.0","2019.0","2023.0","2023.0","2023.0","2022.0","2022.0","2022.0","2022.0","2022.0","2022.0","2022.0","2021.0","2020.0","2022.0","2023.0","2021.0","2019.0","2020.0","2019.0","2023.0","2019.0","2015.0","2023.0","2020.0","2022.0","2022.0","2021.0","2021.0","2021.0","2020.0","2022.0","2022.0","2021.0","2021.0","2021.0","2020.0","2020.0","2019.0","2022.0","2022.0","2021.0","2023.0","2022.0","2021.0","2019.0","2023.0","2023.0","2022.0","2023.0","2022.0","2023.0","2023.0","2023.0","2023.0","2023.0","2022.0","2022.0","2022.0","2022.0","2022.0","2020.0","2020.0","2020.0","2019.0","2023.0","2023.0","2022.0","2022.0","2022.0","2022.0","2023.0","2023.0","2023.0","2023.0","2022.0","2022.0","2021.0","2022.0","2022.0","2021.0","2020.0","2020.0","2023.0","2023.0","2023.0","2023.0","2023.0","2023.0","2023.0","2023.0","2022.0","2022.0","2021.0","2023.0","2023.0","2023.0","2022.0","2023.0","2023.0","2023.0","2022.0","2021.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Conditions","name":"Conditions","type":"numeric","cell":["1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","1.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","1.0","1.0","0.0","1.0","0.0","0.0","0.0","1.0","1.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","1.0","1.0","0.0","0.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","0.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Spatial","name":"Spatial","type":"numeric","cell":["0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","1.0","1.0","0.0","0.0","0.0","0.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Metabolites","name":"Metabolites","type":"numeric","cell":["0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Intracellular","name":"Intracellular","type":"numeric","cell":["0.0","0.0","0.0","0.0","0.0","1.0","1.0","1.0","0.0","1.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","1.0","0.0","1.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","0.0","1.0","0.0","0.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","1.0","0.0","1.0","1.0","1.0","0.0","0.0","1.0","1.0","0.0","0.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Core Functions","name":"Core Functions","type":"numeric","cell":["1.0","0.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","0.0","1.0","1.0","0.0","1.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0","1.0","1.0","0.0","0.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","1.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","1.0","0.0","1.0","1.0","0.0","0.0","0.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","1.0","1.0","0.0","0.0","1.0","1.0","1.0","1.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Deep Learning","name":"Deep Learning","type":"numeric","cell":["1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","1.0","0.0","0.0","1.0","0.0","1.0","1.0","0.0","1.0","1.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","1.0","1.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Classical Stats","name":"Classical Stats","type":"numeric","cell":["1.0","1.0","0.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","1.0","1.0","0.0","1.0","0.0","0.0","1.0","1.0","1.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}},{"id":"Machine Learning","name":"Machine Learning","type":"numeric","cell":["1.0","1.0","1.0","0.0","1.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","0.0","1.0","0.0","0.0","0.0","1.0","0.0","1.0","0.0","0.0","0.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","1.0","1.0","0.0","0.0","1.0","0.0","1.0","1.0","0.0","0.0","0.0","1.0","0.0","0.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0","1.0","0.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","1.0","0.0"],"minWidth":70,"align":"center","headerStyle":{"background":"#f7f7f8"}}],"filterable":true,"searchable":true,"defaultPageSize":10,"minRows":10,"highlight":true,"elementId":"CCC-tools-download","dataKey":"e56b8fadce4ce1237012101816ece7dd"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-ccc-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;A.1: A comprehensive overview of cell-cell-communication tools, sorted by general functionality and programming language, largely drawn from <span class="citation" data-cites="armingol2024nrg">Armingol, Baghdassarian, and Lewis (<a href="references.html#ref-armingol2024nrg" role="doc-biblioref">2024</a>)</span>. Report to Box 1 <strong>Rule-based</strong> and <strong>data-driven</strong> computational strategies for interpretring the variables from the table.
+</figcaption></figure>
+</div>
+</div>
+</section><section id="ai-based-litterature-review-tools" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="ai-based-litterature-review-tools">AI-based litterature review tools</h2>
+<p>Using a <strong>ChatGPT prompt</strong>:</p>
+<blockquote class="blockquote">
+<p>“Provide me with a detailed summary of this paper, including the methodology, main findings, and comparison to existing methodologies.”</p>
+</blockquote>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-armingol2024nrg" class="csl-entry" role="listitem">
+Armingol, Erick, Hratch M. Baghdassarian, and Nathan E. Lewis. 2024. <span>‘The Diversification of Methods for Studying Cell–Cell Interactions and Communication’</span>. <em>Nature Reviews Genetics</em> 25 (6): 381–400. <a href="https://doi.org/10.1038/s41576-023-00685-8">https://doi.org/10.1038/s41576-023-00685-8</a>.
+</div>
+<div id="ref-fischer2023nb" class="csl-entry" role="listitem">
+Fischer, David S., Anna C. Schaar, and Fabian J. Theis. 2023. <span>‘Modeling Intercellular Communication in Tissues Using Spatial Graphs of Cells’</span>. <em>Nature Biotechnology</em> 41 (3): 332–36. <a href="https://doi.org/10.1038/s41587-022-01467-z">https://doi.org/10.1038/s41587-022-01467-z</a>.
+</div>
+<div id="ref-mallona2024" class="csl-entry" role="listitem">
+Mallona, Izaskun, Almut Luetge, Ben Carrillo, Daniel Incicau, Reto Gerber, Anthony Sonrel, Charlotte Soneson, and Mark D. Robinson. 2024. <span>‘Omnibenchmark (Alpha) for Continuous and Open Benchmarking in Bioinformatics’</span>. 25 September 2024. <a href="https://doi.org/10.48550/arXiv.2409.17038">https://doi.org/10.48550/arXiv.2409.17038</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/bastienchassagnol\.github\.io\/CCCSTBench-Book");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/edit/master/tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/bastienchassagnol/CCCSTBench-Book/blob/master/tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bastienchassagnol/CCCSTBench-Book.git">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

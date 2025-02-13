@@ -18,6 +18,13 @@ library(htmltools)
 knitr::opts_chunk$set(
   out.width = "100%"
 )
+
+gdtools::register_gfont("Open Sans")
+flextable::set_flextable_defaults(
+  font.family = "Open Sans",
+  font.size = 11,
+  padding = 2,
+  border.color = "#CCCCCC")
 ```
 
 ## Identified collaborations
