@@ -13,6 +13,7 @@ This is a Quarto book.
 # detect relevant packages
 library(downlit)
 library(gdtools)
+library(curl)
 
 # deal with fucking fonts
 gdtools::register_gfont("Open Sans")

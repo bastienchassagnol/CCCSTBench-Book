@@ -1,0 +1,24 @@
+# Ignore quarto output folder
+docs/
+
+
+# Ignore Quarto cache folder
+.quarto/
+_freeze/
+site_libs/
+
+# Ignore PDF, HTML, DOCX output
+*.pdf
+*.html
+*.docx
+
+# Ignore Quarto logs or auxiliary files
+*.log
+*.aux
+*.out
+
+# Ignore RStudio user/project data
+.Rproj.user/
+
+# Ignore any temporary files
+*.tmp
