@@ -12,9 +12,6 @@ This is a Quarto book.
 #| include: false
 
 # detect relevant packages
-library(downlit)
-library(gdtools)
-library(curl)
 # deal with fucking fonts
 gdtools::register_gfont("Open Sans")
 flextable::set_flextable_defaults(
