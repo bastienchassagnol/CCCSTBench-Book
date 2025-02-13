@@ -36,8 +36,15 @@ jobs:
         with:
           r-version: '4.2.0'
 
-      - name: Install R Dependencies # should include gdtools
+      - name: Install LOCAL Renv R Dependencies 
         uses: r-lib/actions/setup-renv@v2
+
+      # Install extra R dependencies not listed in renv
+      - name: Install R packages
+        run: |
+          Rscript -e "install.packages('gdtools', dependencies = TRUE)"  # Install gfonts from CRAN
+          Rscript -e "install.packages('curl')"  # Two packages somehow related to gdtools
+          Rscript -e "install.packages('gfonts')"  # Install gfonts from CRAN
             
       - name: "Install 'Google Fonts'"
         run: |
