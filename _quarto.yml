@@ -64,7 +64,7 @@ execute:
   message: false
   warning: false
   error: false
-  freeze: auto # to avoid using lots of GH actions + complex fonts managements with pdf output.
+  freeze: false # to avoid using lots of GH actions + complex fonts managements with pdf output.
 # Table options
 tbl-cap-location: bottom
 keywords:
