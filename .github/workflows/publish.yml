@@ -23,10 +23,10 @@ jobs:
       - name: Install ImageMagick (for automated webp conversion)
         uses: mfinelli/setup-imagemagick@v6.0.0
         
-      - name: Install Microsoft fonts
+      - name: "Install 'Google Fonts'"
         run: |
-            sudo apt-get install -y ttf-mscorefonts-installer
-            sudo fc-cache -fv
+          fontreq=$(Rscript -e "cat(gdtools::install_gfont_script(family = 'Open Sans'))")
+          sudo -s eval "$fontreq"
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
