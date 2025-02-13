@@ -117,7 +117,7 @@ knitr::opts_chunk$set(
 ---
 
 
-## List of CCC tools{#sec-ccc-tools .unnumbered .appendix}
+## List of CCC tools {#sec-ccc-tools}
 
 :::: {.content-hidden unless-format="html"}
 

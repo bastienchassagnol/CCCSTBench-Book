@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: docs
+  pre-render:
+    - table_formating.R
 
 book:
   title: "CCCSTBench-Book benchmarking CCC tools integrating pathway information"
@@ -56,7 +58,7 @@ execute:
   message: false
   warning: false
   error: false
-  freeze: auto
+  freeze: auto # to avoid using lots of GH actions + complex fonts managements with pdf output.
 # Table options
 tbl-cap-location: bottom
 keywords:
@@ -98,8 +100,9 @@ format:
     # reference-doc: custom-reference-doc.docx To add a docx reference.
   pdf:
     documentclass: book
+    keep-tex: true # for litterature publishers
     # package installation
-    pdf-engine: xelatex # supports natively webp images, using graphicx package
+    pdf-engine: xelatex # supports fonts installation
     latex-auto-install: true
     # Bibliographic outputs
     colourlinks: true
@@ -110,11 +113,11 @@ format:
     crossref:
       lof-title: "List of Figures"
       lot-title: "List of Tables"
-    #  Add indexing
     # include-in-header:
     #   text: |
-    #     \usepackage{imakeidx}
-    #     \makeindex[intoc=true, columns=2, columnseprule=true]
+    #     \usepackage[backend=biber, sorting=nty]{biblatex}
+    # \usepackage{imakeidx}
+    # \makeindex[intoc=true, columns=2, columnseprule=true]
     # include-after-body:
     #   text: |
     #     \printindex
