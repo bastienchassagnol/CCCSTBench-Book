@@ -23,12 +23,6 @@ jobs:
       - name: Install ImageMagick (for automated webp conversion)
         uses: mfinelli/setup-imagemagick@v6.0.0
 
-      # ✅ Install Arial and other fonts
-      - name: Install Arial Font
-        uses: twaldear/setup-fonts@v1
-        with:
-          fonts: Arial
-
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         env:
