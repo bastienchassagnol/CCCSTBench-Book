@@ -45,6 +45,7 @@ jobs:
           Rscript -e "install.packages('gdtools', dependencies = TRUE)"  # Install gfonts from CRAN
           Rscript -e "install.packages('curl')"  # Two packages somehow related to gdtools
           Rscript -e "install.packages('gfonts')"  # Install gfonts from CRAN
+          Rscript -e "install.packages('downlit')"  # Automated linking of R functions
             
       - name: "Install 'Google Fonts'"
         run: |
