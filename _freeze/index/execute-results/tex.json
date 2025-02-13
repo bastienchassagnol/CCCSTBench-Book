@@ -1,9 +1,11 @@
 {
-  "hash": "389d736e8e396c8f6f4d5d9b671fe228",
+  "hash": "7b63b290264f94abd3d06d89e04733e2",
   "result": {
     "engine": "knitr",
-    "markdown": "# Preface {.unnumbered}\n\nThis is a Quarto book.\n\n\n\n\n\n\n\n\n```{=html}\n<a class=\"github-button\" href=\"https://github.com/bastienchassagnol/CCCSTBench-Book\" data-icon=\"octicon-star\" data-size=\"large\" data-show-count=\"true\" aria-label=\"Star this website on Github\">Star this website on Github</a><script async defer src=\"https://buttons.github.io/buttons.js\"></script>\n```\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] TRUE\n```\n\n\n:::\n:::\n",
-    "supporting": [],
+    "markdown": "# Preface {.unnumbered}\n\nThis is a Quarto book.\n\n\n\n\n\n\n\n\n```{=html}\n<a class=\"github-button\" href=\"https://github.com/bastienchassagnol/CCCSTBench-Book\" data-icon=\"octicon-star\" data-size=\"large\" data-show-count=\"true\" aria-label=\"Star this website on Github\">Star this website on Github</a><script async defer src=\"https://buttons.github.io/buttons.js\"></script>\n```\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

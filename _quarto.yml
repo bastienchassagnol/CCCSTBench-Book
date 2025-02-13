@@ -7,7 +7,13 @@ project:
 book:
   title: "CCCSTBench-Book benchmarking CCC tools integrating pathway information"
   reader-mode: true
-
+  # only working witb a website project
+  # announcement:
+  #     icon: info-circle
+  #     dismissable: true
+  #     content: "This website is still under active development - all content subject to change"
+  #     type: primary
+  #     position: below-navbar
   author: "Bastien CHASSAGNOL"
   date: last-modified
   page-navigation: true
@@ -32,7 +38,7 @@ book:
     - references.qmd
     - tools.qmd
   page-footer:
-    left:  |
+    center:  |
        Written by Bastien CHASSAGNOL and Marie-Pier. We used This book was built with <a href="https://quarto.org/">Quarto</a>.
     background: "#f8f9fa"
     border: false
@@ -81,23 +87,27 @@ format:
       - assets/css/style-reactable.css
       - assets/css/style-utiltr.css
     include-in-header:
-      text: |
-        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=fallback" rel="stylesheet">
+      - file: banner_announcement.js
+      - text: |
+          <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=fallback" rel="stylesheet">
     lightbox: true
     author-meta: "Bastien CHASSAGNOL, and Marie-Pier"
     toc-expand: 3
     comments:
       hypothesis: true
     # code options
-    code-fold: show
+    code-fold: true
+    code-tools: true
+    code-summary: "Show the code"
+    code-block-border-left: "#31BAE9"
     code-copy: true
     code-link: true
     code-overflow: wrap
     collapse: true
     smooth-scroll: true
-  # docx:
-  #   toc-title: Contents
-  #   # reference-doc: custom-reference-doc.docx To add a docx reference.
+  docx:
+    toc-title: Contents
+    # reference-doc: custom-reference-doc.docx To add a docx reference.
   pdf:
     documentclass: book
     keep-tex: true # for litterature publishers
