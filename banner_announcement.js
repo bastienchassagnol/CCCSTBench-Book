@@ -1,5 +1,16 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  // banner
+    let banner = document.createElement("div");
+banner.innerHTML = `
+    <div id="quarto-announcement" data-announcement-id="703300c082156b429677c741d37e3cb3" class="alert alert-primary"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>This website is still under active development - all content subject to change</p>
+</div>
+<i class="bi bi-x-lg quarto-announcement-action"></i>
+</div>`;
+  document.body.prepend(banner);
+
+// announcements
   let announcement = document.createElement("div");
 announcement.innerHTML = `
     <div style="position: fixed; bottom: 20px; right: 20px; background: #ffcc00;
@@ -10,12 +21,7 @@ announcement.innerHTML = `
               style="margin-left: 10px; padding: 5px; background: red; color: white; border: none; cursor: pointer;">
         Dismiss
       </button>
-    </div>
-    <div id="quarto-announcement" data-announcement-id="703300c082156b429677c741d37e3cb3" class="alert alert-primary"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>This website is still under active development - all content subject to change</p>
-</div>
-</div>
-  `;
+    </div> `;
   document.body.appendChild(announcement);
 });
 </script>

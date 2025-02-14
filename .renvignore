@@ -1,5 +1,6 @@
 # Ignore quarto output folder
 docs/
+assets/
 
 
 # Ignore Quarto cache folder

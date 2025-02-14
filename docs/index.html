@@ -107,6 +107,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
 </script><script>
 document.addEventListener("DOMContentLoaded", function() {
+  // banner
+    let banner = document.createElement("div");
+banner.innerHTML = `
+    <div id="quarto-announcement" data-announcement-id="703300c082156b429677c741d37e3cb3" class="alert alert-primary"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>This website is still under active development - all content subject to change</p>
+</div>
+<i class="bi bi-x-lg quarto-announcement-action"></i>
+</div>`;
+  document.body.prepend(banner);
+
+// announcements
   let announcement = document.createElement("div");
 announcement.innerHTML = `
     <div style="position: fixed; bottom: 20px; right: 20px; background: #ffcc00;
@@ -117,12 +128,7 @@ announcement.innerHTML = `
               style="margin-left: 10px; padding: 5px; background: red; color: white; border: none; cursor: pointer;">
         Dismiss
       </button>
-    </div>
-    <div id="quarto-announcement" data-announcement-id="703300c082156b429677c741d37e3cb3" class="alert alert-primary"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>This website is still under active development - all content subject to change</p>
-</div>
-</div>
-  `;
+    </div> `;
   document.body.appendChild(announcement);
 });
 </script><link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&amp;display=fallback" rel="stylesheet">
@@ -928,18 +934,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># detect relevant packages</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(downlit)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gdtools)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curl)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># deal with fucking fonts</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>gdtools<span class="sc">::</span><span class="fu">register_gfont</span>(<span class="st">"Open Sans"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>flextable<span class="sc">::</span><span class="fu">set_flextable_defaults</span>(</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.family =</span> <span class="st">"Open Sans"</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.size =</span> <span class="dv">11</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">padding =</span> <span class="dv">2</span>,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">border.color =</span> <span class="st">"#CCCCCC"</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># deal with fucking fonts</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>gdtools<span class="sc">::</span><span class="fu">register_gfont</span>(<span class="st">"Open Sans"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>flextable<span class="sc">::</span><span class="fu">set_flextable_defaults</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.family =</span> <span class="st">"Open Sans"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.size =</span> <span class="dv">11</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">padding =</span> <span class="dv">2</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">border.color =</span> <span class="st">"#CCCCCC"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

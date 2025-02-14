@@ -31,9 +31,13 @@ book:
     collapse-level: 2
     border: true
     search: true
+  # book structure
   chapters:
     - index.qmd
     - intro.qmd
+    - part: "Review of cell-cell-communication tools"
+      chapters:
+        - spatial-ccc-review.qmd
   appendices:
     - references.qmd
     - tools.qmd
@@ -64,7 +68,7 @@ execute:
   message: false
   warning: false
   error: false
-  freeze: false # to avoid using lots of GH actions + complex fonts managements with pdf output.
+  freeze: auto # to avoid using lots of GH actions + complex fonts managements with pdf output.
 # Table options
 tbl-cap-location: bottom
 keywords:
@@ -105,24 +109,24 @@ format:
     code-overflow: wrap
     collapse: true
     smooth-scroll: true
-  docx:
-    toc-title: Contents
-    # reference-doc: custom-reference-doc.docx To add a docx reference.
-  pdf:
-    documentclass: book
-    keep-tex: true # for litterature publishers
-    # package installation
-    pdf-engine: xelatex # supports fonts installation
-    latex-auto-install: true
-    # Bibliographic outputs
-    colourlinks: true
-    cite-method: biblatex
-    # Generates list of figures and tables
-    lof: true
-    lot: true
-    crossref:
-      lof-title: "List of Figures"
-      lot-title: "List of Tables"
+  # docx:
+  #   toc-title: Contents
+  #   # reference-doc: custom-reference-doc.docx To add a docx reference.
+  # pdf:
+  #   documentclass: book
+  #   keep-tex: true # for litterature publishers
+  #   # package installation
+  #   pdf-engine: xelatex # supports fonts installation
+  #   latex-auto-install: true
+  #   # Bibliographic outputs
+  #   colourlinks: true
+  #   cite-method: biblatex
+  #   # Generates list of figures and tables
+  #   lof: true
+  #   lot: true
+  #   crossref:
+  #     lof-title: "List of Figures"
+  #     lot-title: "List of Tables"
     # include-in-header:
     #   text: |
     #     \usepackage[backend=biber, sorting=nty]{biblatex}
